@@ -44,15 +44,18 @@ body{
 /*grid*/
 
 .grid{
+    display: grid;
+
     width: 100%;
     max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 20px;
+
     padding-left: 28px;
     padding-right: 28px;
     margin-left: auto;
     margin-right: auto;
+
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
 }
 
 /*img*/
@@ -85,6 +88,8 @@ header{
 
     align-items: center;
 }
+
+    /*search bar start*/
 
 .searchbar{
     display: flex;
@@ -123,6 +128,23 @@ header{
 #search :placeholder{
     color: var(--lightgray);
 }
+
+.devidersearchbar{
+    width: 2px;
+    height: 32px;
+
+    margin-left: auto;
+    margin-right: 19px;
+
+    background-color: var(--lightgray);
+}
+
+.settingsicon{
+    margin-right: 20px;
+}
+
+    /*search bar END*/
+
 
 .login-c{
     display: flex;
