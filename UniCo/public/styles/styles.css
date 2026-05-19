@@ -12,8 +12,8 @@
 /*fonts*/
 
 @font-face{
-    font-family: "Montserrat";
-    src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+    font-family: Montserrat;
+    src: url("../assets/fonts/Montserrat-VariableFont_wght.ttf");
 }
 
 
@@ -38,7 +38,7 @@
 
 body{
     background-color: var(--darkblue);
-    font-family: "Montserrat";
+    font-family: Montserrat;
 }
 
 /*grid*/

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>UniCo - Criar Conta</title>
+</head>
+<body>
+    <main class="auth-container">
+        <div class="auth-box">
+            <img src="./assets/icons/logo.svg" alt="UniCo Logo" class="auth-logo">
+            
+            <h2>Criar Nova Conta</h2>
+            <p>Junta-te à comunidade de economia circular do teu campus.</p>
+
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" placeholder="O teu nome e apelido" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail Académico</label>
+                    <input type="email" id="email" placeholder="utilizador@esmad.ipp.pt" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="campus">Campus / Escola Principal</label>
+                    <select id="campus" required>
+                        <option value="" disabled selected>Seleciona o teu campus</option>
+                        <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
+                        <option value="ISEP">ISEP (Porto)</option>
+                        <option value="ISCAP">ISCAP (S. Mamede de Infesta)</option>
+                        <option value="ESE">ESE (Porto)</option>
+                        <option value="ESTG">ESTG (Felgueiras)</option>
+                        <option value="ESMAE">ESMAE (Porto)</option>
+                        <option value="ESS">ESS (Porto)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Palavra-passe</label>
+                    <input type="password" id="password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+                </div>
+
+                <button type="submit" class="btn-auth">Criar Conta</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Já tens uma conta? <a href="login.html">Inicia sessão aqui</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="../js/auth.js"></script>
+</body>
+</html>
