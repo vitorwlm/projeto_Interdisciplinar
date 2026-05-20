@@ -1,58 +1,108 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+<style>
+  :root {
+    /* O hexadecimal para texto e classes mais simples */
+    --bulma-primary: #2C2A9B;
+    /* A conversão de #2C2A9B para HSL (Obrigatório para backgrounds e botões no Bulma 1.0)*/
+    --bulma-primary-h: 241deg;
+    --bulma-primary-s: 57%;
+    --bulma-primary-l: 39%;
+    --bulma-primary-invert: #ffffff;
+  }
+</style>
     <title>UniCo - Criar Conta</title>
 </head>
+
 <body>
-    <main class="auth-container">
-        <div class="auth-box">
-            <img src="./assets/icons/logo.svg" alt="UniCo Logo" class="auth-logo">
-            
-            <h2>Criar Nova Conta</h2>
-            <p>Junta-te à comunidade de economia circular do teu campus.</p>
 
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="name">Nome Completo</label>
-                    <input type="text" id="name" placeholder="O teu nome e apelido" required>
+    <section class="hero is-light is-fullheight">
+        <div class="hero-body has-background-primary">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-11-mobile is-8-tablet is-5-desktop">
+                        <div class="is-flex is-justify-content-center mb-5">
+                            <figure class="image is-128x128">
+                                <img src="../assets/icons/logo.svg " alt="UniCo Logo">
+                            </figure>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-content">
+                                <h1 class="title is-4 has-text-centered">Criar Nova Conta</h1>
+                                <p class="subtitle is-6 has-text-centered mb-5">Junta-te à comunidade de economia
+                                    circular do teu campus.</p>
+
+                                <form id="register-form">
+                                    <div class="field">
+                                        <label class="label" for="name">Nome Completo</label>
+                                        <div class="control">
+                                            <input class="input" type="text" id="name"
+                                                placeholder="O teu nome e apelido" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <label class="label" for="email">E-mail Académico</label>
+                                        <div class="control">
+                                            <input class="input" type="email" id="email"
+                                                placeholder="utilizador@esmad.ipp.pt" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <label class="label" for="campus">Campus / Escola Principal</label>
+                                        <div class="control">
+                                            <div class="select is-fullwidth">
+                                                <select id="campus" required>
+                                                    <option value="" disabled selected>Seleciona o teu campus</option>
+                                                    <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
+                                                    <option value="ISEP">ISEP (Porto)</option>
+                                                    <option value="ISCAP">ISCAP (S. Mamede de Infesta)</option>
+                                                    <option value="ESE">ESE (Porto)</option>
+                                                    <option value="ESTG">ESTG (Felgueiras)</option>
+                                                    <option value="ESMAE">ESMAE (Porto)</option>
+                                                    <option value="ESS">ESS (Porto)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <label class="label" for="password">Palavra-passe</label>
+                                        <div class="control">
+                                            <input class="input" type="password" id="password"
+                                                placeholder="Mínimo de 6 caracteres" minlength="6" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="field mt-5">
+                                        <div class="control">
+                                            <button type="submit" class="button is-primary is-fullwidth">Criar
+                                                Conta</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="has-text-centered mt-4">
+                                    <p class="is-size-7">Já tens uma conta? <a href="login.html"
+                                            class="has-text-link">Inicia sessão aqui</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="email">E-mail Académico</label>
-                    <input type="email" id="email" placeholder="utilizador@esmad.ipp.pt" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="campus">Campus / Escola Principal</label>
-                    <select id="campus" required>
-                        <option value="" disabled selected>Seleciona o teu campus</option>
-                        <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
-                        <option value="ISEP">ISEP (Porto)</option>
-                        <option value="ISCAP">ISCAP (S. Mamede de Infesta)</option>
-                        <option value="ESE">ESE (Porto)</option>
-                        <option value="ESTG">ESTG (Felgueiras)</option>
-                        <option value="ESMAE">ESMAE (Porto)</option>
-                        <option value="ESS">ESS (Porto)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Palavra-passe</label>
-                    <input type="password" id="password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
-                </div>
-
-                <button type="submit" class="btn-auth">Criar Conta</button>
-            </form>
-
-            <div class="auth-footer">
-                <p>Já tens uma conta? <a href="login.html">Inicia sessão aqui</a></p>
             </div>
         </div>
-    </main>
+    </section>
 
     <script type="module" src="../js/auth.js"></script>
 </body>
+
 </html>
