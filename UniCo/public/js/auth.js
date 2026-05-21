@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('password').value;
 
             // Desativa o botão temporariamente para evitar múltiplos cliques
-            const submitBtn = registerForm.querySelector('.btn-auth');
+            const submitBtn = registerForm.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.textContent = 'A criar conta...';
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Sucesso no registo
                 alert('Conta criada com sucesso! Por favor, verifica a caixa de entrada do teu e-mail para confirmar o registo.');
-                
+
                 // Redireciona o utilizador para a página de login
                 window.location.href = 'login.html';
 
@@ -52,6 +52,71 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reativa o botão caso ocorra um erro e o utilizador precise de tentar novamente
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Criar Conta';
+            }
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'A Entrar...';
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) {
+                    throw error;
+                }
+
+                // Sucesso no login
+                alert('Sessão iniciada com sucesso!');
+                window.location.href = 'dashboard.html';
+
+            } catch (error) {
+                console.error('Erro detalhado do Supabase:', error.message);
+                alert('Não foi possível iniciar sessão: ' + error.message);
+            } finally {
+                // Reativa o botão caso ocorra um erro
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Entrar';
+            }
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('user');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            try {
+                const { error } = await supabase.auth.signOut({ scope: 'local' });
+
+                if (error) {
+                    throw error;
+                }
+
+                // Sucesso no logout — redireciona para a página inicial
+                window.location.href = '../index.html';
+
+            } catch (error) {
+                console.error('Erro detalhado do Supabase:', error.message);
+                alert('Não foi possível terminar a sessão: ' + error.message);
             }
         });
     }

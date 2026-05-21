@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../styles/bulma.css">
+    <title> UniCo - Iniciar Sessão</title>
+</head>
+
+<body>
+
+    <section class="hero is-light is-fullheight has-background-primary">
+        <div class="hero-body ">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-8-tablet is-5-desktop">
+                        <div class="is-flex is-justify-content-center mb-5">
+                            <figure class="image is-128x128">
+                                <img src="../assets/icons/logo.svg " alt="UniCo Logo">
+                            </figure>
+                        </div>
+
+                        <div class="card has-background-black-ter ">
+                            <div class="card-content">
+                                <h1 class="title is-4 has-text-centered has-text-white">Iniciar Sessão</h1>
+                                <p class="subtitle is-6 mt-4 has-text-centered mb-5 has-text-white ">Bem-vindo de volta
+                                    à comunidade de economia circular do teu campus.</p>
+
+                                <form id="login-form">
+                                    <div class="field">
+                                        <label class="label" for="email">E-mail Académico</label>
+                                        <div class="control">
+                                            <input class="input" type="email" id="email"
+                                                placeholder="utilizador@esmad.ipp.pt" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="field">
+                                        <label class="label" for="password">Palavra-passe</label>
+                                        <div class="control">
+                                            <input class="input" type="password" id="password"
+                                                placeholder="A tua palavra-passe" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="field mt-5">
+                                        <div class="control">
+                                            <button type="submit" class="button is-primary is-fullwidth">Entrar</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="has-text-centered mt-4">
+                                    <p class="is-size-7">Ainda não tens conta? <a href="register.html"
+                                            class="has-text-link">Cria uma aqui</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="../js/auth.js"></script>
+</body>
+
+</html>
