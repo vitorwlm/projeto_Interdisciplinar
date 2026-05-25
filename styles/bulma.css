@@ -48,3 +48,17 @@
         .mt-5 { margin-top: 1.25rem !important; }
         .card-content { padding: 1.25rem !important; }
     }
+
+.input:focus,
+.input:active,
+.input:hover,
+.input {
+    box-shadow: none !important;
+    border: none;
+    outline: none !important;
+    color: black !important;
+}
+
+.input::placeholder{
+    color: hsl(0, 0%, 71%) !important;
+}
