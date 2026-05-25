@@ -29,9 +29,6 @@
         width: 100%; 
     }
 
-    /* 3. MÁGICA PARA DESKTOP (Ecrãs Baixos): 
-       Se a altura do ecrã for menor que 850px, reduz os espaços em branco 
-       para que o formulário caiba a 100% no ecrã sem ativar o scrollbar */
     @media screen and (min-width: 769px) and (max-height: 850px) {
         .hero-body { 
             padding: 1rem !important; 
