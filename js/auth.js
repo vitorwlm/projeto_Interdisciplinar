@@ -6,50 +6,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
-            // Impede o comportamento padrão do formulário (recarregar a página)
             e.preventDefault();
 
-            // Captura os valores dos inputs do HTML
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const campus = document.getElementById('campus').value;
             const password = document.getElementById('password').value;
 
-            // Desativa o botão temporariamente para evitar múltiplos cliques
             const submitBtn = registerForm.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.textContent = 'A criar conta...';
 
             try {
-                // Executa o registo no Supabase Auth
-                // Usamos o 'options.data' para guardar dados extra (metadados) que não sejam apenas e-mail/password
                 const { data, error } = await supabase.auth.signUp({
                     email: email,
                     password: password,
                     options: {
                         data: {
-                            full_name: name,
-                            campus: campus
+                            full_name: name
+                            // campus removed from metadata
                         }
                     }
                 });
 
-                if (error) {
-                    throw error;
-                }
+                if (error) throw error;
 
-                // Sucesso no registo
-                alert('Conta criada com sucesso! Por favor, verifica a caixa de entrada do teu e-mail para confirmar o registo.');
+                // save university to utilizador table after trigger creates the row
+                const { error: updateError } = await supabase
+                    .from('utilizador')
+                    .update({ university: campus })
+                    .eq('id', data.user.id);
 
-                // Redireciona o utilizador para a página de login
-                window.location.href = 'login.html';
+                if (updateError) throw updateError;
+
+                // show success message without alert()
+                const msg = document.createElement('div');
+                msg.className = 'notification is-success';
+                msg.textContent = 'Conta criada! Verifica o teu e-mail para confirmares o registo.';
+                registerForm.prepend(msg);
+
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
 
             } catch (error) {
-                // Trata possíveis erros (ex: e-mail já registado, password fraca, etc.)
                 console.error('Erro detalhado do Supabase:', error.message);
                 alert('Não foi possível criar a conta: ' + error.message);
             } finally {
-                // Reativa o botão caso ocorra um erro e o utilizador precise de tentar novamente
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Criar Conta';
             }
@@ -77,19 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     password: password,
                 });
 
-                if (error) {
-                    throw error;
-                }
+                if (error) throw error;
 
-                // Sucesso no login
-                alert('Sessão iniciada com sucesso!');
+                // removed alert() — redirect is enough
                 window.location.href = 'dashboard.html';
 
             } catch (error) {
                 console.error('Erro detalhado do Supabase:', error.message);
                 alert('Não foi possível iniciar sessão: ' + error.message);
             } finally {
-                // Reativa o botão caso ocorra um erro
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Entrar';
             }
@@ -98,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const logoutBtn = document.getElementById('user');
+    // changed from 'user' to 'logout-btn'
+    const logoutBtn = document.getElementById('logout-btn');
 
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async (e) => {
@@ -107,11 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const { error } = await supabase.auth.signOut({ scope: 'local' });
 
-                if (error) {
-                    throw error;
-                }
+                if (error) throw error;
 
-                // Sucesso no logout — redireciona para a página inicial
                 window.location.href = '../index.html';
 
             } catch (error) {
