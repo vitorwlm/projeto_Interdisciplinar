@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const campus = document.getElementById('campus').value;
+            const university = document.getElementById('university').value;
             const password = document.getElementById('password').value;
 
             const submitBtn = registerForm.querySelector('button[type="submit"]');
@@ -24,22 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     options: {
                         data: {
                             full_name: name
-                            // campus removed from metadata
                         }
                     }
                 });
 
                 if (error) throw error;
 
-                // save university to utilizador table after trigger creates the row
+                // fixed: was using 'campus' but variable is 'university'
                 const { error: updateError } = await supabase
                     .from('utilizador')
-                    .update({ university: campus })
+                    .update({ university: university })
                     .eq('id', data.user.id);
 
                 if (updateError) throw updateError;
 
-                // show success message without alert()
                 const msg = document.createElement('div');
                 msg.className = 'notification is-success';
                 msg.textContent = 'Conta criada! Verifica o teu e-mail para confirmares o registo.';
@@ -51,7 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } catch (error) {
                 console.error('Erro detalhado do Supabase:', error.message);
-                alert('Não foi possível criar a conta: ' + error.message);
+                const errMsg = document.createElement('div');
+                errMsg.className = 'notification is-danger';
+                errMsg.textContent = 'Não foi possível criar a conta: ' + error.message;
+                registerForm.prepend(errMsg);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Criar Conta';
@@ -82,12 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (error) throw error;
 
-                // removed alert() — redirect is enough
                 window.location.href = 'dashboard.html';
 
             } catch (error) {
                 console.error('Erro detalhado do Supabase:', error.message);
-                alert('Não foi possível iniciar sessão: ' + error.message);
+                const errMsg = document.createElement('div');
+                errMsg.className = 'notification is-danger';
+                errMsg.textContent = 'E-mail ou password incorretos.';
+                loginForm.prepend(errMsg);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Entrar';
@@ -97,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // changed from 'user' to 'logout-btn'
     const logoutBtn = document.getElementById('logout-btn');
 
     if (logoutBtn) {
@@ -112,8 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = '../index.html';
 
             } catch (error) {
-                console.error('Erro detalhado do Supabase:', error.message);
-                alert('Não foi possível terminar a sessão: ' + error.message);
+                console.error('Não foi possível terminar a sessão:', error.message);
             }
         });
     }
