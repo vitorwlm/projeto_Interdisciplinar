@@ -1,8 +1,5 @@
 import { supabase } from './config/supabaseClient.js';
 
-// ==============================
-// REGISTO
-// ==============================
 const registerForm = document.getElementById('register-form');
 
 if (registerForm) {
@@ -53,9 +50,6 @@ if (registerForm) {
     });
 }
 
-// ==============================
-// LOGIN
-// ==============================
 const loginForm = document.getElementById('login-form');
 
 if (loginForm) {
@@ -89,9 +83,6 @@ if (loginForm) {
     });
 }
 
-// ==============================
-// LOGOUT
-// ==============================
 const logoutBtn = document.getElementById('logout-btn');
 
 if (logoutBtn) {
