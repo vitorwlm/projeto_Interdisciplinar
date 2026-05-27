@@ -1,57 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" class="has-navbar-fixed-bottom">
 
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../styles/bulma.css">
 
-    <title>UniCo</title>
+    <title>UniCo - Dashboard</title>
 
 </head>
 
 <body>
 
-    <header class="grid">
+    <section class="is-primary">
+        <nav class="background-gradient-naobulma navbar is-fixed-bottom h-140px pb-24px pt-auto">
+            <div class="has-background-white py-2 is-flex is-justify-content-space-between">
+                <img src="" alt="icon">
+            </div>
+        </nav>
+    </section>
 
-        <div class="searchbar">
-
-            <img src="../assets/icons/search.svg" alt="search icon">
-
-            <input type="search" id="search" name="search" placeholder="Search something...">
-
-            <span class="devidersearchbar"></span>
-
-            <a class="settingsicon" href="#"><img src="../assets/icons/settings.svg" alt="settings icon"></a>
-
-        </div>
-
-        <img src="../assets/icons/logo.svg" alt="logo" class="logo">
-
-        <div class="login-c">
-
-            <a class="user" id="logout-btn" href="#">Logout</a>
-
-            <img src="../assets/icons/profile.svg" alt="user img" class="profile">
-
-        </div>
-
-    </header>
-
-    <div class="menudesktop">
-
-        <a></a>
-        <span class="devider"></span>
-        <a></a>
-        <span class="devider"></span>
-        <a></a>
-        <span class="devider"></span>
-        <a></a>
-    </div>
-    <script type="module" src="../js/item.js"></script>
-    <script type="module" src="../js/auth.js"></script>
 </body>
 
 </html>

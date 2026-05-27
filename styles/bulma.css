@@ -6,6 +6,9 @@
     --bulma-primary-invert: #ffffff;
 }
 
+.background-gradient-naobulma{
+     background: linear-gradient(0deg, rgba(44, 42, 155, 0.20) 0%, rgba(44, 42, 155, 0.00) 100%) !important;
+}
 
 html,
 body {
@@ -56,6 +59,8 @@ body {
         padding: 1.25rem !important;
     }
 }
+
+
 
 .input:focus,
 .input:active,
