@@ -75,10 +75,7 @@ body {
     border: none;
     outline: none !important;
     color: black !important;
-}
 
-#university::placeholder {
-    color: hsl(0, 0%, 71%)
 }
 
 .input::placeholder {
