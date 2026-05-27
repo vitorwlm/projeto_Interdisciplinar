@@ -67,6 +67,20 @@ body {
     color: black !important;
 }
 
+#university:focus,
+#university:active,
+#university:hover,
+#university {
+    box-shadow: none !important;
+    border: none;
+    outline: none !important;
+    color: black !important;
+}
+
+#university::placeholder {
+    color: hsl(0, 0%, 71%)
+}
+
 .input::placeholder {
     color: hsl(0, 0%, 71%) !important;
 }
