@@ -19,7 +19,7 @@
 		{
 			"src": "assets/icons/logo.svg",
 			"sizes": "512x512",
-			"type": "image/png"
+			"type": "image/svg+xml"
 		}
 	],
 	"prefer_related_applications": false
