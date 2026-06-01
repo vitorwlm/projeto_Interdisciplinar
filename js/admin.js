@@ -1,5 +1,6 @@
 import { supabase } from './config/supabaseClient.js';
 
+
 const adminStatus = document.getElementById('admin-status');
 const metricItems = document.getElementById('metric-items');
 const metricCategories = document.getElementById('metric-categories');
@@ -21,6 +22,7 @@ const usersStatus = document.getElementById('users-status');
 const activeCategoryFilter = document.getElementById('active-category-filter');
 const activeCategoryName = document.getElementById('active-category-name');
 const clearCategoryFilterBtn = document.getElementById('clear-category-filter');
+const adminPanelLink = document.getElementById('admin-panel-link');
 
 const wearLabels = {
   novo: 'Novo',

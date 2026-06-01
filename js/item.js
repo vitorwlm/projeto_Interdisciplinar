@@ -9,7 +9,8 @@ const wearStatusMap = {
 	novo: 'novo',
 	como_novo: 'como_novo',
 	bom: 'bom',
-	satisfatorio: 'usado'
+	satisfatorio: 'usado',
+	nao_funcional:'nao_funcional'
 };
 
 async function loadCategories() {

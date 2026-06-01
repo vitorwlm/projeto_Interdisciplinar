@@ -158,4 +158,32 @@ if (itemsGrid && itemsStatus) {
   loadItems();
 }
 
+async function renderAdminButton() {
+    try {
+
+        const { data: authData } = await supabase.auth.getUser();
+        if (!authData?.user) return;
+
+
+        const { data: profile, error } = await supabase
+            .from('utilizador')
+            .select('is_admin')
+            .eq('id', authData.user.id)
+            .single();
+
+        if (error) throw error;
+
+        if (profile?.is_admin) {
+            const adminPanelLink = document.getElementById('admin-panel-link');
+            if (adminPanelLink) {
+                adminPanelLink.innerHTML = '<a id="admin-btn" class="app-btn app-btn--soft" href="admin.html">Painel admin</a>';
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao verificar estatuto de admin:', error);
+    }
+}
+
+renderAdminButton();
+
 loadAdminLink();
