@@ -31,7 +31,7 @@ if (registerForm) {
             if (profileError) throw profileError;
 
             const msg = document.createElement('div');
-            msg.className = 'notification is-success';
+            msg.className = 'app-alert app-alert--success';
             msg.textContent = 'Conta criada! Verifica o teu e-mail para confirmares o registo.';
             registerForm.prepend(msg);
 
@@ -40,7 +40,7 @@ if (registerForm) {
         } catch (error) {
             console.error('Erro:', error.message);
             const errMsg = document.createElement('div');
-            errMsg.className = 'notification is-danger';
+            errMsg.className = 'app-alert app-alert--danger';
             errMsg.textContent = 'Não foi possível criar a conta: ' + error.message;
             registerForm.prepend(errMsg);
         } finally {
@@ -84,7 +84,7 @@ if (loginForm) {
         } catch (error) {
             console.error('Erro:', error.message);
             const errMsg = document.createElement('div');
-            errMsg.className = 'notification is-danger';
+            errMsg.className = 'app-alert app-alert--danger';
             errMsg.textContent = 'E-mail ou password incorretos.';
             loginForm.prepend(errMsg);
         } finally {

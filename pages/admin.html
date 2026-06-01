@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <title>UniCo - Painel de Admin</title>
+</head>
+
+<body class="app-page admin-page">
+    <main class="dashboard-shell admin-shell">
+        <header class="dashboard-header panel desktop-brand-bar">
+            <a href="dashboard.html" aria-label="Dashboard">
+                <img class="desktop-brand-bar__logo" src="../assets/icons/logo.svg" alt="logo">
+            </a>
+
+            <div>
+                <h1 class="section-title">Painel de Controlo</h1>
+                <p id="admin-status" class="status-copy" style="margin-top: 0.5rem;">A verificar permissões...</p>
+            </div>
+
+            <div class="header-actions">
+                <a class="app-btn app-btn--ghost" href="dashboard.html">Voltar ao dashboard</a>
+                <button data-logout-btn class="app-btn app-btn--light" type="button">Sair</button>
+            </div>
+        </header>
+
+        <section class="admin-metrics" aria-label="Resumo do painel">
+            <article class="metric-card">
+                <span class="metric-card__label">Anúncios</span>
+                <strong class="metric-card__value" id="metric-items">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-card__label">Categorias</span>
+                <strong class="metric-card__value" id="metric-categories">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-card__label">Disponíveis</span>
+                <strong class="metric-card__value" id="metric-available">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-card__label">Reservados / Vendidos</span>
+                <strong class="metric-card__value" id="metric-closed">0</strong>
+            </article>
+            <article class="metric-card">
+                <span class="metric-card__label">Utilizadores</span>
+                <strong class="metric-card__value" id="metric-users">0</strong>
+            </article>
+        </section>
+
+        <section class="admin-layout">
+            <aside class="panel admin-panel">
+                <div class="admin-panel__header">
+                    <div>
+                        <h2 class="section-title" id="category-form-title" style="font-size: 1.45rem;">Criar categoria</h2>
+                        <p class="section-copy" style="margin-top: 0.35rem;">Adiciona novas categorias para usar no formulário de publicação.</p>
+                    </div>
+                </div>
+
+                <form id="category-form" class="form-stack admin-form">
+                    <div class="field">
+                        <label class="field-label" for="category-name">Nome da categoria</label>
+                        <input class="app-input" type="text" id="category-name" placeholder="Ex: Moda" required>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="category-icon">URL do ícone</label>
+                        <input class="app-input" type="url" id="category-icon" placeholder="https://...">
+                        <p class="help-text">Opcional. Se não preencher, a categoria é criada sem ícone.</p>
+                    </div>
+
+                    <button type="submit" class="app-btn app-btn--primary app-btn--full">Criar categoria</button>
+                    <button type="button" id="cancel-edit-btn" class="app-btn app-btn--ghost app-btn--full" hidden>Cancelar edição</button>
+                </form>
+
+                <div class="admin-section" style="margin-top: 22px;">
+                    <h3 class="admin-section__title">Categorias existentes</h3>
+                    <div id="categories-list" class="admin-categories-list" aria-live="polite"></div>
+                </div>
+            </aside>
+
+            <section class="admin-content">
+                <div class="panel admin-panel">
+                    <div class="admin-tab-bar">
+                        <button class="admin-tab admin-tab--active" data-tab="reviews" type="button">Anúncios</button>
+                        <button class="admin-tab" data-tab="users" type="button">Utilizadores</button>
+                    </div>
+
+                    <div id="tab-reviews" class="admin-tab-pane">
+                        <div class="admin-panel__header admin-panel__header--wrap" style="margin-top: 18px;">
+                            <div>
+                                <h2 class="section-title" style="font-size: 1.45rem;">Revisar anúncios</h2>
+                                <p class="section-copy" style="margin-top: 0.35rem;">Abre os anúncios existentes e ajusta o estado de publicação.</p>
+                            </div>
+
+                            <div class="admin-filter-row">
+                                <input id="review-search" class="app-input" type="search" placeholder="Procurar por título ou vendedor">
+                                <select id="status-filter" class="app-select">
+                                    <option value="all">Todos os estados</option>
+                                    <option value="disponivel">Disponível</option>
+                                    <option value="reservado">Reservado</option>
+                                    <option value="vendido">Vendido</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="active-category-filter" class="active-category-filter" hidden>
+                            <span class="active-category-filter__label">Categoria:</span>
+                            <strong id="active-category-name" class="active-category-filter__name"></strong>
+                            <button type="button" id="clear-category-filter" class="app-btn app-btn--ghost active-category-filter__clear">× Ver todos</button>
+                        </div>
+
+                        <div id="review-status" class="app-alert app-alert--neutral app-alert--center" style="margin-top: 18px;">
+                            A carregar anúncios...
+                        </div>
+
+                        <div id="reviews-list" class="admin-reviews-list" aria-live="polite"></div>
+                    </div>
+
+                    <div id="tab-users" class="admin-tab-pane" hidden>
+                        <div style="margin-top: 18px;">
+                            <h2 class="section-title" style="font-size: 1.45rem;">Utilizadores</h2>
+                            <p class="section-copy" style="margin-top: 0.35rem;">Gere os utilizadores e as respetivas permissões de administração.</p>
+                        </div>
+                        <div id="users-status" class="app-alert app-alert--neutral app-alert--center" style="margin-top: 18px;">
+                            A carregar utilizadores...
+                        </div>
+                        <div id="users-list" class="admin-users-list" aria-live="polite" style="margin-top: 18px;"></div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script type="module" src="../js/auth-guard.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/admin.js"></script>
+</body>
+
+</html>

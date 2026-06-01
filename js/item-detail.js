@@ -40,7 +40,7 @@ function getPrimaryImage(item) {
 
 function renderError(message) {
   if (statusEl) {
-    statusEl.innerHTML = `<div class="notification is-danger">${message}</div>`;
+    statusEl.innerHTML = `<div class="app-alert app-alert--danger">${message}</div>`;
   }
 }
 
@@ -49,18 +49,14 @@ function renderGallery(images, title) {
 
   if (!images.length) {
     galleryEl.innerHTML = `
-      <div class="column is-12">
-        <div class="notification is-light has-text-centered">Sem fotografias adicionais.</div>
-      </div>
+      <div class="app-alert app-alert--neutral app-alert--center">Sem fotografias adicionais.</div>
     `;
     return;
   }
 
   galleryEl.innerHTML = images.map((image) => `
-    <div class="column is-6-mobile is-4-tablet is-3-desktop">
-      <figure class="image is-4by3">
-        <img src="${image.image_url}" alt="${title}">
-      </figure>
+    <div class="gallery-tile">
+      <img src="${image.image_url}" alt="${title}">
     </div>
   `).join('');
 }
@@ -87,8 +83,8 @@ async function loadItem() {
       price,
       wear_status,
       created_at,
-      categoria ( name ),
-      utilizador ( name, university, avatar_url ),
+      category_id,
+      seller_id,
       item_image ( image_url, is_principal )
     `)
     .eq('id', itemId)
@@ -102,10 +98,20 @@ async function loadItem() {
 
   const images = data.item_image || [];
   const primaryImage = getPrimaryImage(data);
-  const categoryName = data.categoria?.name || 'Sem categoria';
   const wearLabel = wearLabels[data.wear_status] || data.wear_status || 'Sem estado';
-  const sellerName = data.utilizador?.name || 'Vendedor desconhecido';
-  const sellerUniversity = data.utilizador?.university || '';
+
+  const [{ data: categoryData }, { data: sellerData }] = await Promise.all([
+    data.category_id
+      ? supabase.from('categoria').select('name').eq('id', data.category_id).single()
+      : Promise.resolve({ data: null }),
+    data.seller_id
+      ? supabase.from('utilizador').select('name, university, avatar_url').eq('id', data.seller_id).single()
+      : Promise.resolve({ data: null })
+  ]);
+
+  const categoryName = categoryData?.name || 'Sem categoria';
+  const sellerName = sellerData?.name || 'Vendedor desconhecido';
+  const sellerUniversity = sellerData?.university || '';
 
   if (titleEl) titleEl.textContent = data.title || 'Sem título';
   if (imageEl) {

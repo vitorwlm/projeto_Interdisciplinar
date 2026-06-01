@@ -38,7 +38,7 @@ async function loadCategories() {
 
 function showNotification(form, type, message) {
 	const notification = document.createElement('div');
-	notification.className = `notification is-${type}`;
+	notification.className = `app-alert app-alert--${type}`;
 	notification.textContent = message;
 	form.prepend(notification);
 }
@@ -146,12 +146,8 @@ function renderImagePreview(files) {
 	files.forEach((file) => {
 		const url = URL.createObjectURL(file);
 		const column = document.createElement('div');
-		column.className = 'column is-4-mobile is-3-tablet is-2-desktop';
-		column.innerHTML = `
-			<figure class="image is-square">
-				<img src="${url}" alt="Preview" loading="lazy">
-			</figure>
-		`;
+		column.className = 'preview-tile';
+		column.innerHTML = `<img src="${url}" alt="Preview" loading="lazy">`;
 		const img = column.querySelector('img');
 		if (img) {
 			img.addEventListener('load', () => URL.revokeObjectURL(url), { once: true });
@@ -180,7 +176,7 @@ if (publishForm) {
 		const priceValue = document.getElementById('item-price')?.value;
 		const files = Array.from(fileInput?.files || []).slice(0, 5);
 
-		const existingError = publishForm.querySelector('.notification');
+		const existingError = publishForm.querySelector('.app-alert');
 		if (existingError) existingError.remove();
 
 		if (!title || !description || !category || !condition || !priceValue) {

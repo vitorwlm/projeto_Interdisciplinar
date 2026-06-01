@@ -1,16 +1,17 @@
-const CACHE_NAME = 'app-shell-v2';
+const CACHE_NAME = 'app-shell-v3';
 const ASSETS = [
 	'/',
 	'/index.html',
 	'/manifest.json',
-	'/styles/bulma.css',
 	'/styles/styles.css',
 	'/js/app.js',
 	'/js/auth.js',
 	'/js/auth-guard.js',
 	'/js/item.js',
 	'/js/dashboard.js',
-	'/js/item-detail.js'
+	'/js/item-detail.js',
+	'/js/admin.js',
+	'/pages/admin.html'
 ];
 
 self.addEventListener('install', (event) => {

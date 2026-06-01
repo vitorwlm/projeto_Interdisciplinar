@@ -2,6 +2,7 @@ import { supabase } from './config/supabaseClient.js';
 
 const itemsGrid = document.getElementById('items-grid');
 const itemsStatus = document.getElementById('items-status');
+const adminPanelLink = document.getElementById('admin-panel-link');
 
 const categoryLabels = {
   livros: 'Livros & Apontamentos',
@@ -50,18 +51,14 @@ function getWearLabel(value) {
 }
 
 function createBadge(text) {
-  return `<span class="tag is-light is-medium">${text}</span>`;
+  return `<span class="badge">${text}</span>`;
 }
 
 function renderEmptyState(message) {
   if (!itemsGrid) return;
 
   itemsGrid.innerHTML = `
-    <div class="column is-12">
-      <div class="notification is-light has-text-centered">
-        ${message}
-      </div>
-    </div>
+    <div class="app-alert app-alert--neutral app-alert--center">${message}</div>
   `;
 }
 
@@ -79,26 +76,20 @@ function renderItems(items) {
     const wearLabel = getWearLabel(item.wear_status);
 
     return `
-      <div class="column is-12-mobile is-6-tablet is-4-desktop">
-        <a class="card is-block has-text-dark" href="item.html?id=${item.id}">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="${imageUrl}" alt="${item.title || 'Anúncio'}">
-            </figure>
+      <a class="item-card" href="item.html?id=${item.id}">
+        <div class="item-card__media">
+          <img src="${imageUrl}" alt="${item.title || 'Anúncio'}">
+        </div>
+        <div class="item-card__body">
+          <h2 class="item-card__title">${item.title || 'Sem título'}</h2>
+          <p class="item-card__text">${item.description || 'Sem descrição disponível.'}</p>
+          <div class="badge-list">
+            ${createBadge(categoryLabel)}
+            ${createBadge(wearLabel)}
           </div>
-          <div class="card-content">
-            <div class="content">
-              <p class="title is-5 mb-2">${item.title || 'Sem título'}</p>
-              <p class="mb-3">${item.description || 'Sem descrição disponível.'}</p>
-              <div class="tags mb-3">
-                ${createBadge(categoryLabel)}
-                ${createBadge(wearLabel)}
-              </div>
-              <p class="title is-6 has-text-primary mb-0">${formatPrice(item.price)}</p>
-            </div>
-          </div>
-        </a>
-      </div>
+          <p class="detail-price" style="font-size: 1.1rem;">${formatPrice(item.price)}</p>
+        </div>
+      </a>
     `;
   }).join('');
 }
@@ -146,6 +137,25 @@ async function loadItems() {
   renderItems(enhanced);
 }
 
+async function loadAdminLink() {
+  if (!adminPanelLink) return;
+
+  const { data: authData } = await supabase.auth.getUser();
+  if (!authData?.user) return;
+
+  const { data: profile, error } = await supabase
+    .from('utilizador')
+    .select('is_admin')
+    .eq('id', authData.user.id)
+    .single();
+
+  if (!error && profile?.is_admin) {
+    adminPanelLink.hidden = false;
+  }
+}
+
 if (itemsGrid && itemsStatus) {
   loadItems();
 }
+
+loadAdminLink();

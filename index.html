@@ -6,44 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="./manifest.json">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./styles/bulma.css">
+    <link rel="stylesheet" href="./styles/styles.css">
     <title>UniCo</title>
 </head>
 
-<body>
-    <section class="hero is-primary is-fullheight has-background-primary">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns is-mobile is-vcentered mb-5">
-                    <div class="column is-narrow"></div>
-                    <div class="column has-text-centered">
-                        <figure class="image is-96x96 is-inline-block">
-                            <img src="./assets/icons/logo.svg" alt="UniCo Logo">
-                        </figure>
-                    </div>
-                    <div class="column is-narrow"></div>
-                </div>
-
-                <div class="columns is-centered">
-                    <div class="column is-10-mobile is-8-tablet is-5-desktop has-text-centered">
-                        <h1 class="title is-3 has-text-white">UniCo</h1>
-                        <p class="subtitle is-6 has-text-white mb-6">
-                            A comunidade de economia circular do teu campus.
-                        </p>
-                        <div class="buttons is-centered are-large">
-                            <a href="./pages/login.html?skipRedirect=1" class="button is-white is-rounded has-text-primary is-fullwidth mb-3">
-                                <strong>Login</strong>
-                            </a>
-                            <a href="./pages/register.html?skipRedirect=1" class="button is-white is-outlined is-rounded is-fullwidth">
-                                <strong>Register</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<body class="landing-page">
+    <main class="landing-shell">
+        <section class="landing-card" aria-label="UniCo entrada">
+            <div class="landing-brand">
+                <img class="landing-logo" src="./assets/icons/logo.svg" alt="UniCo Logo">
             </div>
-        </div>
-    </section>
+
+            <h1 class="landing-title">UniCo</h1>
+            <p class="landing-copy">
+                A comunidade de economia circular do teu campus.
+            </p>
+
+            <div class="landing-actions">
+                <a href="./pages/login.html?skipRedirect=1" class="app-btn app-btn--light app-btn--full">
+                    Login
+                </a>
+                <a href="./pages/register.html?skipRedirect=1" class="app-btn app-btn--outline app-btn--full">
+                    Registar
+                </a>
+            </div>
+        </section>
+    </main>
 
     <script>
         if ('serviceWorker' in navigator) {

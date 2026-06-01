@@ -4,98 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../styles/bulma.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <title> UniCo - Criar Conta</title>
 </head>
 
-<body>
-
-    <section class="hero is-primary is-fullheight has-background-primary">
-        <div class="hero-body ">
-            <div class="container">
-                <div class="columns is-mobile is-vcentered mb-5">
-                    <div class="column is-narrow">
-                        <a class="button is-white is-rounded" href="../index.html">Voltar</a>
-                    </div>
-                    <div class="column has-text-centered">
-                        <figure class="image is-96x96 is-inline-block">
-                            <img src="../assets/icons/logo.svg" alt="UniCo Logo">
-                        </figure>
-                    </div>
-                    <div class="column is-narrow"></div>
-                </div>
-
-                <div class="columns is-centered">
-                    <div class="column is-8-tablet is-5-desktop">
-                        <div class="card has-background-white ">
-                            <div class="card-content">
-                                <h1 class="title is-4 has-text-centered has-text-primary">Criar Nova Conta</h1>
-                                <p class="subtitle is-6 mt-4 has-text-centered mb-5 has-text-dark">Junta-te à comunidade de economia circular do teu campus.</p>
-
-                                <form id="register-form">
-                                    <div class="field">
-                                        <label class="label has-text-black" for="name">Nome Completo</label>
-                                        <div class="control">
-                                            <input class="input has-background-light" type="text" id="name"
-                                                placeholder="O teu nome e apelido" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="field">
-                                        <label class="label has-text-black" for="email">E-mail Académico</label>
-                                        <div class="control">
-                                            <input class="input has-background-light" type="email" id="email"
-                                                placeholder="utilizador@esmad.ipp.pt" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="field">
-                                        <label class="label has-text-black" for="campus">Campus / Escola Principal</label>
-                                        <div class="control">
-                                            <div class="select is-fullwidth">
-                                                <select id="university" class="has-background-light" required>
-                                                    <option value="" disabled selected>Seleciona o teu campus</option>
-                                                    <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
-                                                    <option value="ISEP">ISEP (Porto)</option>
-                                                    <option value="ISCAP">ISCAP (S. Mamede de Infesta)</option>
-                                                    <option value="ESE">ESE (Porto)</option>
-                                                    <option value="ESTG">ESTG (Felgueiras)</option>
-                                                    <option value="ESMAE">ESMAE (Porto)</option>
-                                                    <option value="ESS">ESS (Porto)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field">
-                                        <label class="label has-text-black" for="password">Palavra-passe</label>
-                                        <div class="control">
-                                            <input class="input has-background-light" type="password" id="password"
-                                                placeholder="Mínimo de 6 caracteres" minlength="6" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="field mt-5">
-                                        <div class="control">
-                                            <button type="submit" class="button is-primary is-fullwidth has-text-white">Criar
-                                                Conta</button>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <div class="has-text-centered mt-4">
-                                    <p class="is-size-7 has-text-dark">Já tens uma conta? <a href="login.html"
-                                            class="has-text-primary">Inicia sessão aqui</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+<body class="auth-page">
+    <main class="auth-shell">
+        <header class="auth-header">
+            <a class="app-btn app-btn--light" href="../index.html">Voltar</a>
+            <div class="auth-brand">
+                <img class="auth-logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
             </div>
-        </div>
-    </section>
+            <span aria-hidden="true"></span>
+        </header>
+
+        <section class="auth-card" aria-label="Formulário de registo">
+            <h1 class="section-title">Criar Nova Conta</h1>
+            <p class="section-copy" style="color: var(--muted); margin-top: 0.75rem;">
+                Junta-te à comunidade de economia circular do teu campus.
+            </p>
+
+            <form id="register-form" class="form-stack">
+                <div class="field">
+                    <label class="field-label" for="name">Nome Completo</label>
+                    <input class="app-input" type="text" id="name" placeholder="O teu nome e apelido" required>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="email">E-mail Académico</label>
+                    <input class="app-input" type="email" id="email" placeholder="utilizador@esmad.ipp.pt" required>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="university">Campus / Escola Principal</label>
+                    <select id="university" class="app-select" required>
+                        <option value="" disabled selected>Seleciona o teu campus</option>
+                        <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
+                        <option value="ISEP">ISEP (Porto)</option>
+                        <option value="ISCAP">ISCAP (S. Mamede de Infesta)</option>
+                        <option value="ESE">ESE (Porto)</option>
+                        <option value="ESTG">ESTG (Felgueiras)</option>
+                        <option value="ESMAE">ESMAE (Porto)</option>
+                        <option value="ESS">ESS (Porto)</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="password">Palavra-passe</label>
+                    <input class="app-input" type="password" id="password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+                </div>
+
+                <button type="submit" class="app-btn app-btn--primary app-btn--full">Criar Conta</button>
+            </form>
+
+            <p class="auth-footer">
+                Já tens uma conta?
+                <a href="login.html" class="text-accent">Inicia sessão aqui</a>
+            </p>
+        </section>
+    </main>
 
     <script type="module" src="../js/auth-guard.js"></script>
     <script type="module" src="../js/auth.js"></script>

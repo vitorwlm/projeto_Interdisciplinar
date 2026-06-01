@@ -1,60 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-PT" class="has-navbar-fixed-top has-navbar-fixed-bottom">
+<html lang="pt-PT">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-    <link rel="stylesheet" href="../styles/bulma.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Anúncio</title>
 </head>
 
-<body>
-    <section class="section pt-6 pb-6">
-        <div class="container">
-            <div class="columns is-mobile is-vcentered mb-4">
-                <div class="column">
-                    <a class="button is-light is-rounded" href="dashboard.html">Voltar</a>
-                </div>
-                <div class="column is-narrow">
-                    <button data-logout-btn class="button is-light is-rounded" type="button">Sair</button>
-                </div>
-            </div>
+<body class="app-page">
+    <main class="page-shell" style="padding: 24px 0 96px;">
+        <header class="page-toolbar" style="margin-bottom: 18px;">
+            <a class="app-btn app-btn--ghost" href="dashboard.html">Voltar</a>
+            <button data-logout-btn class="app-btn app-btn--light" type="button">Sair</button>
+        </header>
 
-            <div id="item-status" class="mb-4">A carregar anúncio...</div>
-
-            <div class="columns is-variable is-6 is-vcentered">
-                <div class="column is-6-desktop is-12-tablet">
-                    <figure class="image is-4by3">
-                        <img id="item-image" src="../assets/icons/logo.svg" alt="Anúncio">
-                    </figure>
-                </div>
-                <div class="column is-6-desktop is-12-tablet">
-                    <h1 id="item-title" class="title is-3">Anúncio</h1>
-                    <p id="item-description" class="content">A carregar descrição...</p>
-                    <p class="title is-4 has-text-primary" id="item-price">--</p>
-
-                    <div class="tags mb-4">
-                        <span class="tag is-light is-medium" id="item-category">Categoria</span>
-                        <span class="tag is-light is-medium" id="item-condition">Estado</span>
-                    </div>
-
-                    <div class="notification is-light">
-                        <p class="mb-2"><strong>Vendedor:</strong> <span id="item-seller">--</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5">
-                <h2 class="title is-4">Mais fotografias</h2>
-                <div class="columns is-multiline" id="item-gallery"></div>
-            </div>
+        <div id="item-status" class="app-alert app-alert--neutral app-alert--center" style="margin-bottom: 18px;">
+            A carregar anúncio...
         </div>
-    </section>
+
+        <section class="detail-grid">
+            <figure class="detail-figure">
+                <img id="item-image" src="../assets/icons/logo.svg" alt="Anúncio">
+            </figure>
+
+            <article class="panel detail-card">
+                <h1 id="item-title" class="detail-title">Anúncio</h1>
+                <p id="item-description" class="detail-copy" style="margin-top: 0.75rem;">A carregar descrição...</p>
+                <p class="detail-price" id="item-price">--</p>
+
+                <div class="chip-list" style="margin: 1rem 0 1.25rem;">
+                    <span class="chip" id="item-category">Categoria</span>
+                    <span class="chip" id="item-condition">Estado</span>
+                </div>
+
+                <div class="seller-box">
+                    <p><strong>Vendedor:</strong> <span id="item-seller">--</span></p>
+                </div>
+            </article>
+        </section>
+
+        <section class="gallery-section">
+            <h2 class="section-title" style="font-size: 1.45rem; margin-bottom: 16px;">Mais fotografias</h2>
+            <div class="gallery-grid" id="item-gallery"></div>
+        </section>
+    </main>
 
     <script type="module" src="../js/auth-guard.js"></script>
     <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/item-detail.js"></script>
+    <script type="module" src="../js/item-detail.js?v=20260601"></script>
 </body>
 
 </html>

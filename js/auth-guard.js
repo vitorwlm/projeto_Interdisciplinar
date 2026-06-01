@@ -1,7 +1,7 @@
 import { supabase } from './config/supabaseClient.js';
 
 const currentPage = window.location.pathname.split('/').pop().toLowerCase();
-const protectedPages = new Set(['dashboard.html', 'publish.html', 'item.html']);
+const protectedPages = new Set(['dashboard.html', 'publish.html', 'item.html', 'admin.html']);
 const publicAuthPages = new Set(['index.html', 'login.html', 'register.html']);
 
 const loginPath = currentPage === 'index.html' ? './pages/login.html' : 'login.html';
