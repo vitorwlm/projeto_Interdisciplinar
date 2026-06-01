@@ -68,7 +68,18 @@ if (loginForm) {
 
             if (error) throw error;
 
-            window.location.href = 'dashboard.html';
+            // If a returnUrl was provided (e.g., user started from publish), go there
+            const params = new URLSearchParams(window.location.search);
+            const returnUrl = params.get('returnUrl');
+
+            if (returnUrl) {
+                // sanitize: allow only same-folder html filename
+                const safeFile = returnUrl.split('/').pop().split('?')[0];
+                const isSafe = /^[a-z0-9_-]+\.html$/i.test(safeFile);
+                window.location.replace(isSafe ? safeFile : 'dashboard.html');
+            } else {
+                window.location.replace('dashboard.html');
+            }
 
         } catch (error) {
             console.error('Erro:', error.message);
@@ -83,9 +94,9 @@ if (loginForm) {
     });
 }
 
-const logoutBtn = document.getElementById('logout-btn');
+const logoutButtons = document.querySelectorAll('[data-logout-btn], #logout-btn');
 
-if (logoutBtn) {
+logoutButtons.forEach((logoutBtn) => {
     logoutBtn.addEventListener('click', async (e) => {
         e.preventDefault();
 
@@ -100,4 +111,4 @@ if (logoutBtn) {
             console.error('Não foi possível terminar a sessão:', error.message);
         }
     });
-}
+});

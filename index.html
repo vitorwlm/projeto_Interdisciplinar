@@ -12,28 +12,34 @@
 </head>
 
 <body>
-    <section class="hero is-primary is-fullheight">
+    <section class="hero is-primary is-fullheight has-background-primary">
         <div class="hero-body">
             <div class="container">
-                <div class="columns is-centered is-mobile">
-                    <div
-                        class="column is-three-quarters-mobile is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
-                        <figure class="image is-square">
-                            <img src="./assets/icons/logo.svg" alt="UniCo">
+                <div class="columns is-mobile is-vcentered mb-5">
+                    <div class="column is-narrow"></div>
+                    <div class="column has-text-centered">
+                        <figure class="image is-96x96 is-inline-block">
+                            <img src="./assets/icons/logo.svg" alt="UniCo Logo">
                         </figure>
                     </div>
+                    <div class="column is-narrow"></div>
                 </div>
-            </div>
-        </div>
-        <div class="hero-foot pb-6 px-5">
-            <div class="container">
-                <div class="buttons is-centered are-large   ">
-                    <a href="./pages/login.html" class="button is-white is-rounded has-text-primary is-fullwidth mb-3">
-                        <strong>Login</strong>
-                    </a>
-                    <a href="./pages/register.html" class="button is-white is-outlined is-rounded is-fullwidth is-hovered">
-                        <strong>Register</strong>
-                    </a>
+
+                <div class="columns is-centered">
+                    <div class="column is-10-mobile is-8-tablet is-5-desktop has-text-centered">
+                        <h1 class="title is-3 has-text-white">UniCo</h1>
+                        <p class="subtitle is-6 has-text-white mb-6">
+                            A comunidade de economia circular do teu campus.
+                        </p>
+                        <div class="buttons is-centered are-large">
+                            <a href="./pages/login.html?skipRedirect=1" class="button is-white is-rounded has-text-primary is-fullwidth mb-3">
+                                <strong>Login</strong>
+                            </a>
+                            <a href="./pages/register.html?skipRedirect=1" class="button is-white is-outlined is-rounded is-fullwidth">
+                                <strong>Register</strong>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,6 +50,7 @@
             navigator.serviceWorker.register('./sw.js');
         }
     </script>
+    <script type="module" src="./js/auth-guard.js"></script>
 </body>
 
 </html>

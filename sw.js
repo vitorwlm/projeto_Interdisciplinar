@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-shell-v1';
+const CACHE_NAME = 'app-shell-v2';
 const ASSETS = [
 	'/',
 	'/index.html',
@@ -7,7 +7,10 @@ const ASSETS = [
 	'/styles/styles.css',
 	'/js/app.js',
 	'/js/auth.js',
-	'/js/item.js'
+	'/js/auth-guard.js',
+	'/js/item.js',
+	'/js/dashboard.js',
+	'/js/item-detail.js'
 ];
 
 self.addEventListener('install', (event) => {

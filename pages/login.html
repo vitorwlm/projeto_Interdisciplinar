@@ -14,19 +14,24 @@
     <section class="hero is-primary is-fullheight has-background-primary">
         <div class="hero-body ">
             <div class="container">
+                <div class="columns is-mobile is-vcentered mb-5">
+                    <div class="column is-narrow">
+                        <a class="button is-white is-rounded" href="../index.html">Voltar</a>
+                    </div>
+                    <div class="column has-text-centered">
+                        <figure class="image is-96x96 is-inline-block">
+                            <img src="../assets/icons/logo.svg" alt="UniCo Logo">
+                        </figure>
+                    </div>
+                    <div class="column is-narrow"></div>
+                </div>
+
                 <div class="columns is-centered">
                     <div class="column is-8-tablet is-5-desktop">
-                        <div class="is-flex is-justify-content-center mb-5">
-                            <figure class="image is-128x128">
-                                <img src="../assets/icons/logo.svg " alt="UniCo Logo">
-                            </figure>
-                        </div>
-
                         <div class="card has-background-white ">
                             <div class="card-content">
                                 <h1 class="title is-4 has-text-centered has-text-primary">Iniciar Sessão</h1>
-                                <p class="subtitle is-6 mt-4 has-text-centered mb-5 has-text-dark ">Bem-vindo de volta
-                                    à comunidade de economia circular do teu campus.</p>
+                                <p class="subtitle is-6 mt-4 has-text-centered mb-5 has-text-dark">Bem-vindo de volta à comunidade de economia circular do teu campus.</p>
 
                                 <form id="login-form">
                                     <div class="field">
@@ -70,6 +75,7 @@
         </div>
     </section>
 
+    <script type="module" src="../js/auth-guard.js"></script>
     <script type="module" src="../js/auth.js"></script>
 </body>
 

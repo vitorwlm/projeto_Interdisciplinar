@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" class="has-navbar-fixed-top">
 
 <head>
     <meta charset="UTF-8">
@@ -10,24 +10,26 @@
 
 <body>
 
-    <section class="hero is-primary is-fullheight">
-            <nav class="navbar is-primary">
-                    <a class="navbar-item" href="dashboard.html">
-                        <span class="ml-2 has-text-weight-bold">Voltar</span>
-                    </a>
-            </nav>
-
-        <div class="hero-body">
-            <div class="container">
+        <section class="hero is-primary is-fullheight">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns is-mobile is-vcentered mb-4">
+                        <div class="column">
+                            <a class="button is-light is-rounded" href="dashboard.html">Voltar</a>
+                        </div>
+                        <div class="column is-narrow">
+                            <button data-logout-btn class="button is-white is-rounded" type="button">Sair</button>
+                        </div>
+                    </div>
                 <div class="columns is-centered">
                     <div class="column is-10-tablet is-6-desktop">
                         <div class="card">
                             <div class="card-content has-text-primary has-background-white">
-                                <h2 class="title is-4">Publicar Novo Artigo</h2>
+                                <h2 class="title is-4 has-text-primary">Publicar Novo Artigo</h2>
 
                                 <form id="publish-form">
                                     <div class="field ">
-                                        <label class="label">Adiciona até 5 fotos</label>
+                                        <label class="label has-text-black">Adiciona até 5 fotos</label>
                                         <div class="control">
                                             <div class="file has-name is-boxed">
                                                 <label class="file-label">
@@ -37,18 +39,19 @@
                                                         <span class="file-icon">
                                                             <i class="fas fa-camera"></i>
                                                         </span>
-                                                        <span class="file-label">Carregar fotografias</span>
+                                                        <span class="file-label has-text-white">Carregar fotografias</span>
                                                     </span>
-                                                    <span class="file-name" id="file-name">Nenhuma fotografia seleccionada</span>
+                                                    <span class="file-name has-text-black" id="file-name">Nenhuma fotografia seleccionada</span>
                                                 </label>
                                             </div>
                                         </div>
+                                        <div id="image-preview" class="columns is-mobile is-multiline mt-3"></div>
                                     </div>
 
                                     <hr>
 
                                     <div class="field">
-                                        <label class="label">Título</label>
+                                        <label class="label has-text-black">Título</label>
                                         <div class="control">
                                             <input class="input" type="text" id="item-title" placeholder="Ex: Livro de Cálculo I"
                                                 required>
@@ -57,7 +60,7 @@
                                     </div>
 
                                     <div class="field">
-                                        <label class="label">Descrição</label>
+                                        <label class="label has-text-black">Descrição</label>
                                         <div class="control">
                                             <textarea class="textarea" id="item-description" rows="4"
                                                 placeholder="Descreve o artigo, menciona detalhes e defeitos (se existirem)..." required></textarea>
@@ -69,15 +72,11 @@
                                     <div class="columns is-multiline">
                                         <div class="column is-6">
                                             <div class="field">
-                                                <label class="label">Categoria</label>
+                                                <label class="label has-text-black">Categoria</label>
                                                 <div class="control">
                                                     <div class="select is-fullwidth">
                                                         <select id="item-category" required>
-                                                            <option value="" disabled selected>Seleciona...</option>
-                                                            <option value="livros">Livros & Apontamentos</option>
-                                                            <option value="tecnologia">Tecnologia & Eletrónica</option>
-                                                            <option value="material">Material Académico</option>
-                                                            <option value="outros">Outros</option>
+                                                            <option value="" disabled selected>Carregando categorias...</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -86,7 +85,7 @@
 
                                         <div class="column is-6">
                                             <div class="field">
-                                                <label class="label">Estado</label>
+                                                <label class="label has-text-black">Estado</label>
                                                 <div class="control">
                                                     <div class="select is-fullwidth">
                                                         <select id="item-condition" required>
@@ -105,7 +104,7 @@
                                     <hr>
 
                                     <div class="field">
-                                        <label class="label">Preço</label>
+                                        <label class="label has-text-black">Preço</label>
                                         <div class="control has-icons-right">
                                             <input class="input is-large has-text-weight-bold" type="number" step="0.01" id="item-price"
                                                 placeholder="0.00" required>
@@ -120,7 +119,7 @@
                                             <a class="button is-light" href="dashboard.html">Cancelar</a>
                                         </p>
                                         <p class="control is-expanded">
-                                            <button type="submit" id="submit-item-btn" class="button is-primary is-fullwidth has-text-weight-bold">Publicar Anúncio</button>
+                                            <button type="submit" id="submit-item-btn" class="button is-primary is-fullwidth has-text-weight-bold has-text-white">Publicar Anúncio</button>
                                         </p>
                                     </div>
                                 </form>
@@ -132,17 +131,9 @@
         </div>
     </section>
 
-    <script>
-        // Show selected file names (simple helper)
-        const fileInput = document.querySelector('input[type="file"][name="item-images"]');
-        const fileNameEl = document.getElementById('file-name');
-        if (fileInput && fileNameEl) {
-            fileInput.addEventListener('change', () => {
-                const names = Array.from(fileInput.files).map(f => f.name).join(', ');
-                fileNameEl.textContent = names || 'Nenhuma fotografia seleccionada';
-            });
-        }
-    </script>
+    <script type="module" src="../js/auth-guard.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/item.js"></script>
 
 </body>
 
