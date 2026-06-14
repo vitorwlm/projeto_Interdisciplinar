@@ -8,10 +8,12 @@
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Anúncio</title>
+    <meta name="description" content="Detalhes do anúncio na UniCo — compra e vende artigos na tua comunidade universitária.">
 </head>
 
 <body class="app-page">
-    <main class="page-shell" style="padding: 24px 0 96px;">
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <main class="page-shell" id="main-content" style="padding: 24px 0 96px;">
         <header class="page-toolbar" style="margin-bottom: 18px;">
             <a class="app-btn app-btn--ghost" href="dashboard.html">Voltar</a>
             <button data-logout-btn class="app-btn app-btn--light" type="button">Sair</button>
@@ -36,7 +38,7 @@
                 <p id="sold-note" class="status-copy" hidden style="margin-top: 0.6rem; color: var(--muted); font-weight: 700;"></p>
                 <div style="margin-top: 0.5rem;">
                     <button id="fav-item-btn" class="app-btn app-btn--ghost" type="button" aria-label="Adicionar aos favoritos" style="gap: 10px;">
-                        <svg id="fav-item-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <svg id="fav-item-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                         <span id="fav-item-label">Guardar nos favoritos</span>
@@ -60,7 +62,7 @@
             </article>
         </section>
 
-        <section class="gallery-section">
+        <section class="gallery-section" aria-label="Galeria de fotografias do anúncio">
             <h2 class="section-title" style="font-size: 1.45rem; margin-bottom: 16px;">Mais fotografias</h2>
             <div class="gallery-grid" id="item-gallery"></div>
         </section>

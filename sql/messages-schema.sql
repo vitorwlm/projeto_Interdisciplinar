@@ -69,11 +69,13 @@ create policy "enviar mensagem nas minhas conversas"
   );
 
 -- ============================================================================
--- (Opcional) Permitir a um comprador marcar o item como vendido.
--- Necessário para o botão "Comprar" funcionar se a tua policy de UPDATE em
--- 'item' só permitir ao dono editar. Descomenta se precisares:
+-- Permitir a um comprador (qualquer utilizador com sessão) marcar o item como
+-- vendido. SEM esta permissão o botão "Comprar" NÃO funciona: o item nunca
+-- fica marcado como vendido.
+-- IMPORTANTE: corre este bloco no Supabase para o "Comprar" funcionar:
+--   Dashboard -> SQL Editor -> New query -> cola e carrega em Run.
 -- ============================================================================
--- create policy "comprador marca item como vendido"
---   on public.item for update
---   using (auth.uid() is not null)
---   with check (sell_status in ('disponivel', 'reservado', 'vendido'));
+create policy "comprador marca item como vendido"
+  on public.item for update
+  using (auth.uid() is not null)
+  with check (sell_status in ('disponivel', 'reservado', 'vendido'));

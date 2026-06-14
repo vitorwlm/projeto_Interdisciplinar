@@ -69,13 +69,14 @@ export function initRegisterForm() {
 
       if (profileResult.error) throw profileResult.error;
 
-      showAlert(form, 'success', 'Conta criada! Verifica o teu e-mail para confirmares o registo.');
+      showAlert(form, 'success', 'Conta criada com sucesso! A entrar...');
 
       /*
-       * Redirecionar após 2 segundos dá tempo ao utilizador de ler a mensagem
-       * de sucesso antes de ser enviado para a página de login.
+       * O registo já deixa o utilizador com sessão iniciada, por isso enviamo-lo
+       * diretamente para o dashboard. Esperamos 1,5 segundos para ele conseguir
+       * ler a mensagem de sucesso antes do redirecionamento.
        */
-      setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
     } catch (err) {
       console.error('Erro:', err.message);
       showAlert(form, 'danger', 'Não foi possível criar a conta: ' + err.message);

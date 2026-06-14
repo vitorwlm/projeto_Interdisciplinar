@@ -7,13 +7,15 @@
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
-    <title> UniCo - Iniciar Sessão</title>
+    <title>UniCo - Iniciar Sessão</title>
+    <meta name="description" content="Inicia sessão na UniCo, a comunidade de economia circular do teu campus.">
 </head>
 
 <body class="auth-page">
-    <main class="auth-shell">
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <main class="auth-shell" id="main-content">
         <header class="auth-header">
-            <a class="app-btn app-btn--light" href="../index.html">Voltar</a>
+            <a class="app-btn app-btn--light" href="../index.html" aria-label="Voltar à página inicial">Voltar</a>
             <div class="auth-brand">
                 <img class="auth-logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
             </div>
@@ -29,12 +31,12 @@
             <form id="login-form" class="form-stack">
                 <div class="field">
                     <label class="field-label" for="email">E-mail Académico</label>
-                    <input class="app-input" type="email" id="email" placeholder="utilizador@esmad.ipp.pt" required>
+                    <input class="app-input" type="email" id="email" name="email" placeholder="utilizador@esmad.ipp.pt" autocomplete="email" required>
                 </div>
 
                 <div class="field">
                     <label class="field-label" for="password">Palavra-passe</label>
-                    <input class="app-input" type="password" id="password" placeholder="A tua palavra-passe" required>
+                    <input class="app-input" type="password" id="password" name="password" placeholder="A tua palavra-passe" autocomplete="current-password" required>
                 </div>
 
                 <button type="submit" class="app-btn app-btn--primary app-btn--full">Entrar</button>

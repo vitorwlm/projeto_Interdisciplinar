@@ -7,13 +7,15 @@
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
-    <title> UniCo - Criar Conta</title>
+    <title>UniCo - Criar Conta</title>
+    <meta name="description" content="Cria uma conta na UniCo e junta-te à comunidade de economia circular do teu campus.">
 </head>
 
 <body class="auth-page">
-    <main class="auth-shell">
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <main class="auth-shell" id="main-content">
         <header class="auth-header">
-            <a class="app-btn app-btn--light" href="../index.html">Voltar</a>
+            <a class="app-btn app-btn--light" href="../index.html" aria-label="Voltar à página inicial">Voltar</a>
             <div class="auth-brand">
                 <img class="auth-logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
             </div>
@@ -29,17 +31,17 @@
             <form id="register-form" class="form-stack">
                 <div class="field">
                     <label class="field-label" for="name">Nome Completo</label>
-                    <input class="app-input" type="text" id="name" placeholder="O teu nome e apelido" required>
+                    <input class="app-input" type="text" id="name" name="name" placeholder="O teu nome e apelido" autocomplete="name" required>
                 </div>
 
                 <div class="field">
                     <label class="field-label" for="email">E-mail Académico</label>
-                    <input class="app-input" type="email" id="email" placeholder="utilizador@esmad.ipp.pt" required>
+                    <input class="app-input" type="email" id="email" name="email" placeholder="utilizador@esmad.ipp.pt" autocomplete="email" required>
                 </div>
 
                 <div class="field">
                     <label class="field-label" for="university">Campus / Escola Principal</label>
-                    <select id="university" class="app-select" required>
+                    <select id="university" name="university" class="app-select" required>
                         <option value="" disabled selected>Seleciona o teu campus</option>
                         <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
                         <option value="ISEP">ISEP (Porto)</option>
@@ -53,7 +55,8 @@
 
                 <div class="field">
                     <label class="field-label" for="password">Palavra-passe</label>
-                    <input class="app-input" type="password" id="password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+                    <input class="app-input" type="password" id="password" name="password" placeholder="Mínimo de 6 caracteres" autocomplete="new-password" minlength="6" aria-describedby="password-hint" required>
+                    <p id="password-hint" class="help-text">A palavra-passe deve ter pelo menos 6 caracteres.</p>
                 </div>
 
                 <button type="submit" class="app-btn app-btn--primary app-btn--full">Criar Conta</button>

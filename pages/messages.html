@@ -8,13 +8,15 @@
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Mensagens</title>
+    <meta name="description" content="As tuas conversas de compra e venda na UniCo.">
 </head>
 
 <body class="app-page">
-    <main class="dashboard-shell">
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <main class="dashboard-shell" id="main-content">
         <header class="dashboard-header panel desktop-brand-bar">
             <a href="dashboard.html" aria-label="Dashboard">
-                <img class="desktop-brand-bar__logo" src="../assets/icons/logo.svg" alt="logo">
+                <img class="desktop-brand-bar__logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
             </a>
 
             <div>
@@ -35,7 +37,7 @@
                 <div id="conversation-list" class="conversation-list" aria-live="polite"></div>
             </aside>
 
-            <section class="chat-pane" id="chat-panel" hidden>
+            <section class="chat-pane" id="chat-panel" aria-label="Painel de chat" hidden>
                 <div class="chat-header">
                     <button id="chat-back" class="app-btn app-btn--ghost chat-back" type="button" aria-label="Voltar à lista">←</button>
                     <div>
@@ -47,14 +49,15 @@
                 <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
 
                 <form id="chat-form" class="chat-form">
-                    <input id="chat-input" class="app-input" type="text" placeholder="Escreve uma mensagem..." autocomplete="off" maxlength="1000">
+                    <label for="chat-input" class="sr-only">Mensagem</label>
+                    <input id="chat-input" class="app-input" type="text" placeholder="Escreve uma mensagem..." autocomplete="off" maxlength="1000" aria-label="Escreve uma mensagem">
                     <button class="app-btn app-btn--primary" type="submit">Enviar</button>
                 </form>
             </section>
         </section>
     </main>
 
-    <nav class="mobile-nav" role="navigation" aria-label="mobile navigation">
+    <nav class="mobile-nav" aria-label="Navegação principal">
         <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard">
             <img src="../assets/icons/Vector.svg" alt="icon dashboard">
         </a>

@@ -18,7 +18,7 @@
  */
 
 import { supabase } from '../config/supabaseClient.js';
-import { initPage, getCurrentUser, plural, showAlert, renderNotice } from '../utils/utils.js';
+import { initPage, getCurrentUser, plural, showAlert, renderNotice, escapeHtml } from '../utils/utils.js';
 
 await initPage();
 
@@ -122,18 +122,20 @@ function renderCategories() {
   categoriesList.innerHTML = cachedCategories.map((category) => {
     const itemCount = cachedItems.filter((item) => item.category_id === category.id).length;
     const extra = category.icon_url ? ' · ícone' : '';
+    const safeName = escapeHtml(category.name);
+    const safeIcon = escapeHtml(category.icon_url || '');
     return `
       <article class="category-card" data-category-id="${category.id}">
-        <strong>${category.name}</strong>
+        <strong>${safeName}</strong>
         <span>${plural(itemCount, 'anúncio')}${extra}</span>
         <div class="category-card__actions">
           <button class="app-btn app-btn--soft category-card__btn" type="button"
             data-category-edit="${category.id}"
-            data-category-name="${category.name}"
-            data-category-icon="${category.icon_url || ''}">Editar</button>
+            data-category-name="${safeName}"
+            data-category-icon="${safeIcon}">Editar</button>
           <button class="app-btn app-btn--danger-soft category-card__btn" type="button"
             data-category-delete="${category.id}"
-            data-category-name="${category.name}">Apagar</button>
+            data-category-name="${safeName}">Apagar</button>
         </div>
       </article>
     `;
@@ -304,8 +306,8 @@ function renderUsers() {
     return `
     <article class="user-card">
       <div class="user-card__info">
-        <strong class="user-card__name">${user.name || 'Sem nome'}</strong>
-        <span class="user-card__meta">${user.university || 'Sem universidade'}</span>
+        <strong class="user-card__name">${escapeHtml(user.name || 'Sem nome')}</strong>
+        <span class="user-card__meta">${escapeHtml(user.university || 'Sem universidade')}</span>
         ${adminBadge}
       </div>
       <div class="user-card__actions">

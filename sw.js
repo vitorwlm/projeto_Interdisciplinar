@@ -31,7 +31,7 @@
  *   O evento "activate" apaga automaticamente as caches com nomes diferentes,
  *   forçando o browser a descarregar os ficheiros atualizados.
  */
-const CACHE_NAME = 'app-shell-v14';
+const CACHE_NAME = 'app-shell-v15';
 
 /*
  * ASSETS — lista de ficheiros a guardar em cache durante a instalação.
@@ -118,18 +118,32 @@ self.addEventListener('activate', (event) => {
  *   Pedidos POST, PUT, DELETE (ex.: inserções na BD via Supabase) não devem
  *   ser servidos da cache — precisam sempre de chegar ao servidor.
  *
- * Estratégia Cache-First:
- *   caches.match() procura o recurso em todas as caches existentes.
- *   Se encontrar (hit), devolve imediatamente sem ir à rede.
- *   Se não encontrar (miss), faz o pedido normal à rede com fetch().
+ * Estratégia: Internet primeiro, cache em reserva (Network-First)
+ *   1. Tentamos sempre ir à internet buscar a versão mais recente.
+ *   2. Se conseguirmos, guardamos uma cópia na cache (para uso offline) e
+ *      devolvemos essa versão fresca.
+ *   3. Se a internet falhar (utilizador offline), devolvemos a cópia guardada.
  *
- *   Para pedidos à API do Supabase (dados dinâmicos), caches.match()
- *   devolverá sempre undefined, pelo que esses pedidos vão sempre à rede.
+ *   Vantagem face à cache-first anterior: o utilizador vê sempre o código mais
+ *   recente quando tem internet (deixa de ficar "preso" a uma versão antiga),
+ *   e a app continua a abrir offline graças à cópia guardada.
  */
 self.addEventListener('fetch', (event) => {
 	if (event.request.method !== 'GET') return;
 
 	event.respondWith(
-		caches.match(event.request).then((cached) => cached || fetch(event.request))
+		fetch(event.request)
+			.then((response) => {
+				/*
+				 * Guardamos uma cópia da resposta na cache para poder ser usada
+				 * offline mais tarde. Usamos .clone() porque uma resposta só
+				 * pode ser "lida" uma vez — uma cópia vai para a cache, a outra
+				 * é devolvida à página.
+				 */
+				const copia = response.clone();
+				caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copia));
+				return response;
+			})
+			.catch(() => caches.match(event.request))
 	);
 });

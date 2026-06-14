@@ -8,10 +8,12 @@
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Editar Anúncio</title>
+    <meta name="description" content="Edita o teu anúncio na UniCo — atualiza título, descrição, preço e fotografias.">
 </head>
 
 <body class="app-page">
-    <main class="dashboard-shell">
+    <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
+    <main class="dashboard-shell" id="main-content">
         <header class="page-toolbar">
             <a class="app-btn app-btn--ghost" id="back-btn" href="dashboard.html">Voltar</a>
             <button data-logout-btn class="app-btn app-btn--light" type="button">Sair</button>
@@ -81,7 +83,7 @@
 
                 <div class="field">
                     <label class="field-label" for="item-price">Preço</label>
-                    <input class="app-input" type="number" step="0.01" id="item-price" placeholder="0.00" required>
+                    <input class="app-input" type="number" step="0.01" min="0" id="item-price" name="item-price" placeholder="0.00" required>
                 </div>
 
                 <div class="form-actions">
@@ -92,7 +94,7 @@
 
             <hr class="section-divider" style="margin-top: 2rem;">
 
-            <div class="admin-section" style="margin-top: 1.5rem;">
+            <div class="admin-section" role="region" aria-label="Zona de perigo" style="margin-top: 1.5rem;">
                 <h2 class="admin-section__title" style="color: var(--danger, #e53e3e);">Zona de perigo</h2>
                 <p class="section-copy" style="color: var(--muted); margin: 0.5rem 0 1rem;">
                     Apagar o anúncio é permanente e não pode ser desfeito.

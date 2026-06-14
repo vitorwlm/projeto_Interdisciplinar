@@ -69,6 +69,15 @@ if (publishForm) {
       return;
     }
 
+    /*
+     * O preço tem de ser um número maior que 0. Sem isto era possível publicar
+     * com preço negativo ou inválido.
+     */
+    if (Number.isNaN(Number(priceValue)) || Number(priceValue) <= 0) {
+      showAlert(publishForm, 'danger', 'Indica um preço válido (maior que 0).');
+      return;
+    }
+
     setSubmitting(true);
 
     try {

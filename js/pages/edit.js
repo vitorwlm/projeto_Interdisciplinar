@@ -145,6 +145,12 @@ if (editForm) {
       return;
     }
 
+    /* O preço tem de ser um número maior que 0. */
+    if (Number.isNaN(Number(price)) || Number(price) <= 0) {
+      showNotification('danger', 'Indica um preço válido (maior que 0).');
+      return;
+    }
+
     setSubmitting(true);
 
     try {

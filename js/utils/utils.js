@@ -129,6 +129,28 @@ export function unique(list) {
   return resultado;
 }
 
+/*
+ * escapeHtml — Transforma caracteres especiais (< > " ' &) nas suas versões
+ * seguras para HTML.
+ *
+ * Porquê é importante?
+ *   Quando mostramos texto escrito pelo utilizador (título de um anúncio,
+ *   nome, etc.) dentro de innerHTML, se esse texto tiver código HTML ele
+ *   seria executado pelo browser. Isto chama-se XSS e é uma falha de segurança.
+ *   Ao "escapar" o texto, o código aparece como texto normal e nunca corre.
+ *
+ *   Exemplo: <img onerror=alert(1)>  →  &lt;img onerror=alert(1)&gt;
+ */
+export function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  return String(text)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
 
 /* ══════════════════════════════════════════════════════════════════════════════
  * 4. FAVORITOS
@@ -251,10 +273,22 @@ export async function buyItem(itemId) {
     return false;
   }
 
-  const { error } = await supabase.from('item').update({ sell_status: 'vendido' }).eq('id', itemId);
-  if (error) {
+  /*
+   * Pedimos o ".select('id')" para o Supabase nos devolver as linhas que
+   * realmente alterou. Isto é importante: se o servidor não permitir marcar
+   * o item como vendido (por falta de permissões), NÃO vem um "error", mas a
+   * lista "vendido" vem vazia. Sem esta verificação, a app diria "compra feita"
+   * mesmo quando o item continua à venda.
+   */
+  const { data: vendido, error } = await supabase
+    .from('item')
+    .update({ sell_status: 'vendido' })
+    .eq('id', itemId)
+    .select('id');
+
+  if (error || !vendido || vendido.length === 0) {
     console.error('Erro ao comprar:', error);
-    alert('Não foi possível concluir a compra.');
+    alert('Não foi possível concluir a compra. Tenta novamente mais tarde.');
     return false;
   }
 
@@ -443,7 +477,7 @@ export async function deleteItemImages(itemId) {
  * consistente em toda a app.
  */
 function createBadge(text) {
-  return '<span class="badge">' + text + '</span>';
+  return '<span class="badge">' + escapeHtml(text) + '</span>';
 }
 
 /*
@@ -581,11 +615,11 @@ export function renderItemCard(item, options) {
         ${favButton}
         <a href="item.html?id=${item.id}" style="flex: 1; display: flex; flex-direction: column; text-decoration: none; color: inherit;">
           <div class="item-card__media">
-            <img class="cardimg"1\ src="${imageUrl}" alt="${item.title || 'Anúncio'}" loading="lazy">
+            <img class="cardimg" src="${imageUrl}" alt="${escapeHtml(item.title || 'Anúncio')}" loading="lazy">
           </div>
           <div class="item-card__body" style="flex: 1;">
-            <h2 class="item-card__title">${item.title || 'Sem título'}</h2>
-            <p class="item-card__text">${item.description || 'Sem descrição disponível.'}</p>
+            <h2 class="item-card__title">${escapeHtml(item.title || 'Sem título')}</h2>
+            <p class="item-card__text">${escapeHtml(item.description || 'Sem descrição disponível.')}</p>
             <div class="badge-list">
               ${categoryBadge}
               ${createBadge(wearLabel)}
@@ -697,7 +731,7 @@ export async function loadCategories(selectedId) {
       return;
     }
 
-    select.innerHTML = '<option value="" disabled>Seleciona...</option>';
+    select.innerHTML = '<option value="" disabled selected>Seleciona...</option>';
     data.forEach((c) => {
       const option = document.createElement('option');
       option.value = c.id;
