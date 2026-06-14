@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2C2A9B">
+    <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Anúncio</title>
 </head>
@@ -28,7 +30,18 @@
                 <h1 id="item-title" class="detail-title">Anúncio</h1>
                 <p id="item-description" class="detail-copy" style="margin-top: 0.75rem;">A carregar descrição...</p>
                 <p class="detail-price" id="item-price">--</p>
-
+                <div id="buy-action" hidden style="margin-top: 0.75rem;">
+                    <button id="buy-item-btn" class="app-btn app-btn--primary app-btn--full" type="button">Comprar</button>
+                </div>
+                <p id="sold-note" class="status-copy" hidden style="margin-top: 0.6rem; color: var(--muted); font-weight: 700;"></p>
+                <div style="margin-top: 0.5rem;">
+                    <button id="fav-item-btn" class="app-btn app-btn--ghost" type="button" aria-label="Adicionar aos favoritos" style="gap: 10px;">
+                        <svg id="fav-item-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <span id="fav-item-label">Guardar nos favoritos</span>
+                    </button>
+                </div>
                 <div class="chip-list" style="margin: 1rem 0 1.25rem;">
                     <span class="chip" id="item-category">Categoria</span>
                     <span class="chip" id="item-condition">Estado</span>
@@ -36,6 +49,13 @@
 
                 <div class="seller-box">
                     <p><strong>Vendedor:</strong> <span id="item-seller">--</span></p>
+                </div>
+
+                <div id="owner-actions" hidden style="margin-top: 1.25rem;">
+                    <div class="action-row" style="justify-content: flex-start;">
+                        <a id="edit-item-btn" class="app-btn app-btn--soft" href="#">Editar anúncio</a>
+                        <button id="delete-item-btn" class="app-btn app-btn--danger-soft" type="button">Apagar anúncio</button>
+                    </div>
                 </div>
             </article>
         </section>
@@ -46,9 +66,7 @@
         </section>
     </main>
 
-    <script type="module" src="../js/auth-guard.js"></script>
-    <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/item-detail.js?v=20260601"></script>
+    <script type="module" src="../js/pages/item.js"></script>
 </body>
 
 </html>

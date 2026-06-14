@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2C2A9B">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <title>UniCo - Mensagens</title>
+</head>
+
+<body class="app-page">
+    <main class="dashboard-shell">
+        <header class="dashboard-header panel desktop-brand-bar">
+            <a href="dashboard.html" aria-label="Dashboard">
+                <img class="desktop-brand-bar__logo" src="../assets/icons/logo.svg" alt="logo">
+            </a>
+
+            <div>
+                <h1 class="section-title">Mensagens</h1>
+                <p class="status-copy" style="margin-top: 0.5rem;">As tuas conversas de compra e venda.</p>
+            </div>
+
+            <div class="header-actions">
+                <button data-logout-btn class="app-btn app-btn--ghost" type="button">Sair</button>
+            </div>
+        </header>
+
+        <section class="messages-layout panel" id="messages-layout">
+            <aside class="conversation-pane">
+                <div id="messages-empty" class="app-alert app-alert--neutral app-alert--center" hidden>
+                    Ainda não tens conversas. Compra um anúncio para iniciar uma.
+                </div>
+                <div id="conversation-list" class="conversation-list" aria-live="polite"></div>
+            </aside>
+
+            <section class="chat-pane" id="chat-panel" hidden>
+                <div class="chat-header">
+                    <button id="chat-back" class="app-btn app-btn--ghost chat-back" type="button" aria-label="Voltar à lista">←</button>
+                    <div>
+                        <strong id="chat-title" class="chat-title">Conversa</strong>
+                        <span id="chat-subtitle" class="chat-subtitle"></span>
+                    </div>
+                </div>
+
+                <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+
+                <form id="chat-form" class="chat-form">
+                    <input id="chat-input" class="app-input" type="text" placeholder="Escreve uma mensagem..." autocomplete="off" maxlength="1000">
+                    <button class="app-btn app-btn--primary" type="submit">Enviar</button>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <nav class="mobile-nav" role="navigation" aria-label="mobile navigation">
+        <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard">
+            <img src="../assets/icons/Vector.svg" alt="icon dashboard">
+        </a>
+        <a class="mobile-nav__link" href="./favorites.html" aria-label="Favoritos">
+            <img src="../assets/icons/Vector1.svg" alt="icon favoritos">
+        </a>
+        <a class="mobile-nav__link" href="publish.html" aria-label="Adicionar">
+            <img src="../assets/icons/Vector2.svg" alt="icon add product">
+        </a>
+        <a class="mobile-nav__link mobile-nav__link--active" href="messages.html" aria-label="Mensagens">
+            <img src="../assets/icons/Vector3.svg" alt="icon messages">
+        </a>
+        <a class="mobile-nav__link" href="profile.html" aria-label="Perfil">
+            <img src="../assets/icons/Vector4.svg" alt="icon profile">
+        </a>
+    </nav>
+
+    <script type="module" src="../js/pages/messages.js"></script>
+</body>
+
+</html>

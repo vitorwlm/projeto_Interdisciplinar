@@ -4,30 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2C2A9B">
+    <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
-    <title>UniCo - Publicar Anúncio</title>
+    <title>UniCo - Editar Anúncio</title>
 </head>
 
 <body class="app-page">
     <main class="dashboard-shell">
         <header class="page-toolbar">
-            <a class="app-btn app-btn--ghost" href="dashboard.html">Voltar</a>
+            <a class="app-btn app-btn--ghost" id="back-btn" href="dashboard.html">Voltar</a>
             <button data-logout-btn class="app-btn app-btn--light" type="button">Sair</button>
         </header>
 
         <section class="panel" style="padding: clamp(1.4rem, 3vw, 2rem);">
             <div class="page-header" style="margin-bottom: 18px;">
                 <div>
-                    <h1 class="section-title">Publicar Novo Artigo</h1>
+                    <h1 class="section-title">Editar Anúncio</h1>
                     <p class="section-copy" style="color: var(--muted); margin-top: 0.5rem;">
-                        Preenche os dados do anúncio e adiciona até 5 fotografias.
+                        Atualiza os dados do teu anúncio.
                     </p>
                 </div>
             </div>
 
-            <form id="publish-form" class="form-stack">
+            <form id="edit-form" class="form-stack">
+
+                <div class="admin-section">
+                    <h2 class="admin-section__title">Fotografias actuais</h2>
+                    <div id="current-images" class="preview-grid" style="margin-top: 10px;"></div>
+                </div>
+
                 <div class="upload-dropzone">
-                    <label class="field-label">Adiciona até 5 fotos</label>
+                    <label class="field-label">Substituir fotografias (opcional)</label>
+                    <p class="help-text" style="margin-bottom: 8px;">Se carregares novas fotos, as anteriores serão substituídas. Deixa em branco para manter as atuais.</p>
                     <label class="upload-button" for="item-images">
                         Carregar fotografias
                         <input class="file-input" type="file" id="item-images" name="item-images" accept="image/*" multiple>
@@ -41,26 +50,27 @@
                 <div class="field">
                     <label class="field-label" for="item-title">Título</label>
                     <input class="app-input" type="text" id="item-title" placeholder="Ex: Livro de Cálculo I" required>
-                    <p class="help-text">Usa um título claro para encontrarem o teu artigo facilmente.</p>
                 </div>
 
                 <div class="field">
                     <label class="field-label" for="item-description">Descrição</label>
-                    <textarea class="app-textarea" id="item-description" rows="4" placeholder="Descreve o artigo, menciona detalhes e defeitos (se existirem)..." required></textarea>
+                    <textarea class="app-textarea" id="item-description" rows="4"
+                        placeholder="Descreve o artigo, menciona detalhes e defeitos (se existirem)..."
+                        required></textarea>
                 </div>
 
                 <div class="field-grid field-grid--two">
                     <div class="field">
                         <label class="field-label" for="item-category">Categoria</label>
                         <select id="item-category" class="app-select" required>
-                            <option value="" disabled selected>Carregando categorias...</option>
+                            <option value="" disabled>A carregar...</option>
                         </select>
                     </div>
 
                     <div class="field">
                         <label class="field-label" for="item-condition">Estado</label>
                         <select id="item-condition" class="app-select" required>
-                            <option value="" disabled selected>Seleciona o estado...</option>
+                            <option value="" disabled>Seleciona o estado...</option>
                             <option value="novo">Novo com etiquetas</option>
                             <option value="como_novo">Muito bom / Como novo</option>
                             <option value="bom">Bom</option>
@@ -75,15 +85,26 @@
                 </div>
 
                 <div class="form-actions">
-                    <a class="app-btn app-btn--ghost" href="dashboard.html">Cancelar</a>
-                    <button type="submit" class="app-btn app-btn--primary">Publicar Anúncio</button>
+                    <a class="app-btn app-btn--ghost" id="cancel-btn" href="dashboard.html">Cancelar</a>
+                    <button type="submit" id="submit-edit-btn" class="app-btn app-btn--primary">Guardar alterações</button>
                 </div>
             </form>
+
+            <hr class="section-divider" style="margin-top: 2rem;">
+
+            <div class="admin-section" style="margin-top: 1.5rem;">
+                <h2 class="admin-section__title" style="color: var(--danger, #e53e3e);">Zona de perigo</h2>
+                <p class="section-copy" style="color: var(--muted); margin: 0.5rem 0 1rem;">
+                    Apagar o anúncio é permanente e não pode ser desfeito.
+                </p>
+                <button id="delete-item-btn" class="app-btn app-btn--danger-soft" type="button">
+                    Apagar anúncio
+                </button>
+            </div>
         </section>
     </main>
 
-    <script type="module" src="../js/pages/publish.js"></script>
-
+    <script type="module" src="../js/pages/edit.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2C2A9B">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <title>UniCo - Perfil</title>
+</head>
+
+<body class="app-page">
+    <main class="dashboard-shell" style="padding-bottom: 96px;">
+
+        <!-- Barra de topo -->
+        <header class="page-toolbar" style="margin-bottom: 24px;">
+            <a class="app-btn app-btn--ghost" href="dashboard.html">Voltar</a>
+            <button data-logout-btn class="app-btn app-btn--light" type="button">Sair</button>
+        </header>
+
+        <!-- Cartão de perfil -->
+        <section class="panel" style="padding: clamp(1.4rem, 3vw, 2rem); margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem;">
+                <!-- Avatar com iniciais -->
+                <div id="profile-avatar" style="
+                    width: 64px; height: 64px; border-radius: 50%;
+                    background: var(--primary); color: #fff;
+                    display: flex; align-items: center; justify-content: center;
+                    font-size: 1.5rem; font-weight: 700; flex-shrink: 0;
+                ">?</div>
+                <div>
+                    <h1 id="profile-name" class="section-title" style="margin: 0;">A carregar...</h1>
+                    <p id="profile-email" style="color: var(--muted); margin: 0.2rem 0 0; font-size: 0.9rem;"></p>
+                    <p id="profile-university" style="color: var(--muted); font-size: 0.85rem; margin: 0;"></p>
+                </div>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="admin-metrics" style="margin-bottom: 1.5rem;">
+                <div class="metric-card">
+                    <span id="stat-items" class="metric-card__value">--</span>
+                    <span class="metric-card__label">Anúncios publicados</span>
+                </div>
+                <div class="metric-card">
+                    <span id="stat-favs" class="metric-card__value">--</span>
+                    <span class="metric-card__label">Favoritos guardados</span>
+                </div>
+            </div>
+
+            <!-- Formulário de edição -->
+            <h2 class="section-title" style="font-size: 1.1rem; margin-bottom: 1rem;">Editar perfil</h2>
+            <form id="profile-form" class="form-stack">
+                <div class="field">
+                    <label class="field-label" for="profile-name-input">Nome</label>
+                    <input class="app-input" type="text" id="profile-name-input" placeholder="O teu nome" required>
+                </div>
+                <div class="field">
+                    <label class="field-label" for="profile-university-input">Universidade / Instituição</label>
+                    <input class="app-input" type="text" id="profile-university-input" placeholder="Ex: IPCA">
+                </div>
+                <!-- Email não é editável aqui — está ligado à conta Supabase Auth -->
+                <p class="help-text" style="margin-top: -0.25rem;">
+                    O e-mail não pode ser alterado aqui — está associado à tua conta.
+                </p>
+                <div class="form-actions">
+                    <button type="submit" id="save-profile-btn" class="app-btn app-btn--primary">Guardar alterações</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Os meus anúncios -->
+        <section style="margin-bottom: 24px;">
+            <h2 class="section-title" style="font-size: 1.3rem; margin-bottom: 16px;">Os meus anúncios</h2>
+            <div id="my-items-status" class="app-alert app-alert--neutral app-alert--center" style="margin-bottom: 12px;">
+                A carregar...
+            </div>
+            <div class="items-grid" id="my-items-grid" aria-label="Os meus anúncios"></div>
+        </section>
+
+    </main>
+
+    <nav class="mobile-nav" role="navigation" aria-label="mobile navigation">
+        <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard">
+            <img src="../assets/icons/Vector.svg" alt="icon dashboard">
+        </a>
+        <a class="mobile-nav__link" href="favorites.html" aria-label="Favoritos">
+            <img src="../assets/icons/Vector1.svg" alt="icon favoritos">
+        </a>
+        <a class="mobile-nav__link" href="publish.html" aria-label="Publicar">
+            <img src="../assets/icons/Vector2.svg" alt="icon publicar">
+        </a>
+        <a class="mobile-nav__link" href="messages.html" aria-label="Mensagens">
+            <img src="../assets/icons/Vector3.svg" alt="icon mensagens">
+        </a>
+        <a class="mobile-nav__link mobile-nav__link--active" href="profile.html" aria-label="Perfil">
+            <img src="../assets/icons/Vector4.svg" alt="icon perfil">
+        </a>
+    </nav>
+
+    <script type="module" src="../js/pages/profile.js"></script>
+</body>
+
+</html>

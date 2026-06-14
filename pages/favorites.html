@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
-    <title>UniCo - Dashboard</title>
+    <title>UniCo - Favoritos</title>
 </head>
 
 <body class="app-page">
@@ -18,20 +18,17 @@
             </a>
 
             <div>
-                <h1 class="section-title">Anúncios da App</h1>
-                <p id="items-status" class="status-copy" style="margin-top: 0.5rem;">A carregar anúncios...</p>
+                <h1 class="section-title">Os meus favoritos</h1>
+                <p id="favorites-status" class="status-copy" style="margin-top: 0.5rem;">A carregar favoritos...</p>
             </div>
 
             <div class="header-actions">
-                <a class="app-btn app-btn--primary" href="publish.html">Publicar anúncio</a>
-                <div id="admin-panel-link">
-                </div>
                 <button data-logout-btn class="app-btn app-btn--ghost" type="button">Sair</button>
             </div>
         </header>
 
-        <section class="items-grid" id="items-grid" aria-label="Lista de anúncios">
-            <div class="app-alert app-alert--neutral app-alert--center">A carregar anúncios...</div>
+        <section class="items-grid" id="favorites-grid" aria-label="Lista de favoritos" style="padding-bottom: 8px;">
+            <div class="app-alert app-alert--neutral app-alert--center">A carregar favoritos...</div>
         </section>
     </main>
 
@@ -39,8 +36,8 @@
         <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard">
             <img src="../assets/icons/Vector.svg" alt="icon dashboard">
         </a>
-        <a class="mobile-nav__link" href="./favorites.html" aria-label="Loja">
-            <img src="../assets/icons/Vector1.svg" alt="icon shopping">
+        <a class="mobile-nav__link mobile-nav__link--active" href="./favorites.html" aria-label="Favoritos">
+            <img src="../assets/icons/Vector1.svg" alt="icon favoritos">
         </a>
         <a class="mobile-nav__link" href="publish.html" aria-label="Adicionar">
             <img src="../assets/icons/Vector2.svg" alt="icon add product">
@@ -53,7 +50,7 @@
         </a>
     </nav>
 
-    <script type="module" src="../js/pages/dashboard.js"></script>
+    <script type="module" src="../js/pages/favorites.js"></script>
 </body>
 
 </html>

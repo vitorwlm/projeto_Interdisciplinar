@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2C2A9B">
+    <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Painel de Admin</title>
 </head>
@@ -34,14 +36,6 @@
             <article class="metric-card">
                 <span class="metric-card__label">Categorias</span>
                 <strong class="metric-card__value" id="metric-categories">0</strong>
-            </article>
-            <article class="metric-card">
-                <span class="metric-card__label">Disponíveis</span>
-                <strong class="metric-card__value" id="metric-available">0</strong>
-            </article>
-            <article class="metric-card">
-                <span class="metric-card__label">Reservados / Vendidos</span>
-                <strong class="metric-card__value" id="metric-closed">0</strong>
             </article>
             <article class="metric-card">
                 <span class="metric-card__label">Utilizadores</span>
@@ -82,60 +76,20 @@
 
             <section class="admin-content">
                 <div class="panel admin-panel">
-                    <div class="admin-tab-bar">
-                        <button class="admin-tab admin-tab--active" data-tab="reviews" type="button">Anúncios</button>
-                        <button class="admin-tab" data-tab="users" type="button">Utilizadores</button>
+                    <div>
+                        <h2 class="section-title" style="font-size: 1.45rem;">Utilizadores</h2>
+                        <p class="section-copy" style="margin-top: 0.35rem;">Gere os utilizadores e as respetivas permissões de administração.</p>
                     </div>
-
-                    <div id="tab-reviews" class="admin-tab-pane">
-                        <div class="admin-panel__header admin-panel__header--wrap" style="margin-top: 18px;">
-                            <div>
-                                <h2 class="section-title" style="font-size: 1.45rem;">Revisar anúncios</h2>
-                                <p class="section-copy" style="margin-top: 0.35rem;">Abre os anúncios existentes e ajusta o estado de publicação.</p>
-                            </div>
-
-                            <div class="admin-filter-row">
-                                <input id="review-search" class="app-input" type="search" placeholder="Procurar por título ou vendedor">
-                                <select id="status-filter" class="app-select">
-                                    <option value="all">Todos os estados</option>
-                                    <option value="disponivel">Disponível</option>
-                                    <option value="reservado">Reservado</option>
-                                    <option value="vendido">Vendido</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="active-category-filter" class="active-category-filter" hidden>
-                            <span class="active-category-filter__label">Categoria:</span>
-                            <strong id="active-category-name" class="active-category-filter__name"></strong>
-                            <button type="button" id="clear-category-filter" class="app-btn app-btn--ghost active-category-filter__clear">× Ver todos</button>
-                        </div>
-
-                        <div id="review-status" class="app-alert app-alert--neutral app-alert--center" style="margin-top: 18px;">
-                            A carregar anúncios...
-                        </div>
-
-                        <div id="reviews-list" class="admin-reviews-list" aria-live="polite"></div>
+                    <div id="users-status" class="app-alert app-alert--neutral app-alert--center" style="margin-top: 18px;">
+                        A carregar utilizadores...
                     </div>
-
-                    <div id="tab-users" class="admin-tab-pane" hidden>
-                        <div style="margin-top: 18px;">
-                            <h2 class="section-title" style="font-size: 1.45rem;">Utilizadores</h2>
-                            <p class="section-copy" style="margin-top: 0.35rem;">Gere os utilizadores e as respetivas permissões de administração.</p>
-                        </div>
-                        <div id="users-status" class="app-alert app-alert--neutral app-alert--center" style="margin-top: 18px;">
-                            A carregar utilizadores...
-                        </div>
-                        <div id="users-list" class="admin-users-list" aria-live="polite" style="margin-top: 18px;"></div>
-                    </div>
+                    <div id="users-list" class="admin-users-list" aria-live="polite" style="margin-top: 18px;"></div>
                 </div>
             </section>
         </section>
     </main>
 
-    <script type="module" src="../js/auth-guard.js"></script>
-    <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/admin.js"></script>
+    <script type="module" src="../js/pages/admin.js"></script>
 </body>
 
 </html>
