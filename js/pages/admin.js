@@ -26,7 +26,7 @@ await initPage();
 /* ── Elementos da página ────────────────────────────────────────────────── */
 
 const adminStatus = document.getElementById('admin-status');
-const metricItems = document.getElementById('metric-items');
+const metricItems = document.getElementById('metric-listings');
 const metricCategories = document.getElementById('metric-categories');
 const metricUsers = document.getElementById('metric-users');
 
@@ -129,11 +129,11 @@ function renderCategories() {
         <strong>${safeName}</strong>
         <span>${plural(itemCount, 'anúncio')}${extra}</span>
         <div class="category-card__actions">
-          <button class="app-btn app-btn--soft category-card__btn" type="button"
+          <button class="btn btn--soft category-card__btn" type="button"
             data-category-edit="${category.id}"
             data-category-name="${safeName}"
             data-category-icon="${safeIcon}">Editar</button>
-          <button class="app-btn app-btn--danger-soft category-card__btn" type="button"
+          <button class="btn btn--danger-soft category-card__btn" type="button"
             data-category-delete="${category.id}"
             data-category-name="${safeName}">Apagar</button>
         </div>
@@ -301,7 +301,7 @@ function renderUsers() {
 
   usersList.innerHTML = cachedUsers.map((user) => {
     const adminBadge = user.is_admin ? '<span class="badge">Admin</span>' : '';
-    const btnClass = user.is_admin ? 'app-btn--danger-soft' : 'app-btn--soft';
+    const btnClass = user.is_admin ? 'btn--danger-soft' : 'btn--soft';
     const btnText = user.is_admin ? 'Remover admin' : 'Tornar admin';
     return `
     <article class="user-card">
@@ -311,7 +311,7 @@ function renderUsers() {
         ${adminBadge}
       </div>
       <div class="user-card__actions">
-        <button class="app-btn ${btnClass}" type="button"
+        <button class="btn ${btnClass}" type="button"
           data-user-toggle="${user.id}"
           data-user-admin="${user.is_admin}">
           ${btnText}

@@ -34,11 +34,11 @@ import {
 await initPage();
 
 const editForm = document.getElementById('edit-form');
-const fileInput = document.querySelector('input[type="file"][name="item-images"]');
+const fileInput = document.querySelector('input[type="file"][name="listing-images"]');
 const fileNameEl = document.getElementById('file-name');
 const imagePreviewEl = document.getElementById('image-preview');
 const currentImagesEl = document.getElementById('current-images');
-const deleteBtn = document.getElementById('delete-item-btn');
+const deleteBtn = document.getElementById('delete-listing-btn');
 
 /*
  * currentItem e currentUser são variáveis de módulo partilhadas entre
@@ -107,10 +107,10 @@ async function loadItem() {
   if (backBtn) backBtn.setAttribute('href', 'item.html?id=' + itemId);
   if (cancelBtn) cancelBtn.setAttribute('href', 'item.html?id=' + itemId);
 
-  const titleEl = document.getElementById('item-title');
-  const descriptionEl = document.getElementById('item-description');
-  const priceEl = document.getElementById('item-price');
-  const conditionEl = document.getElementById('item-condition');
+  const titleEl = document.getElementById('listing-title');
+  const descriptionEl = document.getElementById('listing-description');
+  const priceEl = document.getElementById('listing-price');
+  const conditionEl = document.getElementById('listing-condition');
 
   if (titleEl) titleEl.value = data.title || '';
   if (descriptionEl) descriptionEl.value = data.description || '';
@@ -133,11 +133,11 @@ if (editForm) {
   editForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const title = document.getElementById('item-title').value.trim();
-    const description = document.getElementById('item-description').value.trim();
-    const categoryId = document.getElementById('item-category').value;
-    const condition = document.getElementById('item-condition').value;
-    const price = document.getElementById('item-price').value;
+    const title = document.getElementById('listing-title').value.trim();
+    const description = document.getElementById('listing-description').value.trim();
+    const categoryId = document.getElementById('listing-category').value;
+    const condition = document.getElementById('listing-condition').value;
+    const price = document.getElementById('listing-price').value;
     const files = Array.from(fileInput.files || []).slice(0, 5);
 
     if (!title || !description || !categoryId || !condition || !price) {

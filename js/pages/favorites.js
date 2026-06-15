@@ -31,7 +31,7 @@ const favoritesStatus = document.getElementById('favorites-status');
  */
 function renderEmpty() {
   if (!favoritesGrid) return;
-  favoritesGrid.innerHTML = '<div class="app-alert app-alert--neutral app-alert--center" style="grid-column: 1 / -1;">Ainda não adicionaste nenhum favorito.</div>';
+  favoritesGrid.innerHTML = '<div class="alert alert--neutral alert--center" style="grid-column: 1 / -1;">Ainda não adicionaste nenhum favorito.</div>';
 }
 
 /*

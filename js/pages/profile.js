@@ -28,14 +28,14 @@ const avatarEl        = document.getElementById('profile-avatar');
 const nameEl          = document.getElementById('profile-name');
 const emailEl         = document.getElementById('profile-email');
 const universityEl    = document.getElementById('profile-university');
-const statItemsEl     = document.getElementById('stat-items');
+const statItemsEl     = document.getElementById('stat-listings');
 const statFavsEl      = document.getElementById('stat-favs');
 const nameInput       = document.getElementById('profile-name-input');
 const universityInput = document.getElementById('profile-university-input');
 const profileForm     = document.getElementById('profile-form');
 const saveBtn         = document.getElementById('save-profile-btn');
-const myItemsGrid     = document.getElementById('my-items-grid');
-const myItemsStatus   = document.getElementById('my-items-status');
+const myItemsGrid     = document.getElementById('my-listings-grid');
+const myItemsStatus   = document.getElementById('my-listings-status');
 
 
 /* ── Avatar com iniciais ────────────────────────────────────────────────── */

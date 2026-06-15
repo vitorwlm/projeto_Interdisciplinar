@@ -29,15 +29,15 @@ import {
 
 await initPage();
 
-const titleEl = document.getElementById('item-title');
-const imageEl = document.getElementById('item-image');
-const descriptionEl = document.getElementById('item-description');
-const priceEl = document.getElementById('item-price');
-const categoryEl = document.getElementById('item-category');
-const conditionEl = document.getElementById('item-condition');
-const sellerEl = document.getElementById('item-seller');
-const statusEl = document.getElementById('item-status');
-const galleryEl = document.getElementById('item-gallery');
+const titleEl = document.getElementById('listing-title');
+const imageEl = document.getElementById('listing-image');
+const descriptionEl = document.getElementById('listing-description');
+const priceEl = document.getElementById('listing-price');
+const categoryEl = document.getElementById('listing-category');
+const conditionEl = document.getElementById('listing-condition');
+const sellerEl = document.getElementById('listing-seller');
+const statusEl = document.getElementById('listing-status');
+const galleryEl = document.getElementById('listing-gallery');
 
 function renderError(message) {
   renderNotice(statusEl, message, 'danger', false);
@@ -142,8 +142,8 @@ async function loadItem() {
        * sem sessão não os vejam de todo.
        */
       const ownerActions = document.getElementById('owner-actions');
-      const editBtn = document.getElementById('edit-item-btn');
-      const deleteBtn = document.getElementById('delete-item-btn');
+      const editBtn = document.getElementById('edit-listing-btn');
+      const deleteBtn = document.getElementById('delete-listing-btn');
 
       if (ownerActions) ownerActions.hidden = false;
       if (editBtn) editBtn.href = `edit.html?id=${data.id}`;
@@ -171,7 +171,7 @@ async function loadItem() {
  */
 function initBuyButton(data) {
   const buyAction = document.getElementById('buy-action');
-  const buyBtn = document.getElementById('buy-item-btn');
+  const buyBtn = document.getElementById('buy-listing-btn');
   const soldNote = document.getElementById('sold-note');
 
   const available = (data.sell_status || 'disponivel') === 'disponivel';
@@ -254,9 +254,9 @@ async function deleteItem(itemId, btn) {
  *   em memória. Verificar diretamente na BD é mais fiável.
  */
 async function initFavButton(itemId, userId) {
-  const btn = document.getElementById('fav-item-btn');
-  const icon = document.getElementById('fav-item-icon');
-  const label = document.getElementById('fav-item-label');
+  const btn = document.getElementById('fav-listing-btn');
+  const icon = document.getElementById('fav-listing-icon');
+  const label = document.getElementById('fav-listing-label');
   if (!btn) return;
 
   const { data: existing } = await supabase

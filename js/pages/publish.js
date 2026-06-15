@@ -23,7 +23,7 @@ import {
 await initPage();
 
 const publishForm = document.getElementById('publish-form');
-const fileInput = document.querySelector('input[type="file"][name="item-images"]');
+const fileInput = document.querySelector('input[type="file"][name="listing-images"]');
 const fileNameEl = document.getElementById('file-name');
 const imagePreviewEl = document.getElementById('image-preview');
 
@@ -47,11 +47,11 @@ if (publishForm) {
   publishForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const title = document.getElementById('item-title').value.trim();
-    const description = document.getElementById('item-description').value.trim();
-    const category = document.getElementById('item-category').value;
-    const condition = document.getElementById('item-condition').value;
-    const priceValue = document.getElementById('item-price').value;
+    const title = document.getElementById('listing-title').value.trim();
+    const description = document.getElementById('listing-description').value.trim();
+    const category = document.getElementById('listing-category').value;
+    const condition = document.getElementById('listing-condition').value;
+    const priceValue = document.getElementById('listing-price').value;
 
     /*
      * .slice(0, 5) no Array.from garante que nunca se tentam enviar

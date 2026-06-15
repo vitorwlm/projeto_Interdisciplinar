@@ -31,8 +31,8 @@ import {
  */
 await initPage();
 
-const itemsGrid = document.getElementById('items-grid');
-const itemsStatus = document.getElementById('items-status');
+const itemsGrid = document.getElementById('listings-grid');
+const itemsStatus = document.getElementById('listings-status');
 const adminPanelLink = document.getElementById('admin-panel-link');
 
 /*
@@ -231,7 +231,7 @@ async function loadUserData() {
       .single();
 
     if (profile && profile.is_admin) {
-      adminPanelLink.innerHTML = '<a class="app-btn app-btn--soft" href="admin.html">Painel admin</a>';
+      adminPanelLink.innerHTML = '<a class="btn btn--soft" href="admin.html">Painel admin</a>';
     }
   }
 }

@@ -407,7 +407,7 @@ export async function uploadItemImages(itemId, userId, files) {
     const path = buildStoragePath(userId, itemId, file, index);
 
     const { error: uploadError } = await supabase.storage
-      .from('item-images')
+      .from('listing-images')
       .upload(path, file, { contentType: file.type, upsert: false });
 
     if (uploadError) throw uploadError;
@@ -417,7 +417,7 @@ export async function uploadItemImages(itemId, userId, files) {
      * à rede — o Supabase gera o URL deterministicamente com base no path.
      */
     const { data: publicUrlData } = supabase.storage
-      .from('item-images')
+      .from('listing-images')
       .getPublicUrl(path);
 
     imageRows.push({
@@ -441,8 +441,8 @@ export async function uploadItemImages(itemId, userId, files) {
  *   a ocupar espaço no Storage indefinidamente (ficheiros órfãos).
  *
  * Porquê extrair o path do URL com indexOf?
- *   O URL público tem a forma ".../storage/v1/object/public/item-images/path"
- *   — extraímos apenas a parte após "/item-images/" para passar ao
+ *   O URL público tem a forma ".../storage/v1/object/public/listing-images/path"
+ *   — extraímos apenas a parte após "/listing-images/" para passar ao
  *   método de remoção do Storage.
  */
 export async function deleteItemImages(itemId) {
@@ -453,7 +453,7 @@ export async function deleteItemImages(itemId) {
 
   if (!images || images.length === 0) return;
 
-  const marker = '/item-images/';
+  const marker = '/listing-images/';
   const paths = [];
   images.forEach((img) => {
     const idx = img.image_url.indexOf(marker);
@@ -462,7 +462,7 @@ export async function deleteItemImages(itemId) {
     }
   });
 
-  if (paths.length) await supabase.storage.from('item-images').remove(paths);
+  if (paths.length) await supabase.storage.from('listing-images').remove(paths);
   await supabase.from('item_image').delete().eq('item_id', itemId);
 }
 
@@ -493,8 +493,8 @@ function createBadge(text) {
 export function renderNotice(container, message, type, center) {
   if (!container) return;
   if (!type) type = 'neutral';
-  let classes = 'app-alert app-alert--' + type;
-  if (center) classes += ' app-alert--center';
+  let classes = 'alert alert--' + type;
+  if (center) classes += ' alert--center';
   container.innerHTML = '<div class="' + classes + '">' + message + '</div>';
 }
 
@@ -508,7 +508,7 @@ export function renderNotice(container, message, type, center) {
  */
 export function showAlert(container, type, message) {
   if (!container) return;
-  const anterior = container.querySelector('.app-alert');
+  const anterior = container.querySelector('.alert');
   if (anterior) anterior.remove();
   const div = document.createElement('div');
   div.className = 'alert-' + type;
@@ -588,7 +588,7 @@ export function renderItemCard(item, options) {
   let removeFooter = '';
   if (removable) {
     removeFooter = `<div style="padding: 0 18px 18px;">
-          <button class="app-btn app-btn--danger-soft app-btn--full" type="button" data-remove-fav="${item.id}">
+          <button class="btn btn--danger-soft btn--full" type="button" data-remove-fav="${item.id}">
             Remover dos favoritos
           </button>
         </div>`;
@@ -600,7 +600,7 @@ export function renderItemCard(item, options) {
     const available = (item.sell_status || 'disponivel') === 'disponivel';
     if (!isOwn && available) {
       buyFooter = `<div style="padding: 0 18px 18px;">
-          <button class="app-btn app-btn--primary app-btn--full" type="button" data-buy-item="${item.id}">Comprar</button>
+          <button class="btn btn--primary btn--full" type="button" data-buy-item="${item.id}">Comprar</button>
         </div>`;
     } else if (!isOwn && !available) {
       /*
@@ -613,15 +613,15 @@ export function renderItemCard(item, options) {
   }
 
   return `
-      <div class="item-card" style="display: flex; flex-direction: column;">
+      <div class="listing-card" style="display: flex; flex-direction: column;">
         ${favButton}
         <a href="item.html?id=${item.id}" style="flex: 1; display: flex; flex-direction: column; text-decoration: none; color: inherit;">
-          <div class="item-card__media">
+          <div class="listing-card__media">
             <img class="cardimg" src="${imageUrl}" alt="${escapeHtml(item.title || 'Anúncio')}" loading="lazy">
           </div>
-          <div class="item-card__body" style="flex: 1;">
-            <h2 class="item-card__title">${escapeHtml(item.title || 'Sem título')}</h2>
-            <p class="item-card__text">${escapeHtml(item.description || 'Sem descrição disponível.')}</p>
+          <div class="listing-card__body" style="flex: 1;">
+            <h2 class="listing-card__title">${escapeHtml(item.title || 'Sem título')}</h2>
+            <p class="listing-card__text">${escapeHtml(item.description || 'Sem descrição disponível.')}</p>
             <div class="badge-list">
               ${categoryBadge}
               ${createBadge(wearLabel)}
@@ -654,7 +654,7 @@ export function renderImageGrid(container, images, tileClass, alt, emptyMessage)
   if (!container) return;
 
   if (!images || images.length === 0) {
-    container.innerHTML = '<div class="app-alert app-alert--neutral app-alert--center">' + emptyMessage + '</div>';
+    container.innerHTML = '<div class="alert alert--neutral alert--center">' + emptyMessage + '</div>';
     return;
   }
 
@@ -708,7 +708,7 @@ export function initFilePicker(input, fileNameEl, previewEl) {
  * ══════════════════════════════════════════════════════════════════════════════ */
 
 /*
- * loadCategories — Preenche um <select id="item-category"> com as
+ * loadCategories — Preenche um <select id="listing-category"> com as
  * categorias da base de dados.
  *
  * Porquê carregar do servidor em vez de ter a lista em código?
@@ -721,7 +721,7 @@ export function initFilePicker(input, fileNameEl, previewEl) {
  */
 export async function loadCategories(selectedId) {
   if (!selectedId) selectedId = null;
-  const select = document.getElementById('item-category');
+  const select = document.getElementById('listing-category');
   if (!select) return;
 
   try {
@@ -746,3 +746,4 @@ export async function loadCategories(selectedId) {
     select.innerHTML = '<option value="" disabled selected>Erro ao carregar categorias</option>';
   }
 }
+             

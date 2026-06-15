@@ -14,7 +14,7 @@
     --shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.item-card__media img,
+.listing-card__media img,
 .detail-figure img,.gallery-tile img {
     width: 100% !important;
     height: 240px !important;
@@ -179,7 +179,7 @@ textarea {
 }
 
 .auth-card,
-.panel {
+.surface {
     border-radius: var(--radius-xl);
     border: 1px solid var(--border);
     background: var(--surface);
@@ -219,30 +219,30 @@ textarea {
     margin-top: 24px;
 }
 
-.field,
+.form-field,
 .upload-dropzone {
     display: grid;
     gap: 10px;
 }
 
-.field-grid {
+.form-grid {
     display: grid;
     gap: 18px;
 }
 
-.field-grid--two {
+.form-grid--two {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.field-label {
+.form-field-label {
     font-size: 0.95rem;
     font-weight: 700;
     color: var(--text);
 }
 
-.app-input,
-.app-textarea,
-.app-select {
+.text-input,
+.text-area,
+.dropdown {
     width: 100%;
     border: 1px solid rgba(20, 33, 61, 0.12);
     border-radius: 18px;
@@ -254,24 +254,24 @@ textarea {
     box-shadow: inset 0 1px 2px rgba(19, 27, 49, 0.04);
 }
 
-.app-input:focus,
-.app-textarea:focus,
-.app-select:focus {
+.text-input:focus,
+.text-area:focus,
+.dropdown:focus {
     border-color: rgba(44, 42, 155, 0.7);
     box-shadow: 0 0 0 4px rgba(44, 42, 155, 0.14);
 }
 
-.app-input::placeholder,
-.app-textarea::placeholder {
+.text-input::placeholder,
+.text-area::placeholder {
     color: #8992ad;
 }
 
-.app-textarea {
+.text-area {
     min-height: 140px;
     resize: vertical;
 }
 
-.app-btn {
+.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -286,47 +286,47 @@ textarea {
     user-select: none;
 }
 
-.app-btn:hover {
+.btn:hover {
     transform: translateY(-1px);
 }
 
-.app-btn:disabled {
+.btn:disabled {
     cursor: wait;
     opacity: 0.72;
     transform: none;
 }
 
-.app-btn--primary {
+.btn--primary {
     color: #ffffff;
     background: linear-gradient(135deg, var(--primary) 0%, #4c59d4 100%);
     box-shadow: 0 16px 30px rgba(44, 42, 155, 0.28);
 }
 
-.app-btn--soft {
+.btn--soft {
     color: var(--primary);
     background: rgba(44, 42, 155, 0.1);
     border-color: rgba(44, 42, 155, 0.1);
 }
 
-.app-btn--ghost {
+.btn--ghost {
     color: var(--text);
     background: rgba(255, 255, 255, 0.78);
     border-color: rgba(20, 33, 61, 0.08);
 }
 
-.app-btn--light {
+.btn--light {
     color: var(--primary);
     background: #ffffff;
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-.app-btn--outline {
+.btn--outline {
     color: #ffffff;
     background: transparent;
     border-color: rgba(255, 255, 255, 0.35);
 }
 
-.app-btn--full {
+.btn--full {
     width: 100%;
 }
 
@@ -395,7 +395,7 @@ textarea {
 
 .preview-grid,
 .gallery-grid,
-.items-grid {
+.listings-grid {
     display: grid;
     gap: 16px;
 }
@@ -406,7 +406,7 @@ textarea {
 
 .preview-tile,
 .gallery-tile,
-.item-card {
+.listing-card {
     border-radius: 22px;
     overflow: hidden;
     background: var(--surface-strong);
@@ -421,7 +421,7 @@ textarea {
 .preview-tile img,
 .gallery-tile img,
 .detail-figure img,
-.item-card__media img {
+.listing-card__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -541,44 +541,44 @@ textarea {
     margin-bottom: 24px;
 }
 
-.app-alert {
+.alert {
     border-radius: 16px;
     border: 1px solid transparent;
     padding: 14px 16px;
     line-height: 1.5;
 }
 
-.app-alert--neutral {
+.alert--neutral {
     color: #1f3a7a;
     background: #edf4ff;
     border-color: #c9d7ff;
 }
 
-.app-alert--success {
+.alert--success {
     color: var(--success);
     background: var(--success-soft);
     border-color: #bde6cb;
 }
 
-.app-alert--danger {
+.alert--danger {
     color: var(--danger);
     background: var(--danger-soft);
     border-color: #f0c0bc;
 }
 
-.app-alert--center {
+.alert--center {
     text-align: center;
 }
 
-.items-grid {
+.listings-grid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-.items-grid .app-alert {
+.listings-grid .alert {
     grid-column: 1 / -1;
 }
 
-.item-card {
+.listing-card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -622,12 +622,12 @@ textarea {
     background: #fff5f5;
 }
 
-.item-card:hover {
+.listing-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 20px 40px rgba(12, 20, 45, 0.14);
 }
 
-.item-card__media {
+.listing-card__media {
     aspect-ratio: 4 / 3;
     /* Fundo na cor da marca: quando o anúncio não tem foto, mostramos o logo
        branco como placeholder — e este fundo escuro torna-o bem visível.
@@ -635,20 +635,20 @@ textarea {
     background: #2C2A9B;
 }
 
-.item-card__body {
+.listing-card__body {
     display: grid;
     gap: 12px;
     padding: 18px;
 }
 
-.item-card__title {
+.listing-card__title {
     margin: 0;
     font-size: 1.05rem;
     font-weight: 800;
     color: var(--text);
 }
 
-.item-card__text {
+.listing-card__text {
     margin: 0;
     color: var(--muted);
     line-height: 1.6;
@@ -796,7 +796,7 @@ textarea {
     font-size: 0.82rem;
 }
 
-.app-btn--danger-soft {
+.btn--danger-soft {
     color: var(--danger);
     background: var(--danger-soft);
     border-color: rgba(180, 35, 24, 0.12);
@@ -862,7 +862,7 @@ textarea {
         width: min(100%, calc(100% - 20px));
     }
 
-    .field-grid--two {
+    .form-grid--two {
         grid-template-columns: 1fr;
     }
 
@@ -894,7 +894,7 @@ textarea {
     .landing-card,
     .auth-card,
     .dashboard-header,
-    .panel {
+    .surface {
         border-radius: 24px;
     }
 
@@ -1041,7 +1041,7 @@ textarea {
     border-top: 1px solid var(--border);
 }
 
-.chat-form .app-input {
+.chat-form .text-input {
     flex: 1;
 }
 
