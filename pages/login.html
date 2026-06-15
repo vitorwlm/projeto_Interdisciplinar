@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/global.css">
     <title>UniCo - Iniciar Sessão</title>
     <meta name="description" content="Inicia sessão na UniCo, a comunidade de economia circular do teu campus.">
 </head>
 
-<body class="auth-page">
+<body class="bgimg">
+    
+    
+<!--
+
     <main class="auth-shell" id="main-content">
         <header class="auth-header">
             <a class="app-btn app-btn--light" href="../index.html" aria-label="Voltar à página inicial">Voltar</a>
@@ -47,6 +52,42 @@
             </p>
         </section>
     </main>
+
+-->
+
+    
+    <div class="voltar-cont">
+
+        <a href="../index.html" class="voltar">Voltar</a>
+        
+    </div>
+    
+    <div class="card">
+
+        <h1>Iniciar Sessão</h1>
+
+        <form class="login-form" id="login-form">
+
+            <div class="input-cont">
+                <label for="email">E-mail Académico</label>
+                <input type="email" id="email" class="input" placeholder="user@esmad.ipp.pt">
+            </div>
+
+            <div class="input-cont">
+                <label for="password">Palavra-passe</label>
+                <input type="password" id="password" class="password" placeholder="palavra passe">
+            </div>
+
+            <button type="submit" class="entrar">Entrar</button>
+
+            <p class="criar-conta">Não tens conta? <a href="#">Cria uma aqui.</a></p>
+
+        </form>
+
+    </div>
+
+
+
 
     <script type="module" src="../js/pages/auth.js"></script>
 </body>

@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/register.css">
     <title>UniCo - Criar Conta</title>
     <meta name="description" content="Cria uma conta na UniCo e junta-te à comunidade de economia circular do teu campus.">
 </head>
 
-<body class="auth-page">
+<body class="bgimg">
+
+<!--
+
     <main class="auth-shell" id="main-content">
         <header class="auth-header">
             <a class="app-btn app-btn--light" href="../index.html" aria-label="Voltar à página inicial">Voltar</a>
@@ -67,6 +71,59 @@
             </p>
         </section>
     </main>
+
+    -->
+
+
+    <div class="voltar-cont">
+
+        <a href="../index.html" class="voltar">Voltar</a>
+
+    </div>
+    
+    <div class="card">
+
+        <h1>Criar Conta</h1>
+
+        <form id="register-form">
+
+            <div class="input-cont">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="name" class="input" placeholder="O teu nome e apelidos">
+            </div>
+
+            <div class="input-cont">
+                <label for="email">E-mail Académico</label>
+                <input type="email" id="email" class="input" placeholder="user@esmad.ipp.pt">
+            </div>
+
+            <div class="input-cont">
+                <label for="university">Campus / Escola Principal</label>
+                <select id="university" name="university" class="app-select" required>
+                    <option value="" disabled selected>Seleciona o teu campus <!--inserir aqui uma down arrow--></option>
+                    <option value="ESMAD">ESMAD (Vila do Conde / Póvoa)</option>
+                    <option value="ISEP">ISEP (Porto)</option>
+                    <option value="ISCAP">ISCAP (S. Mamede de Infesta)</option>
+                    <option value="ESE">ESE (Porto)</option>
+                    <option value="ESTG">ESTG (Felgueiras)</option>
+                    <option value="ESMAE">ESMAE (Porto)</option>
+                    <option value="ESS">ESS (Porto)</option>
+                </select>
+            </div>
+
+            <div class="input-cont">
+                <label for="password">Palavra-passe</label>
+                <input type="password" id="password" name="password" placeholder="Mínimo de 6 caracteres" autocomplete="new-password" minlength="6" aria-describedby="password-hint" required>
+            </div>
+
+            <button type="submit" class="criar">Criar</button>
+
+            <p class="iniciar-sessao">Já tens conta? <a href="login.html">Inicia Sessão aqui.</a></p>
+
+        </form>
+
+    </div>
+
 
     <script type="module" src="../js/pages/auth.js"></script>
 </body>

@@ -511,10 +511,12 @@ export function showAlert(container, type, message) {
   const anterior = container.querySelector('.app-alert');
   if (anterior) anterior.remove();
   const div = document.createElement('div');
-  div.className = 'app-alert app-alert--' + type;
+  div.className = 'alert-' + type;
   div.textContent = message;
   container.prepend(div);
 }
+
+
 
 /*
  * setButtonLoading — Ativa/desativa o estado de carregamento de um botão.
