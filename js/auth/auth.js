@@ -11,6 +11,44 @@ import { supabase } from '../config/supabaseClient.js';
 import { showAlert } from '../utils/utils.js';
 
 /*
+ * safeReturnUrl — Decide para onde enviar o utilizador após o login.
+ *
+ * Recebe o valor bruto do parâmetro "returnUrl" (pode vir null ou
+ * codificado, ex.: "edit.html%3Fid%3D123") e devolve um destino seguro.
+ *
+ * Porquê validar?
+ *   Redirecionar cegamente para um valor vindo do URL permitiria um
+ *   "open redirect" — um atacante podia construir
+ *   "login.html?returnUrl=https://site-malicioso.com" e enviar a vítima
+ *   para fora da app após o login. Por isso só aceitamos caminhos
+ *   relativos internos; qualquer outra coisa cai no dashboard.
+ */
+function safeReturnUrl(raw) {
+  const fallback = 'dashboard.html';
+  if (!raw) return fallback;
+
+  let value;
+  try {
+    value = decodeURIComponent(raw);
+  } catch {
+    return fallback;
+  }
+
+  /*
+   * Rejeita destinos externos ou absolutos:
+   *   • "http://" / "https://"  → outro site
+   *   • "//site.com"            → protocolo-relativo (também externo)
+   *   • "/algo"                 → sai do diretório /pages/
+   *   • contém ":"              → esquemas como javascript: ou mailto:
+   */
+  if (/^https?:/i.test(value) || value.startsWith('//') || value.startsWith('/') || value.includes(':')) {
+    return fallback;
+  }
+
+  return value;
+}
+
+/*
  * initRegisterForm — Ativa o formulário de criação de conta.
  *
  * Porquê verificar se o formulário existe antes de ligar o evento?
@@ -117,11 +155,24 @@ export function initLoginForm() {
       if (error) throw error;
 
       /*
+       * Algumas páginas protegidas (ex.: edit.html, admin.html) enviam o
+       * utilizador para o login com "?returnUrl=...". Depois de autenticar,
+       * voltamos a essa página em vez de ir sempre para o dashboard.
+       *
+       * safeReturnUrl valida o destino para evitar "open redirects": só
+       * aceitamos caminhos relativos internos (sem esquema http(s):, sem
+       * "//" protocolo-relativo e sem "/" inicial que sairia do diretório).
+       */
+      const destino = safeReturnUrl(
+        new URLSearchParams(window.location.search).get('returnUrl')
+      );
+
+      /*
        * window.location.replace (em vez de href) substitui a entrada no
        * histórico do browser — o utilizador não consegue voltar à página
        * de login carregando "Recuar", o que é o comportamento esperado.
        */
-      window.location.replace('dashboard.html');
+      window.location.replace(destino);
     } catch (err) {
       console.error('Erro:', err.message);
       /*

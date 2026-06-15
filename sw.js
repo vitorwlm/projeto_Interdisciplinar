@@ -16,11 +16,14 @@
  *   2. activate → limpa caches antigas de versões anteriores.
  *   3. fetch    → interceta pedidos e serve da cache (ou da rede).
  *
- * Estratégia: Cache-First
- *   Tenta servir da cache; se o recurso não estiver em cache, vai à rede.
- *   Vantagem: carregamento muito rápido após a primeira visita.
- *   Desvantagem: alterações ao código só são refletidas quando o SW
- *   é atualizado (nova versão de CACHE_NAME).
+ * Estratégia: Network-First (internet primeiro, cache em reserva)
+ *   Tenta sempre ir à rede buscar a versão mais recente; se a rede falhar
+ *   (utilizador offline), serve a cópia guardada em cache.
+ *   Vantagem: o utilizador vê sempre o código mais recente quando tem
+ *   internet, sem ficar "preso" a uma versão antiga.
+ *   Desvantagem: ligeiramente mais lento que cache-first, pois espera
+ *   pela rede antes de recorrer à cache.
+ *   (Ver detalhe no handler do evento "fetch" mais abaixo.)
  */
 
 /*
@@ -31,7 +34,7 @@
  *   O evento "activate" apaga automaticamente as caches com nomes diferentes,
  *   forçando o browser a descarregar os ficheiros atualizados.
  */
-const CACHE_NAME = 'app-shell-v15';
+const CACHE_NAME = 'app-shell-v0';
 
 /*
  * ASSETS — lista de ficheiros a guardar em cache durante a instalação.
@@ -70,7 +73,13 @@ const ASSETS = [
 	'/pages/favorites.html',
 	'/pages/login.html',
 	'/pages/register.html',
-	'/pages/messages.html'
+	'/pages/messages.html',
+	'/assets/icons/logo.svg',
+	'/assets/icons/Vector.svg',
+	'/assets/icons/Vector1.svg',
+	'/assets/icons/Vector2.svg',
+	'/assets/icons/Vector3.svg',
+	'/assets/icons/Vector4.svg'
 ];
 
 /*
@@ -82,6 +91,14 @@ const ASSETS = [
  * abortada e o SW anterior continua ativo (sem downtime).
  */
 self.addEventListener('install', (event) => {
+	/*
+	 * self.skipWaiting() faz o novo SW ativar-se imediatamente, sem ficar em
+	 * estado "waiting" à espera que todos os separadores antigos fechem.
+	 * Combinado com clients.claim() no "activate", garante que uma nova versão
+	 * (e a limpeza das caches antigas) entra em vigor logo no recarregamento.
+	 */
+	self.skipWaiting();
+
 	event.waitUntil(
 		caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
 	);
@@ -107,7 +124,12 @@ self.addEventListener('activate', (event) => {
 			Promise.all(
 				keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
 			)
-		)
+		).then(() => self.clients.claim())
+		/*
+		 * self.clients.claim() faz este SW assumir o controlo das páginas já
+		 * abertas de imediato (sem ser preciso recarregar duas vezes), para que
+		 * a nova versão passe a servir os pedidos logo após ativar.
+		 */
 	);
 });
 
