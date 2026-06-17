@@ -13,49 +13,40 @@
 </head>
 
 <body class="bgimg">
-    
-    
-<!--
 
-    <main class="auth-shell" id="main-content">
-        <header class="auth-header">
-            <a class="btn btn--light" href="../index.html" aria-label="Voltar à página inicial">Voltar</a>
-            <div class="auth-brand">
-                <img class="auth-logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
-            </div>
-            <span aria-hidden="true"></span>
-        </header>
-
-        <section class="auth-card" aria-label="Formulário de início de sessão">
-            <h1 class="section-title">Iniciar Sessão</h1>
-            <p class="section-copy" style="color: var(--muted); margin-top: 0.75rem;">
-                Bem-vindo de volta à comunidade de economia circular do teu campus.
-            </p>
-
-            <form id="login-form" class="form-stack">
-                <div class="form-field">
-                    <label class="form-field-label" for="email">E-mail Académico</label>
-                    <input class="text-input" type="email" id="email" name="email" placeholder="utilizador@esmad.ipp.pt" autocomplete="email" required>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-field-label" for="password">Palavra-passe</label>
-                    <input class="text-input" type="password" id="password" name="password" placeholder="A tua palavra-passe" autocomplete="current-password" required>
-                </div>
-
-                <button type="submit" class="btn btn--primary btn--full">Entrar</button>
-            </form>
-
-            <p class="auth-footer">
-                Ainda não tens conta?
-                <a href="register.html" class="text-accent">Cria uma aqui</a>
-            </p>
-        </section>
-    </main>
-
--->
-
-    
     <div class="voltar-cont">
 
-        <a href="../index.html" class="volta
+        <a href="../index.html" class="voltar">Voltar</a>
+
+        <img src="../assets/icons/logo.svg" class="logo" alt="logo">
+
+    </div>
+
+    <div class="card">
+
+        <h1>Iniciar Sessão</h1>
+
+        <form id="login-form">
+
+            <div class="input-cont">
+                <label for="email">E-mail Académico</label>
+                <input type="email" id="email" class="input" placeholder="user@esmad.ipp.pt" autocomplete="email" required>
+            </div>
+
+            <div class="input-cont">
+                <label for="password">Palavra-passe</label>
+                <input type="password" id="password" class="password" placeholder="palavra passe" autocomplete="current-password" required>
+            </div>
+
+            <button type="submit" id="enter" class="entrar">Entrar</button>
+
+            <p class="criar-conta">Não tens conta? <a href="register.html">Cria uma aqui.</a></p>
+
+        </form>
+
+    </div>
+
+    <script type="module" src="../js/pages/auth.js"></script>
+</body>
+
+</html>

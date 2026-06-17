@@ -559,80 +559,33 @@ export const HEART_OUTLINE = `<svg xmlns="http://www.w3.org/2000/svg" width="18"
  *   com strings e fazer um único innerHTML = ... é significativamente
  *   mais rápido do que criar cada elemento DOM individualmente.
  */
-export function renderItemCard(item, options) {
-  if (!options) options = {};
-  const showCategory = options.showCategory === true;
-  const isFavorite = options.isFavorite === true;
-  const showFav = options.showFav !== false;
-  const removable = options.removable === true;
-  const showBuy = options.showBuy === true;
-  const currentUserId = options.currentUserId || null;
-
+export function renderItemCard(item, options = {}) {
+  // 1. Procurar a imagem principal ou usar a primeira disponível
   const imageUrl = getPrimaryImage(item);
-  const wearLabel = getWearLabel(item.wear_status);
 
-  let categoryBadge = '';
-  if (showCategory) {
-    const nomeCategoria = (item.categoria && item.categoria.name) || 'Sem categoria';
-    categoryBadge = createBadge(nomeCategoria);
-  }
+  // 2. Formatar o estado de uso (wear_status)
+  // Se na BD estiver "new_with_tags" ou "novo", garante um texto limpo
+  const statusFormatado = item.wear_status === 'new_with_tags' ? 'novo com etiquetas' : getWearLabel(item.wear_status).toLowerCase();
 
-  let favButton = '';
-  if (showFav && !removable) {
-    const favClass = isFavorite ? 'fav-btn fav-btn--active' : 'fav-btn';
-    const favLabel = isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
-    const favIcon = isFavorite ? HEART_FILLED : HEART_OUTLINE;
-    favButton = '<button class="' + favClass + '" type="button" data-fav-item="' + item.id + '" aria-label="' + favLabel + '">' + favIcon + '</button>';
-  }
+  // 3. Formatar o preço (ex: "1300€")
+  // Usamos uma formatação simples para bater certo com o teu exemplo de "1300€"
+  const precoFormatado = item.price ? `${Math.round(item.price)}€` : 'Preço indisponível';
 
-  let removeFooter = '';
-  if (removable) {
-    removeFooter = `<div style="padding: 0 18px 18px;">
-          <button class="btn btn--danger-soft btn--full" type="button" data-remove-fav="${item.id}">
-            Remover dos favoritos
-          </button>
-        </div>`;
-  }
-
-  let buyFooter = '';
-  if (showBuy) {
-    const isOwn = currentUserId && item.seller_id === currentUserId;
-    const available = (item.sell_status || 'disponivel') === 'disponivel';
-    if (!isOwn && available) {
-      buyFooter = `<div style="padding: 0 18px 18px;">
-          <button class="btn btn--primary btn--full" type="button" data-buy-item="${item.id}">Comprar</button>
-        </div>`;
-    } else if (!isOwn && !available) {
-      /*
-       * Se o item não está disponível, mostramos o estado (Reservado/Vendido)
-       * em vez do botão, para que o utilizador perceba que já não pode comprar.
-       */
-      const soldLabel = item.sell_status === 'reservado' ? 'Reservado' : 'Vendido';
-      buyFooter = '<div style="padding: 0 18px 18px;">' + createBadge(soldLabel) + '</div>';
-    }
-  }
-
+  // 4. Retornar a estrutura exata solicitada
   return `
-      <div class="listing-card" style="display: flex; flex-direction: column;">
-        ${favButton}
-        <a href="item.html?id=${item.id}" style="flex: 1; display: flex; flex-direction: column; text-decoration: none; color: inherit;">
-          <div class="listing-card__media">
-            <img class="cardimg" src="${imageUrl}" alt="${escapeHtml(item.title || 'Anúncio')}" loading="lazy">
-          </div>
-          <div class="listing-card__body" style="flex: 1;">
-            <h2 class="listing-card__title">${escapeHtml(item.title || 'Sem título')}</h2>
-            <p class="listing-card__text">${escapeHtml(item.description || 'Sem descrição disponível.')}</p>
-            <div class="badge-list">
-              ${categoryBadge}
-              ${createBadge(wearLabel)}
-            </div>
-            <p class="detail-price" style="font-size: 1.1rem;">${formatPrice(item.price)}</p>
-          </div>
-        </a>
-        ${buyFooter}
-        ${removeFooter}
-      </div>
-    `;
+    <a class="p-card" href="item.html?id=${item.id}">
+        <img src="${imageUrl}" alt="${escapeHtml(item.title || 'Anúncio')}">
+
+        <h2>${escapeHtml(item.title || 'Sem título')}</h2>
+
+        <div>
+            <p>${escapeHtml(statusFormatado)}</p>
+            <p>${precoFormatado}</p>
+        </div>
+
+        <p>Vendedor</p>
+    </a>
+  `;
 }
 
 /*
@@ -746,4 +699,3 @@ export async function loadCategories(selectedId) {
     select.innerHTML = '<option value="" disabled selected>Erro ao carregar categorias</option>';
   }
 }
-             
