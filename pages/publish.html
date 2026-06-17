@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/publish.css">
+    <link rel="stylesheet" href="../styles/global.css">
     <title>UniCo - Publicar Anúncio</title>
     <meta name="description" content="Publica um novo anúncio na UniCo e vende os teus artigos à comunidade universitária.">
 </head>
 
-<body class="app-page">
+<body class="bgimg">
+
+    <!--
+
     <main class="dashboard-shell" id="main-content">
         <header class="page-toolbar">
             <a class="btn btn--ghost" href="dashboard.html">Voltar</a>
@@ -85,6 +89,94 @@
             </form>
         </section>
     </main>
+
+    -->
+
+    <div class="voltar-cont">
+
+        <a href="dashboard.html" class="voltar">Voltar</a>
+
+        <img src="../assets/icons/logo.svg" class="logo" alt="logo">
+
+    </div>
+    
+    <div class="card">
+
+        <h1>Novo produto</h1>
+
+        <form id="publish-form">
+
+            <div class="input-cont">
+
+                <label for="listing-title">Título</label>
+
+                <input type="text" id="listing-title" class="input" placeholder="Ex: Livro de Cálculo I" required>
+
+            </div>
+
+            <div class="input-cont">
+
+                <label for="listing-description">Descrição</label>
+                
+                <textarea type="text" id="listing-description" rows="4" placeholder="Descreve o artigo, menciona detalhes e defeitos (se existirem)..." required></textarea>
+
+            </div>
+
+            <div class="input-cont">
+
+                <label for="listing-category">Categoria</label>
+
+                <select id="listing-category" class="dropdown" required>
+
+                    <option value="" disabled selected>Carregando categorias...</option>
+
+                </select>
+
+            </div>
+
+            <div class="input-cont">
+
+                <label for="listing-condition">Estado</label>
+
+                <select id="listing-condition" class="dropdown" required>
+
+                    <option value="" disabled selected>Seleciona o estado...</option>
+                    <option value="novo">Novo com etiquetas</option>
+                    <option value="como_novo">Muito bom / Como novo</option>
+                    <option value="bom">Bom</option>
+                    <option value="satisfatorio">Satisfatório</option>
+
+                </select>
+
+            </div>
+
+            <div class="input-cont">
+
+                <label for="listing-price">Preço</label>
+
+                <input class="text-input" type="number" step="0.01" min="0" id="listing-price" name="listing-price" placeholder="0.00" aria-describedby="price-hint" required>
+
+            </div>
+
+            <div class="input-cont upload-dropzone">
+
+                <label for="listing-images">Adiciona até 5 fotos</label>
+
+                <label class="upload-button" for="listing-images">
+                    Carregar fotografias
+                    <input class="file-input" type="file" id="listing-images" name="listing-images" accept="image/*" multiple>
+                </label>
+
+                <span id="file-name">Nenhuma fotografia seleccionada</span>
+
+                <div id="image-preview" class="preview-grid"></div>
+            </div>
+
+            <button type="submit" class="publish">Publicar anúncio</button>
+
+        </form>
+
+    </div>
 
     <script type="module" src="../js/pages/publish.js"></script>
 

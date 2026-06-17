@@ -4,6 +4,10 @@ header{
     width: 100%;
 }
 
+h1{
+    display: none;
+}
+
 .logo{
     width: 10vh;
     margin-bottom: 1vh;
@@ -33,6 +37,7 @@ header{
     color: var(--white);
     font-size: 20px;
     font-weight: 600;
+    text-decoration: none;
 
     padding-left: 24px;
     padding-right: 24px;
@@ -223,6 +228,10 @@ header{
     text-decoration: none;
 }
 
+.navbar-icon{
+    height: 40px;
+    width: auto;
+}
 
     /* main */
 
@@ -328,3 +337,4 @@ main p{
     }
 
 }
+
