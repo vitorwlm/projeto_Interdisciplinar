@@ -43,6 +43,12 @@ const adminPanelLink = document.getElementById('admin-panel-link');
 let currentUserId = null;
 let favoriteIds = [];
 
+/*
+ * allItems guarda todos os anúncios carregados, para que a pesquisa possa
+ * filtrar localmente (sem ir à base de dados a cada tecla).
+ */
+let allItems = [];
+
 function renderEmptyState(message) {
   renderNotice(itemsGrid, message, 'neutral', true);
 }
@@ -198,7 +204,39 @@ async function loadItems() {
     it.categoria = it.category_id ? { name: categoryMap[it.category_id] } : null;
   });
 
+  allItems = data;
   renderItems(data);
+}
+
+/*
+ * initSearch — Liga a barra de pesquisa do dashboard.
+ *
+ * Filtra localmente os anúncios já carregados (em allItems) por título,
+ * descrição ou categoria. É instantâneo e não faz pedidos à base de dados.
+ */
+function initSearch() {
+  const searchInput = document.getElementById('search');
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', () => {
+    const termo = searchInput.value.trim().toLowerCase();
+    if (!termo) {
+      renderItems(allItems);
+      return;
+    }
+    const filtrados = allItems.filter((it) => {
+      const titulo = (it.title || '').toLowerCase();
+      const descricao = (it.description || '').toLowerCase();
+      const categoria = ((it.categoria && it.categoria.name) || '').toLowerCase();
+      return titulo.includes(termo) || descricao.includes(termo) || categoria.includes(termo);
+    });
+
+    if (!filtrados.length) {
+      renderEmptyState('Nenhum anúncio corresponde à pesquisa.');
+    } else {
+      renderItems(filtrados);
+    }
+  });
 }
 
 /*
@@ -245,3 +283,4 @@ async function loadUserData() {
  */
 await loadUserData();
 loadItems();
+initSearch();
