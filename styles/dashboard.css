@@ -488,3 +488,17 @@ main p{
 .btn--danger-soft{ background-color: var(--danger-soft); color: var(--danger); }
 .btn--danger-soft:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
 
+
+    /* suporte do cartão .p-card: coração sobreposto + ações */
+
+.p-card{ position: relative; }
+
+.p-card__link{
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.p-card__action{ margin-top: 10px; }
+.p-card__seller{ font-size: 14px; color: #666; }
+

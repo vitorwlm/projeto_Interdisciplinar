@@ -560,31 +560,79 @@ export const HEART_OUTLINE = `<svg xmlns="http://www.w3.org/2000/svg" width="18"
  *   mais rápido do que criar cada elemento DOM individualmente.
  */
 export function renderItemCard(item, options = {}) {
-  // 1. Procurar a imagem principal ou usar a primeira disponível
+  /*
+   * Opções (todas opcionais):
+   *   showFav        → mostra o botão de favorito (coração). Default: true.
+   *   isFavorite     → coração cheio/vazio.
+   *   removable      → mostra "Remover dos favoritos" em vez do coração.
+   *   showBuy        → mostra o botão "Comprar" (ou o estado Vendido/Reservado).
+   *   currentUserId  → para não mostrar "Comprar" nos próprios anúncios.
+   * O nome do vendedor aparece se item.sellerName estiver preenchido.
+   */
+  const showFav = options.showFav !== false;
+  const isFavorite = options.isFavorite === true;
+  const removable = options.removable === true;
+  const showBuy = options.showBuy === true;
+  const currentUserId = options.currentUserId || null;
+
   const imageUrl = getPrimaryImage(item);
 
-  // 2. Formatar o estado de uso (wear_status)
-  // Se na BD estiver "new_with_tags" ou "novo", garante um texto limpo
-  const statusFormatado = item.wear_status === 'new_with_tags' ? 'novo com etiquetas' : getWearLabel(item.wear_status).toLowerCase();
+  const statusFormatado = item.wear_status === 'new_with_tags'
+    ? 'novo com etiquetas'
+    : getWearLabel(item.wear_status).toLowerCase();
 
-  // 3. Formatar o preço (ex: "1300€")
-  // Usamos uma formatação simples para bater certo com o teu exemplo de "1300€"
-  const precoFormatado = item.price ? `${Math.round(item.price)}€` : 'Preço indisponível';
+  // Preço SEM arredondar, com cêntimos e vírgula decimal (pt-PT).
+  const precoFormatado = (item.price !== null && item.price !== undefined && item.price !== '')
+    ? Number(item.price).toLocaleString('pt-PT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '€'
+    : 'Preço indisponível';
 
-  // 4. Retornar a estrutura exata solicitada
+  // Linha do vendedor — só se o nome estiver disponível (perfil não mostra).
+  const vendedor = item.sellerName
+    ? `<p class="p-card__seller">Vendedor: ${escapeHtml(item.sellerName)}</p>`
+    : '';
+
+  // Botão de favorito (coração) sobreposto — escondido no perfil e nos favoritos.
+  let favButton = '';
+  if (showFav && !removable) {
+    const favClass = isFavorite ? 'fav-btn fav-btn--active' : 'fav-btn';
+    const favLabel = isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
+    const favIcon = isFavorite ? HEART_FILLED : HEART_OUTLINE;
+    favButton = `<button class="${favClass}" type="button" data-fav-item="${item.id}" aria-label="${favLabel}">${favIcon}</button>`;
+  }
+
+  /*
+   * Rodapé de ação (FORA do <a> para o clique não navegar):
+   *   - favoritos  → botão "Remover dos favoritos"
+   *   - dashboard  → botão "Comprar" se disponível, ou etiqueta Vendido/Reservado
+   */
+  let footer = '';
+  if (removable) {
+    footer = `<button class="btn btn--danger-soft btn--full p-card__action" type="button" data-remove-fav="${item.id}">Remover dos favoritos</button>`;
+  } else if (showBuy) {
+    const isOwn = currentUserId && item.seller_id === currentUserId;
+    const available = (item.sell_status || 'disponivel') === 'disponivel';
+    if (!isOwn && available) {
+      footer = `<button class="btn btn--primary btn--full p-card__action" type="button" data-buy-item="${item.id}">Comprar</button>`;
+    } else if (!isOwn && !available) {
+      const soldLabel = item.sell_status === 'reservado' ? 'Reservado' : 'Vendido';
+      footer = `<span class="badge p-card__action">${soldLabel}</span>`;
+    }
+  }
+
   return `
-    <a class="p-card" href="item.html?id=${item.id}">
-        <img src="${imageUrl}" alt="${escapeHtml(item.title || 'Anúncio')}">
-
-        <h2>${escapeHtml(item.title || 'Sem título')}</h2>
-
-        <div>
-            <p>${escapeHtml(statusFormatado)}</p>
-            <p>${precoFormatado}</p>
-        </div>
-
-        <p>Vendedor</p>
-    </a>
+    <div class="p-card">
+        ${favButton}
+        <a class="p-card__link" href="item.html?id=${item.id}">
+            <img src="${imageUrl}" alt="${escapeHtml(item.title || 'Anúncio')}" loading="lazy">
+            <h2>${escapeHtml(item.title || 'Sem título')}</h2>
+            <div>
+                <p>${escapeHtml(statusFormatado)}</p>
+                <p>${precoFormatado}</p>
+            </div>
+            ${vendedor}
+        </a>
+        ${footer}
+    </div>
   `;
 }
 

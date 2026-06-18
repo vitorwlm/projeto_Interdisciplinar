@@ -143,7 +143,7 @@ async function loadFavorites() {
    */
   const { data: items, error: itemsError } = await supabase
     .from('item')
-    .select('id, title, description, price, wear_status, item_image(image_url, is_principal)')
+    .select('id, title, description, price, wear_status, seller_id, item_image(image_url, is_principal)')
     .in('id', itemIds)
     .order('created_at', { ascending: false });
 
@@ -153,7 +153,20 @@ async function loadFavorites() {
     return;
   }
 
-  renderFavorites(items || []);
+  /*
+   * Buscar os nomes dos vendedores numa única query (.in) para mostrar
+   * "Vendedor: X" em cada cartão de favorito.
+   */
+  const lista = items || [];
+  const sellerIds = [...new Set(lista.map((i) => i.seller_id).filter(Boolean))];
+  if (sellerIds.length) {
+    const { data: sellers } = await supabase.from('utilizador').select('id,name').in('id', sellerIds);
+    const sellerMap = {};
+    (sellers || []).forEach((u) => { sellerMap[u.id] = u.name; });
+    lista.forEach((i) => { i.sellerName = sellerMap[i.seller_id] || ''; });
+  }
+
+  renderFavorites(lista);
 }
 
 loadFavorites();

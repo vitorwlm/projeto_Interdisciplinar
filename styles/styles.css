@@ -1101,3 +1101,68 @@ textarea {
     white-space: nowrap;
     border: 0;
 }
+
+/* === Cartão de anúncio (.p-card) ===
+ * O renderItemCard (utils.js) gera esta estrutura. Os Favoritos e o Perfil
+ * usam este ficheiro, por isso o cartão precisa de estilo aqui também.
+ * Cores literais para não depender das variáveis do global.css. */
+.p-card {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    justify-self: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    padding: 12px;
+}
+
+.p-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.p-card h2 {
+    color: #11102B;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.p-card div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.p-card p {
+    color: #333333;
+    font-size: 0.95rem;
+    font-weight: 400;
+    text-align: left;
+}
+
+.p-card div p:last-child {
+    color: #2C2A9B;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+/* posição relativa para o botão de favorito sobreposto */
+.p-card { position: relative; }
+
+/* área clicável do cartão (envolve imagem + texto) */
+.p-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* botão de ação no rodapé do cartão (Comprar / Remover) */
+.p-card__action { margin-top: 10px; }
+.p-card__seller { font-size: 0.85rem; color: #666666; }

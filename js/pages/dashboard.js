@@ -204,6 +204,20 @@ async function loadItems() {
     it.categoria = it.category_id ? { name: categoryMap[it.category_id] } : null;
   });
 
+  /*
+   * Buscar os nomes dos vendedores numa única query (.in), tal como as
+   * categorias, para mostrar "Vendedor: X" em cada cartão.
+   */
+  const sellerIds = unique(data.map((it) => it.seller_id).filter(Boolean));
+  const sellerMap = {};
+  if (sellerIds.length) {
+    const { data: sellers } = await supabase.from('utilizador').select('id,name').in('id', sellerIds);
+    if (sellers) {
+      sellers.forEach((u) => { sellerMap[u.id] = u.name; });
+    }
+  }
+  data.forEach((it) => { it.sellerName = sellerMap[it.seller_id] || ''; });
+
   allItems = data;
   renderItems(data);
 }
