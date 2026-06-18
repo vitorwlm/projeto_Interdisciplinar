@@ -407,7 +407,7 @@ export async function uploadItemImages(itemId, userId, files) {
     const path = buildStoragePath(userId, itemId, file, index);
 
     const { error: uploadError } = await supabase.storage
-      .from('listing-images')
+      .from('item-images')
       .upload(path, file, { contentType: file.type, upsert: false });
 
     if (uploadError) throw uploadError;
@@ -417,7 +417,7 @@ export async function uploadItemImages(itemId, userId, files) {
      * à rede — o Supabase gera o URL deterministicamente com base no path.
      */
     const { data: publicUrlData } = supabase.storage
-      .from('listing-images')
+      .from('item-images')
       .getPublicUrl(path);
 
     imageRows.push({
@@ -441,8 +441,8 @@ export async function uploadItemImages(itemId, userId, files) {
  *   a ocupar espaço no Storage indefinidamente (ficheiros órfãos).
  *
  * Porquê extrair o path do URL com indexOf?
- *   O URL público tem a forma ".../storage/v1/object/public/listing-images/path"
- *   — extraímos apenas a parte após "/listing-images/" para passar ao
+ *   O URL público tem a forma ".../storage/v1/object/public/item-images/path"
+ *   — extraímos apenas a parte após "/item-images/" para passar ao
  *   método de remoção do Storage.
  */
 export async function deleteItemImages(itemId) {
@@ -453,7 +453,7 @@ export async function deleteItemImages(itemId) {
 
   if (!images || images.length === 0) return;
 
-  const marker = '/listing-images/';
+  const marker = '/item-images/';
   const paths = [];
   images.forEach((img) => {
     const idx = img.image_url.indexOf(marker);
@@ -462,7 +462,7 @@ export async function deleteItemImages(itemId) {
     }
   });
 
-  if (paths.length) await supabase.storage.from('listing-images').remove(paths);
+  if (paths.length) await supabase.storage.from('item-images').remove(paths);
   await supabase.from('item_image').delete().eq('item_id', itemId);
 }
 

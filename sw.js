@@ -34,7 +34,7 @@
  *   O evento "activate" apaga automaticamente as caches com nomes diferentes,
  *   forçando o browser a descarregar os ficheiros atualizados.
  */
-const CACHE_NAME = 'app-shell-v0';
+const CACHE_NAME = 'app-shell-v1';
 
 /*
  * ASSETS — lista de ficheiros a guardar em cache durante a instalação.
@@ -49,6 +49,12 @@ const ASSETS = [
 	'/index.html',
 	'/manifest.json',
 	'/styles/styles.css',
+	'/styles/global.css',
+	'/styles/index.css',
+	'/styles/login.css',
+	'/styles/register.css',
+	'/styles/dashboard.css',
+	'/styles/publish.css',
 	'/js/sw-register.js',
 	'/js/pages/app.js',
 	'/js/auth/auth.js',
@@ -79,7 +85,9 @@ const ASSETS = [
 	'/assets/icons/Vector1.svg',
 	'/assets/icons/Vector2.svg',
 	'/assets/icons/Vector3.svg',
-	'/assets/icons/Vector4.svg'
+	'/assets/icons/Vector4.svg',
+	'/assets/icons/settings.svg',
+	'/assets/icons/bgimg-forms.svg'
 ];
 
 /*
