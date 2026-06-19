@@ -15,11 +15,13 @@
 <body class="app-page">
     <main class="page-shell" id="main-content" style="padding: 24px 0 96px;">
         <header class="page-toolbar" style="margin-bottom: 18px;">
-            <a class="btn btn--ghost" href="dashboard.html">Voltar</a>
-            <button data-logout-btn class="btn btn--light" type="button">Sair</button>
+            <a class="voltar" style="background-color: var(--white);" href="dashboard.html">
+                Voltar
+            </a>
+            <button data-logout-btn class="logout" style="background-color: var(--white);" type="button">Sair</button>
         </header>
 
-        <div id="listing-status" class="alert alert--neutral alert--center" style="margin-bottom: 18px;">
+        <div id="listing-status" class="alert alert--neutral alert--center" style="border-radius: 12px; margin-bottom: 18px;">
             A carregar anúncio...
         </div>
 
@@ -28,7 +30,7 @@
                 <img id="listing-image" src="../assets/icons/logo.svg" alt="Anúncio">
             </figure>
 
-            <article class="surface detail-card">
+            <article class="surface detail-card" style="border-radius: 12px;">
                 <h1 id="listing-title" class="detail-title">Anúncio</h1>
                 <p id="listing-description" class="detail-copy" style="margin-top: 0.75rem;">A carregar descrição...</p>
                 <p class="detail-price" id="listing-price">--</p>
@@ -63,7 +65,7 @@
         </section>
 
         <section class="gallery-section" aria-label="Galeria de fotografias do anúncio">
-            <h2 class="section-title" style="font-size: 1.45rem; margin-bottom: 16px;">Mais fotografias</h2>
+            <h2 class="section-title" style="color: var(--white); font-size: 1.45rem; margin-bottom: 16px;">Mais fotografias</h2>
             <div class="gallery-grid" id="listing-gallery"></div>
         </section>
     </main>
