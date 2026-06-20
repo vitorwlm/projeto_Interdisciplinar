@@ -379,7 +379,7 @@ async function loadUserData() {
       .single();
 
     if (profile && profile.is_admin) {
-      adminPanelLink.innerHTML = '<a class="btn btn--soft" href="admin.html">Painel admin</a>';
+      adminPanelLink.innerHTML = '<a href="admin.html">Painel admin</a>';
     }
   }
 }
