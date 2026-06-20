@@ -181,8 +181,23 @@ async function apagarCategoria(btn) {
   btn.disabled = true;
 
   try {
-    const { error } = await supabase.from('categoria').delete().eq('id', categoryId);
+    /*
+     * .select() devolve as linhas apagadas. Se o RLS recusar, não vem erro,
+     * só uma lista vazia — por isso verificamos para mostrar um aviso real.
+     */
+    const { data: apagadas, error } = await supabase
+      .from('categoria')
+      .delete()
+      .eq('id', categoryId)
+      .select('id');
+
     if (error) throw error;
+
+    if (!apagadas || apagadas.length === 0) {
+      showAlert(categoryForm, 'danger', 'Não foi possível apagar a categoria. Confirma que tens permissões de administrador.');
+      btn.disabled = false;
+      return;
+    }
 
     /*
      * Se estava a editar esta categoria, limpar o formulário para não tentar
@@ -342,14 +357,28 @@ async function toggleAdmin(btn) {
   btn.disabled = true;
 
   try {
-    const { error } = await supabase
+    /*
+     * .select() devolve as linhas alteradas. Se o RLS recusar (sem política
+     * para o admin alterar outros), não vem erro mas a lista vem vazia.
+     */
+    const { data: alterados, error } = await supabase
       .from('utilizador')
       .update({ is_admin: !currentAdmin })
-      .eq('id', userId);
+      .eq('id', userId)
+      .select('id');
+
     if (error) throw error;
+
+    if (!alterados || alterados.length === 0) {
+      showAlert(usersList, 'danger', 'Não foi possível alterar as permissões. Confirma que tens autorização de administrador.');
+      btn.disabled = false;
+      return;
+    }
+
     await loadUsers();
   } catch (error) {
     console.error('Erro ao atualizar permissões:', error);
+    showAlert(usersList, 'danger', error.message || 'Não foi possível alterar as permissões.');
     btn.disabled = false;
   }
 }

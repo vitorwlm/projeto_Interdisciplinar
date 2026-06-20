@@ -68,3 +68,55 @@ body{
     color: var(--success);
     font-weight: 600;
 }
+
+/*
+ * Alertas gerados pelo JavaScript (showAlert / renderNotice em utils.js):
+ * classes "alert" + "alert--danger|success|neutral" e, opcional, "alert--center".
+ */
+.alert{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+    border: thin solid transparent;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.alert--neutral{ background-color: var(--light); border-color: var(--lightgray); color: var(--dark); }
+.alert--success{ background-color: var(--success-soft); border-color: var(--success); color: var(--success); }
+.alert--danger{ background-color: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+.alert--center{ justify-content: center; text-align: center; }
+
+/* === Barra de navegação inferior (consistente em todas as páginas) === */
+.mobile-nav{
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    width: min(760px, calc(100% - 24px));
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+
+    padding: 10px;
+    border-radius: 24px;
+
+    background: var(--light);
+    box-shadow: var(--shadow);
+
+    z-index: 1000;
+}
+.mobile-nav__link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    border-radius: 18px;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+.mobile-nav__link:hover{ background: rgba(44, 42, 155, 0.08); transform: translateY(-1px); }
+.mobile-nav__link--active{ background: rgba(44, 42, 155, 0.12); }
+.mobile-nav__link img{ width: 28px; height: 28px; }

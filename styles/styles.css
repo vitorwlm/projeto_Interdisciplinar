@@ -1161,6 +1161,42 @@ textarea {
     font-size: 1.05rem;
 }
 
+/* posição relativa para o coração sobreposto + área clicável + ações */
+.p-card { position: relative; }
+.p-card__link { display: block; text-decoration: none; color: inherit; }
+.p-card__action { margin-top: 10px; }
+.p-card__seller { font-size: 0.85rem; color: #666666; }
+
+/* === Imagem principal do anúncio: mostrar INTEIRA (sem cortar) === */
+.detail-figure img {
+    height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 0 !important;
+    cursor: zoom-in;
+}
+.gallery-tile img { cursor: zoom-in; }
+
+/* === Lightbox: clicar numa foto para a ver em ecrã inteiro === */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.85);
+    cursor: zoom-out;
+}
+.lightbox--open { display: flex; }
+.lightbox img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
 /* posição relativa para o botão de favorito sobreposto */
 .p-card { position: relative; }
 

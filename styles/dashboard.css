@@ -426,3 +426,73 @@ main p{
 .p-card__action{ margin-top: 10px; }
 .p-card__seller{ font-size: 14px; color: #666; }
 
+
+    /* === Botão de filtros (engrenagem) + painel de filtros === */
+
+.filter-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+.filter-toggle img{ height: 24px; width: 24px; }
+
+.filters-panel{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+
+    width: 1200px;
+    max-width: 90%;
+
+    background-color: var(--light);
+    border-radius: 16px;
+    padding: 20px 24px;
+
+    margin: 2vh auto 0;
+}
+
+.filters-panel[hidden]{ display: none; }
+
+.filter-field{ display: flex; flex-direction: column; gap: 6px; }
+.filter-field label{ color: var(--dark); font-size: 14px; font-weight: 600; }
+.filter-field select,
+.filter-field input{
+    height: 40px;
+    min-width: 150px;
+    background-color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 15px;
+    color: var(--dark);
+}
+.filter-field input[type="number"]{ min-width: 110px; }
+
+.filter-check{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+}
+.filter-check input{ width: 18px; height: 18px; }
+
+.filter-clear{
+    height: 40px;
+    padding: 0 18px;
+    background-color: var(--darkblue);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s ease;
+}
+.filter-clear:hover{ box-shadow: var(--shadow); transform: translateY(-2px); }
+

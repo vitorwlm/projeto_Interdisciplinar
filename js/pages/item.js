@@ -312,4 +312,36 @@ function updateFavButton(btn, icon, label, isFavorite) {
   }
 }
 
+/*
+ * initLightbox — Clicar nas fotos (principal e galeria) abre-as em ecrã inteiro.
+ * Usa delegação na galeria (desenhada dinamicamente) e fecha com clique ou Esc.
+ */
+function initLightbox() {
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-label', 'Fotografia ampliada');
+  overlay.innerHTML = '<img alt="Fotografia do anúncio">';
+  document.body.appendChild(overlay);
+
+  const overlayImg = overlay.querySelector('img');
+  const open = (src) => { if (src) { overlayImg.src = src; overlay.classList.add('lightbox--open'); } };
+  const close = () => overlay.classList.remove('lightbox--open');
+
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  if (imageEl) {
+    imageEl.style.cursor = 'zoom-in';
+    imageEl.addEventListener('click', () => open(imageEl.src));
+  }
+  if (galleryEl) {
+    galleryEl.addEventListener('click', (e) => {
+      const img = e.target.closest('img');
+      if (img) open(img.src);
+    });
+  }
+}
+
 loadItem();
+initLightbox();
