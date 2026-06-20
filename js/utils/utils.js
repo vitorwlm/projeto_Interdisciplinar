@@ -337,7 +337,9 @@ const wearLabels = {
   novo: 'Novo',
   como_novo: 'Como novo',
   bom: 'Bom',
-  satisfatorio: 'Satisfatório'
+  satisfatorio: 'Satisfatório',
+  usado: 'Usado',
+  muito_usado: 'Muito usado'
 };
 
 export function getWearLabel(value) {

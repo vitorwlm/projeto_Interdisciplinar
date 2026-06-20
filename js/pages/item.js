@@ -312,4 +312,47 @@ function updateFavButton(btn, icon, label, isFavorite) {
   }
 }
 
+/*
+ * initLightbox — Permite clicar nas fotos (principal e galeria) para as ver
+ * em ecrã inteiro, por cima da página.
+ *
+ * Cria um único overlay reutilizável e usa delegação de eventos na galeria
+ * (que é desenhada dinamicamente), por isso funciona mesmo para as imagens
+ * adicionadas depois pelo renderImageGrid.
+ */
+function initLightbox() {
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-label', 'Fotografia ampliada');
+  overlay.innerHTML = '<img alt="Fotografia do anúncio">';
+  document.body.appendChild(overlay);
+
+  const overlayImg = overlay.querySelector('img');
+
+  function open(src) {
+    if (!src) return;
+    overlayImg.src = src;
+    overlay.classList.add('lightbox--open');
+  }
+  function close() {
+    overlay.classList.remove('lightbox--open');
+  }
+
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  if (imageEl) {
+    imageEl.style.cursor = 'zoom-in';
+    imageEl.addEventListener('click', () => open(imageEl.src));
+  }
+  if (galleryEl) {
+    galleryEl.addEventListener('click', (e) => {
+      const img = e.target.closest('img');
+      if (img) open(img.src);
+    });
+  }
+}
+
 loadItem();
+initLightbox();

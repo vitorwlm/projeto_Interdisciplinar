@@ -1166,3 +1166,38 @@ textarea {
 /* botão de ação no rodapé do cartão (Comprar / Remover) */
 .p-card__action { margin-top: 10px; }
 .p-card__seller { font-size: 0.85rem; color: #666666; }
+
+/* === Imagem principal do anúncio: mostrar INTEIRA (sem cortar) ===
+ * Substitui o object-fit:cover (que cortava a foto). Com "contain" a foto
+ * aparece completa, centrada sobre o fundo da marca da .detail-figure (4/3). */
+.detail-figure img {
+    height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 0 !important;
+    cursor: zoom-in;
+}
+
+.gallery-tile img { cursor: zoom-in; }
+
+/* === Lightbox: clicar numa foto para a ver em ecrã inteiro === */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.85);
+    cursor: zoom-out;
+}
+
+.lightbox--open { display: flex; }
+
+.lightbox img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}

@@ -85,13 +85,60 @@
 
             <div class="search-cont">
 
-                <form>
+                <form id="search-form">
                     <input class="search" type="search" id="search" placeholder="Pesquisa algo...">
 
-                    <a href="#">
+                    <button type="button" id="filter-toggle" class="filter-toggle" aria-label="Filtros" aria-expanded="false">
                         <img src="../assets/icons/settings.svg" alt="filtros">
-                    </a>
+                    </button>
                 </form>
+
+            </div>
+
+            <div class="filters-panel" id="filters-panel" hidden>
+
+                <div class="filter-field">
+                    <label for="filter-sort">Ordenar</label>
+                    <select id="filter-sort">
+                        <option value="recent">Mais recentes</option>
+                        <option value="price-asc">Preço: menor primeiro</option>
+                        <option value="price-desc">Preço: maior primeiro</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="filter-category">Categoria</label>
+                    <select id="filter-category">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="filter-condition">Estado</label>
+                    <select id="filter-condition">
+                        <option value="">Qualquer</option>
+                        <option value="novo">Novo com etiquetas</option>
+                        <option value="como_novo">Muito bom / Como novo</option>
+                        <option value="bom">Bom</option>
+                        <option value="satisfatorio">Satisfatório</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="filter-min">Preço mín (€)</label>
+                    <input type="number" id="filter-min" min="0" step="0.01" placeholder="0">
+                </div>
+
+                <div class="filter-field">
+                    <label for="filter-max">Preço máx (€)</label>
+                    <input type="number" id="filter-max" min="0" step="0.01" placeholder="—">
+                </div>
+
+                <label class="filter-check" for="filter-available">
+                    <input type="checkbox" id="filter-available"> Apenas disponíveis
+                </label>
+
+                <button type="button" id="filter-clear" class="filter-clear">Limpar filtros</button>
 
             </div>
 

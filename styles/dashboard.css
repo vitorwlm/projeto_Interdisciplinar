@@ -212,9 +212,12 @@ h1{
     height: 140px;
 
     background: linear-gradient(0deg, rgba(44, 42, 155, 0.20) 0%, rgba(44, 42, 155, 0.00) 100%);
-        
+
     position: fixed;
     bottom: 0;
+
+    /* fica sempre por cima dos anúncios */
+    z-index: 100;
 }
 
 .navbar{
@@ -332,6 +335,9 @@ main p{
         justify-content: center;
         flex-direction: column;
         flex-wrap: nowrap;
+
+        /* espaço para o último anúncio não ficar tapado pela navbar fixa */
+        padding-bottom: 160px;
     }
 
     .search-cont{
@@ -501,4 +507,100 @@ main p{
 
 .p-card__action{ margin-top: 10px; }
 .p-card__seller{ font-size: 14px; color: #666; }
+
+
+    /* === Botão de filtros (engrenagem) + painel de filtros === */
+
+.filter-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.filter-toggle img{ height: 24px; width: 24px; }
+
+.filters-panel{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+
+    width: 1200px;
+    max-width: 90%;
+
+    background-color: var(--light);
+    border-radius: 16px;
+    padding: 20px 24px;
+
+    margin: 2vh auto 0;
+}
+
+/* começa escondido (atributo hidden) — sem isto o display:flex sobrepunha-se */
+.filters-panel[hidden]{ display: none; }
+
+.filter-field{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-field label{
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.filter-field select,
+.filter-field input{
+    height: 40px;
+    min-width: 150px;
+
+    background-color: var(--white);
+    border: none;
+    border-radius: 10px;
+
+    padding: 0 12px;
+
+    font-size: 15px;
+    color: var(--dark);
+}
+
+.filter-field input[type="number"]{ min-width: 110px; }
+
+.filter-check{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.filter-check input{ width: 18px; height: 18px; }
+
+.filter-clear{
+    height: 40px;
+    padding: 0 18px;
+
+    background-color: var(--darkblue);
+    color: var(--white);
+
+    border: none;
+    border-radius: 10px;
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.filter-clear:hover{
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+}
 
