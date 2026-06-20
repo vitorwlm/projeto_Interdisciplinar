@@ -8,6 +8,7 @@
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../styles/dashboard.css">
     <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <title>UniCo - Dashboard</title>
     <meta name="description" content="Dashboard da UniCo — vê todos os anúncios publicados na tua comunidade.">
 </head>
@@ -85,73 +86,19 @@
 
             <div class="search-cont">
 
-                <form id="search-form">
+                <form>
                     <input class="search" type="search" id="search" placeholder="Pesquisa algo...">
 
-                    <button type="button" id="filter-toggle" class="filter-toggle" aria-label="Filtros" aria-expanded="false">
+                    <a href="#">
                         <img src="../assets/icons/settings.svg" alt="filtros">
-                    </button>
+                    </a>
                 </form>
 
             </div>
 
-            <div class="filters-panel" id="filters-panel" hidden>
-
-                <div class="filter-field">
-                    <label for="filter-sort">Ordenar</label>
-                    <select id="filter-sort">
-                        <option value="recent">Mais recentes</option>
-                        <option value="price-asc">Preço: menor primeiro</option>
-                        <option value="price-desc">Preço: maior primeiro</option>
-                    </select>
-                </div>
-
-                <div class="filter-field">
-                    <label for="filter-category">Categoria</label>
-                    <select id="filter-category">
-                        <option value="">Todas</option>
-                    </select>
-                </div>
-
-                <div class="filter-field">
-                    <label for="filter-condition">Estado</label>
-                    <select id="filter-condition">
-                        <option value="">Qualquer</option>
-                        <option value="novo">Novo com etiquetas</option>
-                        <option value="como_novo">Muito bom / Como novo</option>
-                        <option value="bom">Bom</option>
-                        <option value="satisfatorio">Satisfatório</option>
-                    </select>
-                </div>
-
-                <div class="filter-field">
-                    <label for="filter-min">Preço mín (€)</label>
-                    <input type="number" id="filter-min" min="0" step="0.01" placeholder="0">
-                </div>
-
-                <div class="filter-field">
-                    <label for="filter-max">Preço máx (€)</label>
-                    <input type="number" id="filter-max" min="0" step="0.01" placeholder="—">
-                </div>
-
-                <label class="filter-check" for="filter-available">
-                    <input type="checkbox" id="filter-available"> Apenas disponíveis
-                </label>
-
-                <button type="button" id="filter-clear" class="filter-clear">Limpar filtros</button>
-
-            </div>
-
-            <div class="menu">
-
-                <a href="../pages/dashboard.html">Catálogo</a>
-                <a href="../pages/favorites.html">Favoritos</a>
-                <a href="../pages/messages.html">Mensagens</a>
-                <a href="../pages/profile.html">Perfil</a>
-
-            </div>
-
         </header>
+
+        <!--
 
         <div class="navbar-cont">
 
@@ -180,6 +127,27 @@
             </div>
 
         </div>
+
+    -->
+
+    <nav class="mobile-nav" aria-label="Navegação principal">
+        <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard">
+            <img src="../assets/icons/Vector.svg" alt="icon dashboard">
+        </a>
+        <a class="mobile-nav__link" href="favorites.html" aria-label="Favoritos">
+            <img src="../assets/icons/Vector1.svg" alt="icon favoritos">
+        </a>
+        <a class="mobile-nav__link" href="publish.html" aria-label="Publicar">
+            <img src="../assets/icons/Vector2.svg" alt="icon publicar">
+        </a>
+        <a class="mobile-nav__link" href="messages.html" aria-label="Mensagens">
+            <img src="../assets/icons/Vector3.svg" alt="icon mensagens">
+        </a>
+        <a class="mobile-nav__link mobile-nav__link--active" href="profile.html" aria-label="Perfil">
+            <img src="../assets/icons/Vector4.svg" alt="icon perfil">
+        </a>
+    </nav>
+
 
         <main id="listings-grid">
             <p>A carregar anúncios...</p>

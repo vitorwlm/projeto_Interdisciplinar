@@ -9,9 +9,16 @@
     --green: #66CC66;
     --lightgreen: #DFF490;
     --white: #ffffff;
+    --light: #EAE9F5;
     --lightgray: #A3A3A3;
     --black: #000;
+    --dark: #11102B;
     --shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+    --success: #16794c;
+    --success-soft: #e9fbf2;
+    --danger: #b42318;
+    --danger-soft: #fff0ee;
 }
 
 .listing-card__media img,
@@ -740,10 +747,11 @@ textarea {
     gap: 8px;
     padding: 10px;
     border-radius: 24px;
-    background: rgba(255, 255, 255, 0.92);
+    background: var(--light);
     border: 1px solid rgba(20, 33, 61, 0.08);
     box-shadow: var(--shadow);
     backdrop-filter: blur(18px);
+    z-index: 1000;
 }
 
 .mobile-nav__link {
@@ -1167,37 +1175,62 @@ textarea {
 .p-card__action { margin-top: 10px; }
 .p-card__seller { font-size: 0.85rem; color: #666666; }
 
-/* === Imagem principal do anúncio: mostrar INTEIRA (sem cortar) ===
- * Substitui o object-fit:cover (que cortava a foto). Com "contain" a foto
- * aparece completa, centrada sobre o fundo da marca da .detail-figure (4/3). */
-.detail-figure img {
-    height: 100% !important;
-    object-fit: contain !important;
-    border-radius: 0 !important;
-    cursor: zoom-in;
-}
 
-.gallery-tile img { cursor: zoom-in; }
-
-/* === Lightbox: clicar numa foto para a ver em ecrã inteiro === */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: none;
+.voltar{
+    display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.85);
-    cursor: zoom-out;
-}
 
-.lightbox--open { display: flex; }
+    padding-left: 24px;
+    padding-right: 24px;
 
-.lightbox img {
-    max-width: 95%;
-    max-height: 95%;
-    object-fit: contain;
+    height: 48px;
+
     border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: none;
+
+    background-color: var(--light);
+
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--dark);
+    text-decoration: none;
+
+    transition: .3s ease;
 }
+
+.voltar:hover{
+    background-color: var(--white);
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow);
+
+    transition: .3s ease;
+}
+
+
+.logout{
+    background-color: var(--light);
+
+    height: 48px;
+
+    border: none;
+    border-radius: 12px;
+
+    color: var(--dark);
+    font-size: 20px;
+    font-weight: 600;
+
+    padding-left: 24px;
+    padding-right: 24px;
+
+    transition: .3s ease;
+}
+
+.logout:hover{
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    transition: .3s ease;
+}
+
+

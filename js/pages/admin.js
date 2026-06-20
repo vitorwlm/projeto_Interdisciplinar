@@ -181,24 +181,8 @@ async function apagarCategoria(btn) {
   btn.disabled = true;
 
   try {
-    /*
-     * .select() devolve as linhas realmente apagadas. Se o RLS recusar a
-     * operação, o Supabase NÃO devolve erro — apenas uma lista vazia. Sem
-     * esta verificação, a app diria "apagada com sucesso" sem nada acontecer.
-     */
-    const { data: apagadas, error } = await supabase
-      .from('categoria')
-      .delete()
-      .eq('id', categoryId)
-      .select('id');
-
+    const { error } = await supabase.from('categoria').delete().eq('id', categoryId);
     if (error) throw error;
-
-    if (!apagadas || apagadas.length === 0) {
-      showAlert(categoryForm, 'danger', 'Não foi possível apagar a categoria. Confirma que tens permissões de administrador.');
-      btn.disabled = false;
-      return;
-    }
 
     /*
      * Se estava a editar esta categoria, limpar o formulário para não tentar
@@ -358,29 +342,14 @@ async function toggleAdmin(btn) {
   btn.disabled = true;
 
   try {
-    /*
-     * .select() devolve as linhas alteradas. Se o RLS recusar (ex.: sem
-     * política para o admin alterar OUTROS utilizadores), não vem erro mas
-     * a lista vem vazia — por isso verificamos e avisamos.
-     */
-    const { data: alterados, error } = await supabase
+    const { error } = await supabase
       .from('utilizador')
       .update({ is_admin: !currentAdmin })
-      .eq('id', userId)
-      .select('id');
-
+      .eq('id', userId);
     if (error) throw error;
-
-    if (!alterados || alterados.length === 0) {
-      showAlert(usersList, 'danger', 'Não foi possível alterar as permissões. Confirma que tens autorização de administrador.');
-      btn.disabled = false;
-      return;
-    }
-
     await loadUsers();
   } catch (error) {
     console.error('Erro ao atualizar permissões:', error);
-    showAlert(usersList, 'danger', error.message || 'Não foi possível alterar as permissões.');
     btn.disabled = false;
   }
 }
