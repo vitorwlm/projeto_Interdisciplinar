@@ -13,9 +13,9 @@
 
 <body class="app-page">
     <main class="dashboard-shell" id="main-content">
-        <header class="dashboard-header surface desktop-brand-bar" style="background-color: var(--light); border-radius: 16px;">
-            <a class="voltar" style="background-color: var(--white);" href="dashboard.html">
-                Voltar
+        <header class="dashboard-header surface desktop-brand-bar">
+            <a href="dashboard.html" aria-label="Dashboard">
+                <img class="desktop-brand-bar__logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
             </a>
 
             <div>
@@ -23,8 +23,9 @@
                 <p id="favorites-status" class="status-copy" style="margin-top: 0.5rem;">A carregar favoritos...</p>
             </div>
 
-            <button data-logout-btn class="logout" style="background-color: var(--white);" type="button">Sair</button>
-            
+            <div class="header-actions">
+                <button data-logout-btn class="btn btn--ghost" type="button">Sair</button>
+            </div>
         </header>
 
         <section class="listings-grid" id="favorites-grid" aria-label="Lista de favoritos" style="padding-bottom: 8px;">
