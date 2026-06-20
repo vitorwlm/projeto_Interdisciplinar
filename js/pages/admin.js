@@ -176,6 +176,20 @@ async function apagarCategoria(btn) {
   const categoryId = btn.dataset.categoryDelete;
   const categoryName = btn.dataset.categoryName;
 
+  /*
+   * Verificação prévia: uma categoria com anúncios associados não pode ser
+   * apagada (violaria a foreign key na tabela "item"). Usamos os anúncios já
+   * carregados (cachedItems) para avisar o utilizador com um pop-up claro,
+   * em vez de o deixar bater no erro técnico da base de dados.
+   */
+  const emUso = cachedItems.filter((item) => item.category_id === categoryId).length;
+  if (emUso > 0) {
+    alert('Não podes apagar a categoria "' + categoryName + '" porque ainda tem ' +
+      plural(emUso, 'anúncio') + ' associado' + (emUso === 1 ? '' : 's') + '.\n\n' +
+      'Apaga ou muda a categoria desses anúncios primeiro.');
+    return;
+  }
+
   if (!confirm('Apagar a categoria "' + categoryName + '"? Esta ação não pode ser desfeita.')) return;
 
   btn.disabled = true;
@@ -208,7 +222,16 @@ async function apagarCategoria(btn) {
     showAlert(categoryForm, 'success', 'Categoria apagada com sucesso.');
   } catch (error) {
     console.error('Erro ao apagar categoria:', error);
-    showAlert(categoryForm, 'danger', error.message || 'Não foi possível apagar a categoria.');
+    /*
+     * Salvaguarda: se mesmo assim a base de dados recusar por causa da
+     * foreign key (anúncios associados), mostramos a mensagem amigável em
+     * vez do erro técnico do Postgres.
+     */
+    const temAnuncios = error.code === '23503' || /foreign key/i.test(error.message || '');
+    const msg = temAnuncios
+      ? 'Não podes apagar a categoria "' + categoryName + '" porque ainda tem anúncios associados. Apaga ou muda a categoria desses anúncios primeiro.'
+      : (error.message || 'Não foi possível apagar a categoria.');
+    showAlert(categoryForm, 'danger', msg);
     btn.disabled = false;
   }
 }
