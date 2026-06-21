@@ -35,8 +35,7 @@ import { runAuthGuard } from '../auth/auth-guard.js';
  *
  * Porquê usar "scope: 'local'"?
  *   Termina a sessão apenas neste browser/aba, sem invalidar sessões ativas
- *   noutros dispositivos do mesmo utilizador. É o comportamento expectável
- *   num "sair" normal (não um "sair de todos os dispositivos").
+ *   noutros dispositivos do mesmo utilizador.
  *
  * Porquê usar window.location.href em vez de replace()?
  *   No logout queremos que o utilizador possa usar o botão "Recuar" para
@@ -136,7 +135,7 @@ export function unique(list) {
  * Porquê é importante?
  *   Quando mostramos texto escrito pelo utilizador (título de um anúncio,
  *   nome, etc.) dentro de innerHTML, se esse texto tiver código HTML ele
- *   seria executado pelo browser. Isto chama-se XSS e é uma falha de segurança.
+ *   seria executado pelo browser e isto é uma falha de segurança.
  *   Ao "escapar" o texto, o código aparece como texto normal e nunca corre.
  *
  *   Exemplo: <img onerror=alert(1)>  →  &lt;img onerror=alert(1)&gt;
@@ -194,8 +193,6 @@ export function removeFavorite(userId, itemId) {
  *   maybeSingle() devolve null sem erro, o que é o comportamento correto
  *   quando a conversa ainda não existe.
  *
- * Regra de negócio: existe no máximo UMA conversa por par (item + comprador),
- * independentemente de quantas mensagens já foram trocadas.
  */
 async function startConversation(itemId, sellerId, buyerId) {
   const { data: existente } = await supabase

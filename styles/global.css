@@ -135,6 +135,13 @@ textarea:focus {
 
 ::placeholder { color: #9a9ab0; }
 
+/*
+ * Garante que o atributo "hidden" esconde sempre o elemento — sem isto,
+ * regras como ".alert { display: flex }" sobrepunham-se e deixavam, por ex.,
+ * o estado "A carregar utilizadores..." visível mesmo depois de carregar.
+ */
+[hidden] { display: none !important; }
+
 /* contorno de foco por teclado (acessibilidade) */
 :focus-visible { outline: 2px solid var(--darkblue); outline-offset: 2px; }
 

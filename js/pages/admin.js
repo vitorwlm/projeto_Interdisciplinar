@@ -279,7 +279,7 @@ async function createCategory(event) {
   event.preventDefault();
 
   const name = categoryNameInput.value.trim();
-  const iconUrl = categoryIconInput.value.trim();
+  const iconUrl = categoryIconInput ? categoryIconInput.value.trim() : '';
   const editingId = categoryForm.dataset.editingId;
 
   if (!name) {
@@ -418,6 +418,7 @@ async function loadCategories() {
   if (error) throw error;
 
   cachedCategories = data || [];
+  renderMetrics();
   renderCategories();
 }
 
