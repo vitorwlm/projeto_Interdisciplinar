@@ -6,62 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2C2A9B">
     <link rel="manifest" href="../manifest.json">
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="../styles/global.css">
     <title>UniCo - Painel de Admin</title>
     <meta name="description" content="Painel de administração da UniCo — gere utilizadores, categorias e anúncios.">
 </head>
 
-<body class="app-page admin-page">
-    <main class="dashboard-shell admin-shell" id="main-content">
-        <header class="dashboard-header surface desktop-brand-bar">
-            <a href="dashboard.html" aria-label="Dashboard">
-                <img class="desktop-brand-bar__logo" src="../assets/icons/logo.svg" alt="UniCo Logo">
-            </a>
+<body class="bgimg">
 
-            <div>
-                <h1 class="section-title">Painel de Controlo</h1>
-                <p id="admin-status" class="status-copy" style="margin-top: 0.5rem;">A verificar permissões...</p>
-            </div>
+    <div class="voltar-cont">
+        <a href="dashboard.html" class="voltar">Voltar</a>
+        <a href="dashboard.html" aria-label="Ir para o dashboard">
+            <img src="../assets/icons/logo.svg" class="logo" alt="UniCo Logo">
+        </a>
+    </div>
 
-            <div class="header-actions">
-                <a class="btn btn--ghost" href="dashboard.html">Voltar ao dashboard</a>
-                <button data-logout-btn class="btn btn--light" type="button">Sair</button>
-            </div>
-        </header>
+    <div class="admin-wrap">
 
-        <section class="admin-metrics" aria-label="Resumo do painel">
-            <article class="metric-card">
+        <h1>Painel de administração</h1>
+        <p id="admin-status" class="admin-status">A verificar permissões...</p>
+
+        <div class="admin-metrics" aria-label="Resumo do painel">
+            <div class="metric-card">
                 <span class="metric-card__label">Anúncios</span>
                 <strong class="metric-card__value" id="metric-listings">0</strong>
-            </article>
-            <article class="metric-card">
+            </div>
+            <div class="metric-card">
                 <span class="metric-card__label">Categorias</span>
                 <strong class="metric-card__value" id="metric-categories">0</strong>
-            </article>
-            <article class="metric-card">
+            </div>
+            <div class="metric-card">
                 <span class="metric-card__label">Utilizadores</span>
                 <strong class="metric-card__value" id="metric-users">0</strong>
-            </article>
-        </section>
+            </div>
+        </div>
 
-        <section class="admin-layout">
-            <aside class="surface admin-panel">
-                <div class="admin-panel__header">
-                    <div>
-                        <h2 class="section-title" id="category-form-title" style="font-size: 1.45rem;">Criar categoria</h2>
-                        <p class="section-copy" style="margin-top: 0.35rem;">Adiciona novas categorias para usar no formulário de publicação.</p>
-                    </div>
-                </div>
+        <div class="admin-grid">
 
-                <form id="category-form" class="form-stack admin-form">
-                    <div class="form-field">
-                        <label class="form-field-label" for="category-name">Nome da categoria</label>
-                        <input class="text-input" type="text" id="category-name" placeholder="Ex: Moda" required>
+            <section class="card">
+                <h2 id="category-form-title">Criar categoria</h2>
+                <p>Adiciona novas categorias para usar no formulário de publicação.</p>
+
+                <form id="category-form">
+                    <div class="input-cont">
+                        <label for="category-name">Nome da categoria</label>
+                        <input type="text" id="category-name" placeholder="Ex: Moda" required>
                     </div>
 
-                    <div class="form-field">
-                        <label class="form-field-label" for="category-icon">URL do ícone</label>
-                        <input class="text-input" type="url" id="category-icon" placeholder="https://...">
+                    <div class="input-cont">
+                        <label for="category-icon">URL do ícone</label>
+                        <input type="url" id="category-icon" placeholder="https://...">
                         <p class="help-text">Opcional. Se não preencher, a categoria é criada sem ícone.</p>
                     </div>
 
@@ -69,26 +63,22 @@
                     <button type="button" id="cancel-edit-btn" class="btn btn--ghost btn--full" hidden>Cancelar edição</button>
                 </form>
 
-                <div class="admin-section" style="margin-top: 22px;">
-                    <h3 class="admin-section__title">Categorias existentes</h3>
-                    <div id="categories-list" class="admin-categories-list" aria-live="polite"></div>
-                </div>
-            </aside>
-
-            <section class="admin-content">
-                <div class="surface admin-panel">
-                    <div>
-                        <h2 class="section-title" style="font-size: 1.45rem;">Utilizadores</h2>
-                        <p class="section-copy" style="margin-top: 0.35rem;">Gere os utilizadores e as respetivas permissões de administração.</p>
-                    </div>
-                    <div id="users-status" class="alert alert--neutral alert--center" style="margin-top: 18px;">
-                        A carregar utilizadores...
-                    </div>
-                    <div id="users-list" class="admin-users-list" aria-live="polite" style="margin-top: 18px;"></div>
-                </div>
+                <h3 class="admin-subtitle">Categorias existentes</h3>
+                <div id="categories-list" class="admin-categories-list" aria-live="polite"></div>
             </section>
-        </section>
-    </main>
+
+            <section class="card">
+                <h2>Utilizadores</h2>
+                <p>Gere os utilizadores e as respetivas permissões de administração.</p>
+
+                <div id="users-status" class="alert alert--neutral alert--center" style="margin-top: 16px;">
+                    A carregar utilizadores...
+                </div>
+                <div id="users-list" class="admin-users-list" aria-live="polite"></div>
+            </section>
+
+        </div>
+    </div>
 
     <nav class="mobile-nav" aria-label="Navegação principal">
         <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard"><img src="../assets/icons/Vector.svg" alt="dashboard"></a>

@@ -1270,3 +1270,28 @@ textarea {
 }
 
 
+/* === Polimento de UI (subtil — mantém a identidade) === */
+
+html { scroll-behavior: smooth; }
+
+/* foco com brilho suave na cor da marca */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 42, 155, 0.20);
+}
+
+::placeholder { color: #9a9ab0; }
+
+/* contorno de foco por teclado (acessibilidade) */
+:focus-visible { outline: 2px solid #2C2A9B; outline-offset: 2px; }
+
+/* cartões de anúncio: pequeno "lift" ao passar o rato */
+.p-card { transition: transform .2s ease, box-shadow .2s ease; }
+.p-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(15, 21, 51, 0.18); }
+
+/* === Estrutura: espaço no fim para a navbar fixa não tapar o conteúdo === */
+body.app-page { padding-bottom: 96px; }
+
+

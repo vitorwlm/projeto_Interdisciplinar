@@ -120,3 +120,35 @@ body{
 .mobile-nav__link:hover{ background: rgba(44, 42, 155, 0.08); transform: translateY(-1px); }
 .mobile-nav__link--active{ background: rgba(44, 42, 155, 0.12); }
 .mobile-nav__link img{ width: 28px; height: 28px; }
+
+/* === Polimento de UI (subtil — mantém a identidade) === */
+
+html { scroll-behavior: smooth; }
+
+/* foco com brilho suave na cor da marca */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 42, 155, 0.20);
+}
+
+::placeholder { color: #9a9ab0; }
+
+/* contorno de foco por teclado (acessibilidade) */
+:focus-visible { outline: 2px solid var(--darkblue); outline-offset: 2px; }
+
+/* cartões de anúncio: pequeno "lift" ao passar o rato */
+.p-card { transition: transform .2s ease, box-shadow .2s ease; }
+.p-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22); }
+
+/* === Estrutura responsiva: cartões/formulários em ecrãs pequenos === */
+@media (max-width: 560px) {
+    .card { padding: 26px 20px; }
+    .card h1,
+    .admin-wrap > h1 { font-size: 30px; }
+    .admin-metrics { gap: 12px; }
+    .voltar { height: 42px; padding: 0 18px; font-size: 18px; }
+    .logo { height: 54px; }
+    .admin-grid { gap: 16px; }
+}

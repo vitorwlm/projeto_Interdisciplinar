@@ -14,89 +14,11 @@
 
 <body class="bgimg">
 
-    <!--
-
-    <main class="dashboard-shell" id="main-content">
-        <header class="page-toolbar">
-            <a class="btn btn--ghost" href="dashboard.html">Voltar</a>
-            <button data-logout-btn class="btn btn--light" type="button">Sair</button>
-        </header>
-
-        <section class="surface" style="padding: clamp(1.4rem, 3vw, 2rem);">
-            <div class="page-header" style="margin-bottom: 18px;">
-                <div>
-                    <h1 class="section-title">Publicar Novo Artigo</h1>
-                    <p class="section-copy" style="color: var(--muted); margin-top: 0.5rem;">
-                        Preenche os dados do anúncio e adiciona até 5 fotografias.
-                    </p>
-                </div>
-            </div>
-
-            <form id="publish-form" class="form-stack">
-                <div class="upload-dropzone">
-                    <label class="form-field-label">Adiciona até 5 fotos</label>
-                    <label class="upload-button" for="listing-images">
-                        Carregar fotografias
-                        <input class="file-input" type="file" id="listing-images" name="listing-images" accept="image/*" multiple>
-                    </label>
-                    <span class="file-name" id="file-name">Nenhuma fotografia seleccionada</span>
-                    <div id="image-preview" class="preview-grid"></div>
-                </div>
-
-                <hr class="section-divider">
-
-                <div class="form-field">
-                    <label class="form-field-label" for="listing-title">Título</label>
-                    <input class="text-input" type="text" id="listing-title" placeholder="Ex: Livro de Cálculo I" required>
-                    <p class="help-text">Usa um título claro para encontrarem o teu artigo facilmente.</p>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-field-label" for="listing-description">Descrição</label>
-                    <textarea class="text-area" id="listing-description" rows="4" placeholder="Descreve o artigo, menciona detalhes e defeitos (se existirem)..." required></textarea>
-                </div>
-
-                <div class="form-grid form-grid--two">
-                    <div class="form-field">
-                        <label class="form-field-label" for="listing-category">Categoria</label>
-                        <select id="listing-category" class="dropdown" required>
-                            <option value="" disabled selected>Carregando categorias...</option>
-                        </select>
-                    </div>
-
-                    <div class="form-field">
-                        <label class="form-field-label" for="listing-condition">Estado</label>
-                        <select id="listing-condition" class="dropdown" required>
-                            <option value="" disabled selected>Seleciona o estado...</option>
-                            <option value="novo">Novo com etiquetas</option>
-                            <option value="como_novo">Muito bom / Como novo</option>
-                            <option value="bom">Bom</option>
-                            <option value="satisfatorio">Satisfatório</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-field">
-                    <label class="form-field-label" for="listing-price">Preço</label>
-                    <input class="text-input" type="number" step="0.01" min="0" id="listing-price" name="listing-price" placeholder="0.00" aria-describedby="price-hint" required>
-                    <p id="price-hint" class="help-text">Introduz o preço em euros (ex: 5.00).</p>
-                </div>
-
-                <div class="form-actions">
-                    <a class="btn btn--ghost" href="dashboard.html">Cancelar</a>
-                    <button type="submit" class="btn btn--primary">Publicar Anúncio</button>
-                </div>
-            </form>
-        </section>
-    </main>
-
-    -->
-
     <div class="voltar-cont">
 
         <a href="dashboard.html" class="voltar">Voltar</a>
 
-        <img src="../assets/icons/logo.svg" class="logo" alt="logo">
+        <a href="dashboard.html" aria-label="Ir para o dashboard"><img src="../assets/icons/logo.svg" class="logo" alt="logo"></a>
 
     </div>
     
@@ -181,7 +103,7 @@
     <nav class="mobile-nav" aria-label="Navegação principal">
         <a class="mobile-nav__link" href="dashboard.html" aria-label="Dashboard"><img src="../assets/icons/Vector.svg" alt="dashboard"></a>
         <a class="mobile-nav__link" href="favorites.html" aria-label="Favoritos"><img src="../assets/icons/Vector1.svg" alt="favoritos"></a>
-        <a class="mobile-nav__link mobile-nav__link--active" href="publish.html" aria-label="Publicar"><img src="../assets/icons/Vector2.svg" alt="publicar"></a>
+        <a class="mobile-nav__link" href="publish.html" aria-label="Publicar"><img src="../assets/icons/Vector2.svg" alt="publicar"></a>
         <a class="mobile-nav__link" href="messages.html" aria-label="Mensagens"><img src="../assets/icons/Vector3.svg" alt="mensagens"></a>
         <a class="mobile-nav__link" href="profile.html" aria-label="Perfil"><img src="../assets/icons/Vector4.svg" alt="perfil"></a>
     </nav>
