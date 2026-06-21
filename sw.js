@@ -34,7 +34,7 @@
  *   O evento "activate" apaga automaticamente as caches com nomes diferentes,
  *   forçando o browser a descarregar os ficheiros atualizados.
  */
-const CACHE_NAME = 'app-shell-v1';
+const CACHE_NAME = 'app-shell-v2';
 
 /*
  * ASSETS — lista de ficheiros a guardar em cache durante a instalação.
@@ -44,50 +44,57 @@ const CACHE_NAME = 'app-shell-v1';
  * existir no servidor, a instalação do SW falha — por isso a lista deve
  * estar sempre atualizada.
  */
+/*
+ * Caminhos RELATIVOS (sem "/" inicial) para o SW funcionar tanto na raiz
+ * (ex.: localhost) como numa subpasta (ex.: github.io/projeto_Interdisciplinar/).
+ * São resolvidos relativamente à localização do próprio sw.js.
+ */
 const ASSETS = [
-	'/',
-	'/index.html',
-	'/manifest.json',
-	'/styles/styles.css',
-	'/styles/global.css',
-	'/styles/index.css',
-	'/styles/login.css',
-	'/styles/register.css',
-	'/styles/dashboard.css',
-	'/styles/publish.css',
-	'/js/sw-register.js',
-	'/js/pages/app.js',
-	'/js/auth/auth.js',
-	'/js/auth/auth-guard.js',
-	'/js/pages/auth.js',
-	'/js/pages/publish.js',
-	'/js/pages/item.js',
-	'/js/pages/dashboard.js',
-	'/js/pages/edit.js',
-	'/js/pages/admin.js',
-	'/js/pages/favorites.js',
-	'/js/pages/profile.js',
-	'/js/pages/messages.js',
-	'/js/utils/utils.js',
-	'/js/config/supabaseClient.js',
-	'/pages/admin.html',
-	'/pages/profile.html',
-	'/pages/dashboard.html',
-	'/pages/item.html',
-	'/pages/edit.html',
-	'/pages/publish.html',
-	'/pages/favorites.html',
-	'/pages/login.html',
-	'/pages/register.html',
-	'/pages/messages.html',
-	'/assets/icons/logo.svg',
-	'/assets/icons/Vector.svg',
-	'/assets/icons/Vector1.svg',
-	'/assets/icons/Vector2.svg',
-	'/assets/icons/Vector3.svg',
-	'/assets/icons/Vector4.svg',
-	'/assets/icons/settings.svg',
-	'/assets/icons/bgimg-forms.svg'
+	'./',
+	'index.html',
+	'offline.html',
+	'manifest.json',
+	'styles/styles.css',
+	'styles/global.css',
+	'styles/index.css',
+	'styles/login.css',
+	'styles/register.css',
+	'styles/dashboard.css',
+	'styles/publish.css',
+	'styles/admin.css',
+	'js/sw-register.js',
+	'js/pages/app.js',
+	'js/auth/auth.js',
+	'js/auth/auth-guard.js',
+	'js/pages/auth.js',
+	'js/pages/publish.js',
+	'js/pages/item.js',
+	'js/pages/dashboard.js',
+	'js/pages/edit.js',
+	'js/pages/admin.js',
+	'js/pages/favorites.js',
+	'js/pages/profile.js',
+	'js/pages/messages.js',
+	'js/utils/utils.js',
+	'js/config/supabaseClient.js',
+	'pages/admin.html',
+	'pages/profile.html',
+	'pages/dashboard.html',
+	'pages/item.html',
+	'pages/edit.html',
+	'pages/publish.html',
+	'pages/favorites.html',
+	'pages/login.html',
+	'pages/register.html',
+	'pages/messages.html',
+	'assets/icons/logo.svg',
+	'assets/icons/Vector.svg',
+	'assets/icons/Vector1.svg',
+	'assets/icons/Vector2.svg',
+	'assets/icons/Vector3.svg',
+	'assets/icons/Vector4.svg',
+	'assets/icons/settings.svg',
+	'assets/icons/bgimg-forms.svg'
 ];
 
 /*
@@ -174,6 +181,18 @@ self.addEventListener('fetch', (event) => {
 				caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copia));
 				return response;
 			})
-			.catch(() => caches.match(event.request))
+			.catch(async () => {
+				/*
+				 * Sem rede: tentamos a cópia em cache. Se a página não estiver
+				 * em cache (ex.: primeira visita offline), e for uma navegação,
+				 * mostramos a página offline em vez do erro do browser.
+				 */
+				const cached = await caches.match(event.request);
+				if (cached) return cached;
+				if (event.request.mode === 'navigate') {
+					return caches.match('offline.html');
+				}
+				return Response.error();
+			})
 	);
 });

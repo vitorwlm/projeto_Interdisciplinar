@@ -60,6 +60,13 @@ h1{
     transition: .3s ease;
 }
 
+/*
+ * Enquanto a div estiver vazia (antes de o JS confirmar que és admin, ou
+ * para utilizadores normais), não mostra a "bola" — só aparece quando o
+ * link "Painel admin" é inserido lá dentro.
+ */
+#admin-panel-link:empty{ display: none; }
+
 #admin-panel-link a{
     color: var(--dark);
 }

@@ -28,11 +28,14 @@ export function registerServiceWorker() {
    */
   window.addEventListener('load', () => {
     /*
-     * O caminho '/sw.js' é absoluto (começa com '/') para que o Service Worker
-     * tenha escopo sobre toda a app, independentemente da página onde é
-     * registado (raiz ou pasta /pages/).
+     * Calculamos o caminho do sw.js a partir da localização deste módulo
+     * (js/sw-register.js → ../sw.js = raiz do projeto). Assim funciona tanto
+     * na raiz do domínio (ex.: localhost) como numa subpasta
+     * (ex.: github.io/projeto_Interdisciplinar/), ao contrário do antigo
+     * '/sw.js' absoluto, que falhava em subpastas.
      */
-    navigator.serviceWorker.register('/sw.js')
+    const swUrl = new URL('../sw.js', import.meta.url);
+    navigator.serviceWorker.register(swUrl)
       .then((registration) => {
         console.log('Service Worker registado com escopo:', registration.scope);
       })
