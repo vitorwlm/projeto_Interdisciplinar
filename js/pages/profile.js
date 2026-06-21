@@ -80,7 +80,7 @@ async function loadProfile() {
 
   const { data: profile } = await supabase
     .from('utilizador')
-    .select('name, university')
+    .select('name, university, is_admin')
     .eq('id', user.id)
     .single();
 
@@ -95,6 +95,16 @@ async function loadProfile() {
 
   if (nameInput)       nameInput.value       = name;
   if (universityInput) universityInput.value = university;
+
+  /*
+   * Acesso ao painel de administração — mostrado aqui (na página de perfil)
+   * porque no telemóvel o cabeçalho do dashboard fica escondido. Assim, os
+   * admins chegam ao painel pela barra de navegação inferior → Perfil.
+   */
+  const adminLinkEl = document.getElementById('profile-admin-link');
+  if (adminLinkEl && profile && profile.is_admin) {
+    adminLinkEl.innerHTML = '<a class="btn btn--primary" href="admin.html">Painel de administração</a>';
+  }
 }
 
 

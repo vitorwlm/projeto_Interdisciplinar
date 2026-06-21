@@ -1314,4 +1314,7 @@ textarea:focus {
 /* === Estrutura: espaço no fim para a navbar fixa não tapar o conteúdo === */
 body.app-page { padding-bottom: 96px; }
 
+/* placeholder do link "Painel admin" no perfil: escondido se vazio (não-admins) */
+#profile-admin-link:empty { display: none; }
+
 
