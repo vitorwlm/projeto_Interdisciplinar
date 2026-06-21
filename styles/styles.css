@@ -920,6 +920,23 @@ textarea {
 
     /* cartões de anúncio enchem a largura em ecrãs estreitos */
     .p-card { max-width: 100%; }
+
+    /* cabeçalho compacto: "Voltar" + "Sair" na 1ª linha, título por baixo */
+    .dashboard-header {
+        padding: 16px;
+        margin-bottom: 16px;
+        align-items: center;
+        row-gap: 12px;
+    }
+    .dashboard-header > div {
+        order: 3;
+        flex: 1 1 100%;
+    }
+    .dashboard-header .voltar,
+    .dashboard-header .logout {
+        flex: 0 0 auto;
+    }
+    .dashboard-header .section-title { font-size: 1.6rem; }
 }
 
 /* ── Mensagens / chat ─────────────────────────────────────────────────────── */
