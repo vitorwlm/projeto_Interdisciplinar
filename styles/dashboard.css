@@ -265,14 +265,29 @@ main p{
         flex-wrap: nowrap;
     }
 
-    .search-cont{
-        margin-top: 8vh;
-    }
+    /* cabeçalho de secretária escondido; a navegação fica na barra inferior */
+    .cont1{ display: none; }
+    .menu{ display: none; }
 
-    .cont1{
-        display: none;
-    }
+    /* pesquisa: menos espaço vazio no topo */
+    .search-cont{ margin-top: 3vh; }
 
+    /* painel de filtros empilhado e a toda a largura no telemóvel */
+    .filters-panel{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .filter-field{ width: 100%; }
+    .filter-field select,
+    .filter-field input{ width: 100%; min-width: 0; }
+    .filter-clear{ width: 100%; }
+
+    /* uma coluna de anúncios, bem espaçada */
+    main{ grid-template-columns: 1fr; gap: 18px; }
+
+    /* cartões enchem a largura disponível (sem ficarem pequenos ao centro) */
+    .p-card{ max-width: 100%; }
 }
 
 

@@ -456,7 +456,7 @@ export async function deleteItemImages(itemId) {
   const paths = [];
   images.forEach((img) => {
     const idx = img.image_url.indexOf(marker);
-    if (idx !== -1) {
+      if (idx !== -1) {
       paths.push(decodeURIComponent(img.image_url.substring(idx + marker.length)));
     }
   });

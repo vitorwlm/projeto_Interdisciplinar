@@ -151,11 +151,13 @@ textarea:focus {
 
 /* === Estrutura responsiva: cartões/formulários em ecrãs pequenos === */
 @media (max-width: 560px) {
-    .card { padding: 26px 20px; }
+    .card { padding: 26px 20px; margin-bottom: 110px; }
     .card h1,
     .admin-wrap > h1 { font-size: 30px; }
     .admin-metrics { gap: 12px; }
+    .admin-wrap { margin-bottom: 110px; }
     .voltar { height: 42px; padding: 0 18px; font-size: 18px; }
     .logo { height: 54px; }
     .admin-grid { gap: 16px; }
+    .voltar-cont { width: 92%; }
 }
